@@ -1,0 +1,90 @@
+.nos-select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--fg-default);
+  transition: border-color var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard);
+}
+
+.nos-select:hover:not(.nos-select--disabled):not(.nos-select--error) {
+  border-color: var(--border-strong);
+}
+
+.nos-select:focus-within {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+.nos-select--error {
+  border-color: var(--color-semantic-error-600);
+}
+
+.nos-select--error:focus-within {
+  box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--color-semantic-error-600);
+}
+
+.nos-select--disabled {
+  background: var(--bg-subtle);
+  color: var(--fg-disabled);
+  cursor: not-allowed;
+}
+
+.nos-select--sm {
+  height: 28px;
+  font-size: var(--font-size-xs);
+}
+
+.nos-select--md {
+  height: 36px;
+  font-size: var(--font-size-sm);
+}
+
+.nos-select--lg {
+  height: 44px;
+  font-size: var(--font-size-base);
+}
+
+.nos-select__control {
+  width: 100%;
+  min-width: 0;
+  appearance: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: var(--line-height-normal);
+  padding: 0 var(--spacing-8) 0 var(--spacing-3);
+  cursor: inherit;
+}
+
+.nos-select--lg .nos-select__control {
+  padding-left: var(--spacing-4);
+}
+
+.nos-select__control:disabled {
+  cursor: not-allowed;
+}
+
+.nos-select__indicator {
+  position: absolute;
+  top: 50%;
+  right: var(--spacing-3);
+  width: var(--spacing-2);
+  height: var(--spacing-2);
+  border-right: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  color: var(--fg-subtle);
+  pointer-events: none;
+  transform: translateY(-50%) rotate(45deg);
+  transition: transform var(--duration-fast) var(--easing-standard);
+}
+
+.nos-select:focus-within .nos-select__indicator {
+  transform: translateY(-50%) rotate(225deg);
+}

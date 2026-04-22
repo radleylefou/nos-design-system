@@ -1,0 +1,235 @@
+/* ── Shell ────────────────────────────────────────────────────────── */
+
+.nos-sidenav {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  height: 100%;
+  min-height: 100vh;
+  background: var(--color-brand-900);
+  padding: var(--spacing-3) 0 var(--spacing-3);
+  overflow-y: auto;
+}
+
+/* ── Header ───────────────────────────────────────────────────────── */
+
+.nos-sidenav__header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-1) var(--spacing-4) var(--spacing-4);
+}
+
+.nos-sidenav__logo-badge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-brand-500);
+  background: var(--color-brand-800);
+  /* solid color — no opacity, so no compound-transparency issues */
+  color: var(--color-brand-300);
+}
+
+.nos-sidenav__logo-badge svg {
+  width: 20px;
+  height: 20px;
+}
+
+.nos-sidenav__brand {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+/* ── Section ──────────────────────────────────────────────────────── */
+
+.nos-sidenav__section {
+  display: flex;
+  flex-direction: column;
+  /* horizontal padding here so items can be width:100% without margin hacks */
+  padding: var(--spacing-1) var(--spacing-2);
+  flex: 1;
+}
+
+.nos-sidenav__section--divider {
+  margin-top: var(--spacing-2);
+  padding-top: var(--spacing-2);
+  border-top: 1px solid var(--color-brand-800);
+  flex: 0;
+}
+
+.nos-sidenav__section-label {
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brand-400);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: var(--spacing-1) var(--spacing-3) var(--spacing-2);
+}
+
+/* ── Item ─────────────────────────────────────────────────────────── */
+
+.nos-sidenav__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  width: 100%;
+  padding: 10px var(--spacing-3);
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-md);
+  /* solid color for text — keeps SVG strokes clean */
+  color: var(--color-brand-200);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--easing-standard),
+    color var(--duration-fast) var(--easing-standard);
+}
+
+.nos-sidenav__item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.nos-sidenav__item:active {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nos-sidenav__item:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-brand-400);
+}
+
+.nos-sidenav__item--active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-weight: var(--font-weight-medium);
+}
+
+.nos-sidenav__item--active:hover {
+  background: rgba(255, 255, 255, 0.11);
+}
+
+/* ── Icon ─────────────────────────────────────────────────────────── */
+
+.nos-sidenav__item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  /* no opacity — use explicit stroke color on SVG to avoid compound transparency */
+}
+
+.nos-sidenav__item-icon svg {
+  width: 18px;
+  height: 18px;
+  /* solid stroke so overlapping paths don't bleed through */
+  stroke: var(--color-brand-300);
+  fill: none;
+}
+
+.nos-sidenav__item:hover .nos-sidenav__item-icon svg,
+.nos-sidenav__item--active .nos-sidenav__item-icon svg {
+  stroke: #ffffff;
+}
+
+.nos-sidenav__item-label {
+  line-height: 1;
+}
+
+/* ── Footer ───────────────────────────────────────────────────────── */
+
+.nos-sidenav__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  margin-top: auto;
+  border-top: 1px solid var(--color-brand-800);
+}
+
+.nos-sidenav__footer-avatar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-brand-700);
+  color: var(--color-brand-300);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.04em;
+  overflow: hidden;
+}
+
+.nos-sidenav__footer-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nos-sidenav__footer-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.nos-sidenav__footer-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: #ffffff;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nos-sidenav__footer-email {
+  font-size: var(--font-size-xs);
+  color: var(--color-brand-400);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.nos-sidenav__footer-action {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: var(--color-brand-400);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
+}
+
+.nos-sidenav__footer-action:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.nos-sidenav__footer-action:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-brand-400);
+}

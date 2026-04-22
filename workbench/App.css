@@ -1,0 +1,89 @@
+.wb-app {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: 100vh;
+  background: var(--bg-canvas);
+}
+
+.wb-main {
+  overflow-y: auto;
+  padding: var(--spacing-10) var(--spacing-12);
+}
+
+/* Page shell */
+.wb-page {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-10);
+}
+
+.wb-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding-bottom: var(--spacing-8);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.wb-page__eyebrow {
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--fg-brand);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wb-page__title {
+  font-size: 38px;
+  font-weight: var(--font-weight-bold);
+  color: var(--fg-default);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.wb-page__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--fg-muted);
+  line-height: var(--line-height-relaxed);
+  max-width: 56ch;
+  margin-top: var(--spacing-1);
+}
+
+/* Section shell */
+.wb-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.wb-section__title {
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Demo canvas */
+.wb-demo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-8) var(--spacing-6);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+}
+
+.wb-demo--module {
+  align-items: stretch;
+  padding: var(--spacing-6);
+}
+
+.wb-demo--sidenav-full {
+  min-height: calc(100vh - var(--spacing-20));
+}

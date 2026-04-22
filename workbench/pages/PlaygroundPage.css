@@ -1,0 +1,171 @@
+.wb-playground {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--spacing-6);
+  align-items: start;
+}
+
+/* Controls panel */
+.wb-playground__controls {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.wb-ctrl-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--border-default);
+}
+
+.wb-ctrl-group:last-child {
+  border-bottom: none;
+}
+
+.wb-ctrl-group--inline {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wb-ctrl-label {
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+}
+
+.wb-ctrl-select,
+.wb-ctrl-input {
+  width: 100%;
+  height: 30px;
+  padding: 0 var(--spacing-3);
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--fg-default);
+  appearance: none;
+  cursor: pointer;
+}
+
+.wb-ctrl-select:focus,
+.wb-ctrl-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Toggle switch */
+.wb-toggle {
+  position: relative;
+  width: 30px;
+  height: 17px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: var(--color-neutral-300);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color var(--duration-fast) var(--easing-standard);
+}
+
+.wb-toggle--on {
+  background: var(--color-brand-600);
+}
+
+.wb-toggle__thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 13px;
+  height: 13px;
+  border-radius: var(--radius-full);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--duration-fast) var(--easing-standard);
+}
+
+.wb-toggle--on .wb-toggle__thumb {
+  transform: translateX(13px);
+}
+
+.wb-toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+/* Right column */
+.wb-playground__right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* Preview area */
+.wb-playground__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
+  padding: var(--spacing-10);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+}
+
+/* Code panel */
+.wb-code-panel {
+  border: 1px solid var(--color-neutral-800);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.wb-code-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-2) var(--spacing-4);
+  background: var(--color-neutral-900);
+  border-bottom: 1px solid var(--color-neutral-800);
+}
+
+.wb-code-panel__label {
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-neutral-500);
+}
+
+.wb-code-panel__pre {
+  margin: 0;
+  padding: var(--spacing-5) var(--spacing-6);
+  background: var(--color-neutral-950);
+  overflow-x: auto;
+}
+
+.wb-code-panel__pre code {
+  font-family: var(--font-family-mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--color-neutral-300);
+  white-space: pre;
+}
+
+/* Copy button in dark context (code panels) */
+.wb-code-panel .wb-copy-btn {
+  border-color: var(--color-neutral-700);
+  color: var(--color-neutral-500);
+}
+
+.wb-code-panel .wb-copy-btn:hover {
+  background: var(--color-neutral-800);
+  color: var(--color-neutral-300);
+}
