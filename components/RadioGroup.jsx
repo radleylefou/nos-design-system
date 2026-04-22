@@ -14,7 +14,7 @@ import './RadioGroup.css';
  *   disabled:    boolean
  *   name:        radio group name; generated when omitted
  *   value, defaultValue, onChange: native radio control props
- *   All other props pass through to the underlying <fieldset>.
+ *   All other props pass through to the underlying radio group wrapper.
  *
  * Usage:
  *   <RadioGroup label="Priority" options={priorityOptions} defaultValue="normal" />
@@ -35,6 +35,7 @@ export function RadioGroup({
 }) {
   const generatedId = useId();
   const groupName = name || generatedId;
+  const labelId = `${generatedId}-label`;
   const describedById = `${generatedId}-desc`;
 
   const errorText = typeof error === 'string' ? error : null;
@@ -52,14 +53,20 @@ export function RadioGroup({
     .join(' ');
 
   return (
-    <fieldset
+    <div
       className={classes}
-      disabled={disabled}
+      role="radiogroup"
       aria-invalid={hasError || undefined}
+      aria-disabled={disabled || undefined}
+      aria-labelledby={label ? labelId : undefined}
       aria-describedby={message ? describedById : undefined}
       {...rest}
     >
-      {label && <legend className="nos-radio-group__legend">{label}</legend>}
+      {label && (
+        <div id={labelId} className="nos-radio-group__label-text">
+          {label}
+        </div>
+      )}
       <div className="nos-radio-group__options">
         {options.map((option) => {
           const controlProps = value === undefined
@@ -81,7 +88,7 @@ export function RadioGroup({
                 {...controlProps}
               />
               <span className="nos-radio-group__copy">
-                <span className="nos-radio-group__label">{option.label}</span>
+                <span className="nos-radio-group__option-label">{option.label}</span>
                 {option.helperText && (
                   <span className="nos-radio-group__hint">{option.helperText}</span>
                 )}
@@ -93,11 +100,11 @@ export function RadioGroup({
       {message && (
         <div
           id={describedById}
-          className={`nos-field__message ${hasError ? 'nos-field__message--error' : ''}`}
+          className={`nos-radio-group__message ${hasError ? 'nos-radio-group__message--error' : ''}`}
         >
           {message}
         </div>
       )}
-    </fieldset>
+    </div>
   );
 }

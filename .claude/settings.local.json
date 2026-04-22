@@ -6,7 +6,11 @@
       "Bash(npm run:*)",
       "Bash(npx skills:*)",
       "Bash(find /Users/georgestepanov/Documents/CLAUDE/NOS2-v1 -name *.md -path *skills*)",
-      "Bash(node /Users/georgestepanov/.agents/skills/impeccable/scripts/cleanup-deprecated.mjs)"
+      "Bash(node /Users/georgestepanov/.agents/skills/impeccable/scripts/cleanup-deprecated.mjs)",
+      "WebSearch",
+      "WebFetch(domain:help.figma.com)",
+      "WebFetch(domain:developers.figma.com)",
+      "WebFetch(domain:medium.com)"
     ]
   }
 }

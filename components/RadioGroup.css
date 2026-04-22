@@ -1,34 +1,32 @@
 .nos-radio-group {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-3);
+  gap: var(--spacing-2);
   min-width: 0;
-  margin: 0;
-  padding: 0;
-  border: none;
   color: var(--fg-default);
 }
 
-.nos-radio-group__legend {
-  padding: 0;
+.nos-radio-group__label-text {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
   color: var(--fg-default);
 }
 
 .nos-radio-group__options {
   display: flex;
-  gap: var(--spacing-2);
 }
 
 .nos-radio-group--vertical .nos-radio-group__options {
   flex-direction: column;
+  gap: var(--spacing-3);
 }
 
 .nos-radio-group--horizontal .nos-radio-group__options {
   flex-direction: row;
   flex-wrap: wrap;
-  gap: var(--spacing-3);
+  column-gap: var(--spacing-4);
+  row-gap: var(--spacing-2);
 }
 
 .nos-radio-group__option {
@@ -42,7 +40,7 @@
   flex: 0 0 auto;
   width: var(--spacing-4);
   height: var(--spacing-4);
-  margin: var(--spacing-1) 0 0;
+  margin: 0;
   appearance: none;
   display: grid;
   place-content: center;
@@ -103,10 +101,10 @@
   gap: var(--spacing-1);
 }
 
-.nos-radio-group__label {
+.nos-radio-group__option-label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-normal);
+  line-height: var(--line-height-tight);
   color: var(--fg-default);
 }
 
@@ -117,10 +115,21 @@
   color: var(--fg-muted);
 }
 
-.nos-radio-group--disabled .nos-radio-group__legend,
-.nos-radio-group--disabled .nos-radio-group__label,
+.nos-radio-group__message {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-normal);
+  color: var(--fg-muted);
+}
+
+.nos-radio-group__message--error {
+  color: var(--color-semantic-error-600);
+}
+
+.nos-radio-group--disabled .nos-radio-group__label-text,
+.nos-radio-group--disabled .nos-radio-group__option-label,
 .nos-radio-group--disabled .nos-radio-group__hint,
-.nos-radio-group__option--disabled .nos-radio-group__label,
+.nos-radio-group--disabled .nos-radio-group__message,
+.nos-radio-group__option--disabled .nos-radio-group__option-label,
 .nos-radio-group__option--disabled .nos-radio-group__hint {
   color: var(--fg-disabled);
 }
