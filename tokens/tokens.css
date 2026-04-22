@@ -87,6 +87,8 @@
   --shadow-lg: 0 10px 15px -3px rgba(17, 24, 39, 0.08), 0 4px 6px -4px rgba(17, 24, 39, 0.05);
   --shadow-xl: 0 20px 25px -5px rgba(17, 24, 39, 0.10), 0 8px 10px -6px rgba(17, 24, 39, 0.05);
   --shadow-focus: 0 0 0 2px #ffffff, 0 0 0 4px #2729AB;
+  --shadow-brand-glow: 0 2px 4px -1px rgba(28, 19, 93, 0.30), 0 4px 10px -2px rgba(28, 19, 93, 0.20), 0 12px 20px -4px rgba(72, 53, 213, 0.50);
+  --shadow-brand-glow-hover: 0 2px 4px -1px rgba(28, 19, 93, 0.35), 0 6px 14px -2px rgba(28, 19, 93, 0.25), 0 18px 28px -4px rgba(72, 53, 213, 0.55);
   --bg-canvas: var(--color-neutral-50);
   --bg-surface: #ffffff;
   --bg-subtle: var(--color-neutral-100);

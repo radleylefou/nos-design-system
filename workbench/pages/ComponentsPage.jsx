@@ -79,7 +79,7 @@ function DemoSection({ section }) {
 
 const DEMOS = {
   Button: {
-    description: 'Primary interactive control. Four variants, three sizes, loading state, and icon slots.',
+    description: 'Primary interactive control. Five variants, three sizes, loading state, and icon slots.',
     sections: [
       {
         title: 'Variants',
@@ -95,6 +95,24 @@ const DEMOS = {
 <Button variant="secondary">Secondary</Button>
 <Button variant="ghost">Ghost</Button>
 <Button variant="danger">Danger</Button>`,
+      },
+      {
+        title: 'Super',
+        render: () => (
+          <Button
+            variant="super"
+            leadingIcon={
+              <svg viewBox="0 0 18 18" width="18" height="18" fill="none" aria-hidden="true">
+                <path d="M9 3.75v10.5M3.75 9h10.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+              </svg>
+            }
+          >
+            Time Entry
+          </Button>
+        ),
+        code: `<Button variant="super" leadingIcon={<PlusIcon />}>
+  Time Entry
+</Button>`,
       },
       {
         title: 'Sizes',

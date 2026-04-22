@@ -4,7 +4,9 @@ import './Button.css';
  * Button — primary interactive control.
  *
  * Props:
- *   variant:  "primary" | "secondary" | "ghost" | "danger"   (default: "primary")
+ *   variant:  "primary" | "secondary" | "ghost" | "danger" | "super"
+ *             (default: "primary"). "super" is an elevated primary with a
+ *             brand glow — reserve it for a single headline action per view.
  *   size:     "sm" | "md" | "lg"                             (default: "md")
  *   disabled: boolean
  *   loading:  boolean   — shows a spinner and blocks clicks
