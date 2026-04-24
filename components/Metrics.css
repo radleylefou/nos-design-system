@@ -3,79 +3,62 @@
 .nos-metrics {
   display: flex;
   flex-direction: column;
+  gap: var(--spacing-4);
   width: 100%;
-  overflow: hidden;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-}
-
-/* Featured variant — solid brand bg, inverted text */
-.nos-metrics--featured {
-  background: var(--color-brand-700);
-  border-color: var(--color-brand-800);
-  box-shadow: var(--shadow-md);
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 /* ── Header ───────────────────────────────────────────────────────── */
 
 .nos-metrics__header {
-  padding: var(--spacing-4) var(--spacing-5);
-  border-bottom: 1px solid var(--border-default);
-}
-
-.nos-metrics--featured .nos-metrics__header {
-  border-bottom-color: var(--color-brand-600);
+  padding: 0;
 }
 
 .nos-metrics__title {
   margin: 0;
-  font-size: 10px;
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.1em;
+  letter-spacing: var(--letter-spacing-wide);
   line-height: var(--line-height-tight);
   text-transform: uppercase;
   color: var(--fg-muted);
 }
 
-.nos-metrics--featured .nos-metrics__title {
-  color: var(--color-brand-200);
-}
-
 /* ── Grid ─────────────────────────────────────────────────────────── */
 
-/* Items sit flush in a divided grid — no nested cards */
 .nos-metrics__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--spacing-24) * 2), 1fr));
+  gap: var(--spacing-4);
 }
 
-/* Dividers between cells: right border on all but the last in each row */
 .nos-metrics__item {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-3);
-  padding: var(--spacing-5) var(--spacing-6);
-  border-right: 1px solid var(--border-default);
-}
-
-.nos-metrics__item:last-child {
-  border-right: none;
+  padding: var(--spacing-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
 }
 
 .nos-metrics--featured .nos-metrics__item {
-  border-right-color: var(--color-brand-600);
+  background: var(--color-brand-700);
+  border-color: var(--color-brand-800);
+  box-shadow: var(--shadow-md);
 }
 
 /* ── Label ────────────────────────────────────────────────────────── */
 
 .nos-metrics__label {
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
-  letter-spacing: 0.06em;
+  letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
-  line-height: 1;
+  line-height: var(--line-height-tight);
   color: var(--fg-muted);
 }
 
@@ -89,29 +72,28 @@
   display: inline-flex;
   align-items: baseline;
   gap: var(--spacing-1);
-  line-height: 1;
+  line-height: var(--line-height-tight);
 }
 
-/* The number is the hero — bold, large, tight */
 .nos-metrics__value {
-  font-size: 44px;
+  font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
-  letter-spacing: -0.03em;
+  letter-spacing: var(--letter-spacing-normal);
   font-variant-numeric: tabular-nums;
-  line-height: 1;
+  line-height: var(--line-height-tight);
   color: var(--fg-default);
 }
 
 .nos-metrics--featured .nos-metrics__value {
-  color: #ffffff;
+  color: var(--fg-inverse);
 }
 
 .nos-metrics__unit {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.02em;
+  letter-spacing: var(--letter-spacing-normal);
   color: var(--fg-muted);
-  padding-bottom: 4px; /* optical baseline alignment */
+  padding-bottom: var(--spacing-1);
 }
 
 .nos-metrics--featured .nos-metrics__unit {
@@ -123,8 +105,8 @@
 .nos-metrics__trend {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.02em;
-  line-height: 1;
+  letter-spacing: var(--letter-spacing-normal);
+  line-height: var(--line-height-tight);
 }
 
 .nos-metrics__trend--up {
@@ -136,9 +118,9 @@
 }
 
 .nos-metrics--featured .nos-metrics__trend--up {
-  color: var(--color-semantic-success-300, #6ee7b7);
+  color: var(--color-semantic-success-100);
 }
 
 .nos-metrics--featured .nos-metrics__trend--down {
-  color: var(--color-semantic-error-300, #fca5a5);
+  color: var(--color-semantic-error-100);
 }
