@@ -92,33 +92,70 @@
   background: var(--action-danger-bg-hover);
 }
 
-/* Super — elevated primary with brand glow and subtle top sheen. */
+/* Super — elevated primary with brand glow and cross-fading sheen layers. */
 .nos-button--super {
+  position: relative;
   height: 48px;
   padding: 0 var(--spacing-6);
   font-size: var(--font-size-base);
   color: var(--action-primary-fg);
   border-color: var(--color-brand-400);
   border-radius: var(--radius-lg);
-  background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.10) 100%),
-    linear-gradient(var(--action-primary-bg), var(--action-primary-bg));
+  background-color: var(--action-primary-bg);
   box-shadow: var(--shadow-brand-glow);
+  /* Override base transition: give glow more time to bloom */
+  transition: background-color var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-base) var(--easing-decelerate),
+    transform var(--duration-instant) var(--easing-standard);
 }
+
+/* Bottom-lit sheen — resting state */
+.nos-button--super::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.10) 100%);
+  opacity: 1;
+  transition: opacity var(--duration-base) var(--easing-standard);
+  pointer-events: none;
+}
+
+/* Top-lit sheen — fades in on hover */
+.nos-button--super::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 100%);
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--easing-standard);
+  pointer-events: none;
+}
+
 .nos-button--super:hover:not(:disabled) {
-  background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0) 100%),
-    linear-gradient(var(--action-primary-bg-hover), var(--action-primary-bg-hover));
+  background-color: var(--action-primary-bg-hover);
   box-shadow: var(--shadow-brand-glow-hover);
 }
+.nos-button--super:hover:not(:disabled)::before {
+  opacity: 0;
+}
+.nos-button--super:hover:not(:disabled)::after {
+  opacity: 1;
+}
+
 .nos-button--super:active:not(:disabled) {
-  background-image:
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.06) 100%),
-    linear-gradient(var(--action-primary-bg-active), var(--action-primary-bg-active));
+  background-color: var(--action-primary-bg-active);
   box-shadow:
     0 1px 2px -1px rgba(28, 19, 93, 0.35),
     0 2px 6px -2px rgba(28, 19, 93, 0.25);
 }
+.nos-button--super:active:not(:disabled)::before,
+.nos-button--super:active:not(:disabled)::after {
+  opacity: 0;
+}
+
 .nos-button--super:focus-visible {
   box-shadow: var(--shadow-focus), var(--shadow-brand-glow);
 }

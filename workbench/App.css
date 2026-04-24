@@ -1,6 +1,6 @@
 .wb-app {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: calc(var(--spacing-24) * 4 + var(--spacing-2)) 1fr;
   height: 100vh;
   background: var(--bg-canvas);
 }
