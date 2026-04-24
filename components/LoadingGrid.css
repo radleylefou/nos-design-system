@@ -1,15 +1,16 @@
 .nos-loading-grid {
   --nos-loading-grid-count: 5;
-  --nos-loading-grid-duration: calc(var(--duration-slow) + var(--duration-slow) + var(--duration-base));
+  --nos-loading-grid-duration: calc(var(--duration-slow) * 4); /* ~1280ms */
   --nos-loading-grid-cell-size: var(--spacing-3);
   --nos-loading-grid-gap: var(--spacing-2);
   --nos-loading-grid-background: var(--bg-surface);
   --nos-loading-grid-border: var(--border-default);
-  --nos-loading-cell-rest: var(--color-neutral-200);
-  --nos-loading-cell-fill: var(--color-neutral-500);
-  --nos-loading-cell-accent: var(--color-brand-500);
-  --nos-loading-cell-idle-opacity: 0.2;
-  --nos-loading-cell-peak-opacity: 0.86;
+  --nos-loading-cell-rest: var(--color-brand-100);
+  --nos-loading-cell-fill: var(--color-brand-400);
+  --nos-loading-cell-accent: var(--color-brand-600);
+  --nos-loading-cell-idle-opacity: 0.28;
+  --nos-loading-cell-mid-opacity: 0.5;
+  --nos-loading-cell-peak-opacity: 0.92;
   --nos-loading-cell-peak: var(--nos-loading-cell-fill);
 
   display: inline-grid;
@@ -27,19 +28,19 @@
 .nos-loading-grid--inverse {
   --nos-loading-grid-background: var(--color-neutral-950);
   --nos-loading-grid-border: var(--color-neutral-800);
-  --nos-loading-cell-rest: var(--color-neutral-800);
-  --nos-loading-cell-fill: var(--color-neutral-100);
-  --nos-loading-cell-accent: var(--color-brand-300);
-  --nos-loading-cell-idle-opacity: 0.28;
+  --nos-loading-cell-rest: var(--color-brand-900);
+  --nos-loading-cell-fill: var(--color-brand-300);
+  --nos-loading-cell-accent: var(--color-brand-200);
+  --nos-loading-cell-idle-opacity: 0.32;
   --nos-loading-cell-peak-opacity: 0.95;
 }
 
 .nos-loading-grid--speed-slow {
-  --nos-loading-grid-duration: calc(var(--duration-slow) + var(--duration-slow) + var(--duration-slow) + var(--duration-base));
+  --nos-loading-grid-duration: calc(var(--duration-slow) * 5); /* ~1600ms */
 }
 
 .nos-loading-grid--speed-fast {
-  --nos-loading-grid-duration: calc(var(--duration-slow) + var(--duration-base));
+  --nos-loading-grid-duration: calc(var(--duration-slow) * 3); /* ~960ms */
 }
 
 .nos-loading-grid--cell-sm {
@@ -65,7 +66,7 @@
   background: var(--nos-loading-cell-rest);
   opacity: var(--nos-loading-cell-idle-opacity);
   transform: scale(0.72);
-  animation: nos-loading-grid-pulse var(--nos-loading-grid-duration) var(--easing-standard) infinite;
+  animation: nos-loading-grid-pulse var(--nos-loading-grid-duration) ease-in-out infinite;
   will-change: opacity, transform;
 }
 
@@ -90,36 +91,38 @@
   animation-play-state: paused;
 }
 
+/* Phase offsets are fractions of the full cycle so they stay evenly
+   spread across any speed (fixes stutter on fast speed). */
 .nos-loading-grid__cell--phase-0 {
   animation-delay: 0ms;
 }
 
 .nos-loading-grid__cell--phase-1 {
-  animation-delay: calc(0ms - var(--duration-instant));
+  animation-delay: calc(var(--nos-loading-grid-duration) * -0.125);
 }
 
 .nos-loading-grid__cell--phase-2 {
-  animation-delay: calc(0ms - var(--duration-fast));
+  animation-delay: calc(var(--nos-loading-grid-duration) * -0.25);
 }
 
 .nos-loading-grid__cell--phase-3 {
-  animation-delay: calc(0ms - var(--duration-base));
+  animation-delay: calc(var(--nos-loading-grid-duration) * -0.375);
 }
 
 .nos-loading-grid__cell--phase-4 {
-  animation-delay: calc(0ms - var(--duration-slow));
+  animation-delay: calc(var(--nos-loading-grid-duration) * -0.5);
 }
 
 .nos-loading-grid__cell--phase-5 {
-  animation-delay: calc(0ms - var(--duration-slow) - var(--duration-instant));
+  animation-delay: calc(var(--nos-loading-grid-duration) * -0.625);
 }
 
 .nos-loading-grid__cell--phase-6 {
-  animation-delay: calc(0ms - var(--duration-slow) - var(--duration-fast));
+  animation-delay: calc(var(--nos-loading-grid-duration) * -0.75);
 }
 
 .nos-loading-grid__cell--phase-7 {
-  animation-delay: calc(0ms - var(--duration-slow) - var(--duration-base));
+  animation-delay: calc(var(--nos-loading-grid-duration) * -0.875);
 }
 
 @keyframes nos-loading-grid-pulse {
@@ -138,7 +141,7 @@
 
   64% {
     background: var(--nos-loading-cell-rest);
-    opacity: calc(var(--nos-loading-cell-idle-opacity) + 0.16);
+    opacity: var(--nos-loading-cell-mid-opacity);
     transform: scale(0.82);
   }
 }
