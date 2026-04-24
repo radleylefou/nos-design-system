@@ -10,6 +10,7 @@ import {
   Tabs,
   Card,
   Badge,
+  LoadingGrid,
   Metrics,
   SideNav,
 } from '../../components/index.js';
@@ -555,6 +556,54 @@ const DEMOS = {
 <Badge variant="success" dot>Active</Badge>
 <Badge variant="warning" dot>Degraded</Badge>
 <Badge variant="error" dot>Down</Badge>`,
+      },
+    ],
+  },
+
+  LoadingGrid: {
+    type: 'Feedback',
+    description: 'Deterministic pixel-grid loader for NOS async states. Pattern, grid size, speed, density, accent ratio, cell size, gap, and theme are all prop-driven.',
+    sections: [
+      {
+        title: 'Patterns',
+        render: () => (
+          <div style={{ display: 'grid', gap: 'var(--spacing-5)', gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', width: '100%' }}>
+            <LoadingGrid pattern="scatter" label="Loading scatter pattern" />
+            <LoadingGrid pattern="wave" label="Loading wave pattern" />
+            <LoadingGrid pattern="ripple" label="Loading ripple pattern" />
+            <LoadingGrid pattern="scan" label="Loading scan pattern" />
+          </div>
+        ),
+        code: `<LoadingGrid pattern="scatter" label="Loading data" />
+<LoadingGrid pattern="wave" label="Loading data" />
+<LoadingGrid pattern="ripple" label="Loading data" />
+<LoadingGrid pattern="scan" label="Loading data" />`,
+      },
+      {
+        title: 'Grid size and density',
+        render: () => (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-6)', flexWrap: 'wrap' }}>
+            <LoadingGrid gridSize={4} density="sparse" cellSize="lg" label="Loading compact grid" />
+            <LoadingGrid gridSize={5} density="balanced" label="Loading balanced grid" />
+            <LoadingGrid gridSize={6} density="dense" cellSize="sm" gap="xs" label="Loading dense grid" />
+          </div>
+        ),
+        code: `<LoadingGrid gridSize={4} density="sparse" cellSize="lg" />
+<LoadingGrid gridSize={5} density="balanced" />
+<LoadingGrid gridSize={6} density="dense" cellSize="sm" gap="xs" />`,
+      },
+      {
+        title: 'Theme and motion controls',
+        render: () => (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-6)', flexWrap: 'wrap' }}>
+            <LoadingGrid pattern="wave" speed="fast" accentRatio="high" label="Syncing guidance" />
+            <LoadingGrid pattern="scan" variant="inverse" speed="slow" label="Loading dark preview" />
+            <LoadingGrid pattern="ripple" paused decorative />
+          </div>
+        ),
+        code: `<LoadingGrid pattern="wave" speed="fast" accentRatio="high" label="Syncing guidance" />
+<LoadingGrid pattern="scan" variant="inverse" speed="slow" label="Loading dark preview" />
+<LoadingGrid pattern="ripple" paused decorative />`,
       },
     ],
   },

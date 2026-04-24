@@ -7,7 +7,7 @@ export const COMPONENT_CATEGORIES = [
   { label: 'Modules',     components: ['Metrics', 'SideNav'] },
   { label: 'Forms',        components: ['Select', 'Textarea', 'Checkbox', 'RadioGroup', 'Switch'] },
   { label: 'Layout',       components: ['Tabs'] },
-  { label: 'Feedback',     components: [] },
+  { label: 'Feedback',     components: ['LoadingGrid'] },
   { label: 'Data Display', components: [] },
 ];
 

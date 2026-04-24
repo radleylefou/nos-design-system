@@ -271,6 +271,12 @@
   overflow: hidden;
 }
 
+.wb-playground__preview--loading {
+  align-items: center;
+  justify-content: center;
+  min-height: calc(var(--spacing-24) * 3);
+}
+
 .wb-playground__sidenav-frame {
   width: calc(var(--spacing-24) * 2 + var(--spacing-12));
   max-width: 100%;

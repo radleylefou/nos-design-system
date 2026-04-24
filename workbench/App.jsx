@@ -17,7 +17,7 @@ export function App() {
       <main className="wb-main">
         {view.section === 'component'  && <ComponentsPage componentId={view.componentId} />}
         {view.section === 'tokens'     && <TokensPage category={view.category} />}
-        {view.section === 'playground' && <PlaygroundPage />}
+        {view.section === 'playground' && <PlaygroundPage playgroundView={view.playgroundView} />}
       </main>
     </div>
   );

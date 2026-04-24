@@ -9,6 +9,11 @@ const PRIMARY_SECTIONS = [
   { id: 'playground', label: 'Playground' },
 ];
 
+const PLAYGROUND_VIEWS = [
+  { id: 'components', label: 'Components' },
+  { id: 'loading', label: 'Loading Lab' },
+];
+
 /**
  * Sidebar — two-layer workbench navigation.
  *
@@ -113,14 +118,20 @@ export function Sidebar({ view, onNavigate }) {
               <div className="wb-sidebar__group">
                 <div className="wb-sidebar__group-label">Workspace</div>
                 <div className="wb-sidebar__group-items">
-                  <button
-                    type="button"
-                    className="wb-sidebar__secondary-item wb-sidebar__secondary-item--active"
-                    aria-current="page"
-                    onClick={() => onNavigate({ section: 'playground' })}
-                  >
-                    Playground
-                  </button>
+                  {PLAYGROUND_VIEWS.map((item) => {
+                    const active = getPlaygroundView(view) === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        className={`wb-sidebar__secondary-item ${active ? 'wb-sidebar__secondary-item--active' : ''}`}
+                        aria-current={active ? 'page' : undefined}
+                        onClick={() => onNavigate({ section: 'playground', playgroundView: item.id })}
+                      >
+                        {item.label}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             </nav>
@@ -144,7 +155,9 @@ function getSectionView(sectionId, currentView) {
       : { section: 'tokens', category: currentView.category || TOKEN_CATEGORIES[0] };
   }
 
-  return { section: 'playground' };
+  return currentView.section === 'playground'
+    ? currentView
+    : { section: 'playground', playgroundView: 'components' };
 }
 
 function getPanelEyebrow(section) {
@@ -157,4 +170,10 @@ function getPanelTitle(section) {
   if (section === 'tokens') return 'Tokens';
   if (section === 'playground') return 'Playground';
   return 'Components';
+}
+
+function getPlaygroundView(view) {
+  return PLAYGROUND_VIEWS.some((item) => item.id === view.playgroundView)
+    ? view.playgroundView
+    : 'components';
 }

@@ -12,5 +12,6 @@ export { Switch } from './Switch.jsx';
 export { Tabs } from './Tabs.jsx';
 export { Card } from './Card.jsx';
 export { Badge } from './Badge.jsx';
+export { LoadingGrid } from './LoadingGrid.jsx';
 export { Metrics } from './Metrics.jsx';
 export { SideNav } from './SideNav.jsx';

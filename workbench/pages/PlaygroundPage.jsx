@@ -5,6 +5,7 @@ import {
   Card,
   Checkbox,
   Input,
+  LoadingGrid,
   Metrics,
   RadioGroup,
   Select,
@@ -16,6 +17,7 @@ import {
 import './PlaygroundPage.css';
 
 const STORAGE_KEY = 'nos-playground-state-v1';
+const LOADING_LAB_STORAGE_KEY = 'nos-loading-lab-state-v1';
 
 const ICON_OPTIONS = [
   { value: 'none', label: 'None' },
@@ -44,6 +46,22 @@ const COMPONENT_ORDER = [
   'Badge',
   'Metrics',
   'SideNav',
+];
+
+const LOADING_GRID_PATTERN_OPTIONS = ['scatter', 'wave', 'ripple', 'scan'];
+const LOADING_GRID_SPEED_OPTIONS = ['slow', 'normal', 'fast'];
+const LOADING_GRID_DENSITY_OPTIONS = ['sparse', 'balanced', 'dense'];
+const LOADING_GRID_ACCENT_OPTIONS = ['low', 'medium', 'high'];
+const LOADING_GRID_CELL_OPTIONS = ['sm', 'md', 'lg'];
+const LOADING_GRID_GAP_OPTIONS = ['xs', 'sm', 'md'];
+const LOADING_GRID_VARIANT_OPTIONS = [
+  { value: 'light', label: 'Light' },
+  { value: 'inverse', label: 'Inverse' },
+];
+const LOADING_GRID_SIZE_OPTIONS = [
+  { value: '4', label: '4 x 4' },
+  { value: '5', label: '5 x 5' },
+  { value: '6', label: '6 x 6' },
 ];
 
 const field = {
@@ -197,6 +215,56 @@ const DEFAULT_COMPONENT_PROPS = {
       { label: 'Project Management', icon: 'none' },
     ],
   },
+};
+
+const DEFAULT_LOADING_GRID_PROPS = {
+  pattern: 'scatter',
+  gridSize: '5',
+  speed: 'normal',
+  density: 'balanced',
+  accentRatio: 'medium',
+  cellSize: 'md',
+  gap: 'sm',
+  variant: 'light',
+  paused: false,
+  decorative: false,
+  label: 'Loading',
+};
+
+const LOADING_LAB_CONFIG = {
+  sections: [
+    {
+      title: 'Pattern',
+      fields: [
+        field.select('pattern', 'Pattern', LOADING_GRID_PATTERN_OPTIONS),
+        field.select('gridSize', 'Grid size', LOADING_GRID_SIZE_OPTIONS),
+        field.select('density', 'Density', LOADING_GRID_DENSITY_OPTIONS),
+        field.select('accentRatio', 'Accent ratio', LOADING_GRID_ACCENT_OPTIONS),
+      ],
+    },
+    {
+      title: 'Motion',
+      fields: [
+        field.select('speed', 'Speed', LOADING_GRID_SPEED_OPTIONS),
+        field.toggle('paused', 'Paused'),
+      ],
+    },
+    {
+      title: 'Appearance',
+      fields: [
+        field.select('cellSize', 'Cell size', LOADING_GRID_CELL_OPTIONS),
+        field.select('gap', 'Gap', LOADING_GRID_GAP_OPTIONS),
+        field.select('variant', 'Theme', LOADING_GRID_VARIANT_OPTIONS),
+      ],
+    },
+    {
+      title: 'Accessibility',
+      fields: [
+        field.text('label', 'Accessible label'),
+        field.toggle('decorative', 'Decorative'),
+      ],
+    },
+  ],
 };
 
 const COMPONENT_CONFIG = {
@@ -660,9 +728,20 @@ const DEFAULT_PLAYGROUND_STATE = {
 };
 
 /**
- * PlaygroundPage — interactive prop editor with live preview and generated JSX.
+ * PlaygroundPage — workspace for component props and focused component labs.
  */
-export function PlaygroundPage() {
+export function PlaygroundPage({ playgroundView = 'components' }) {
+  if (playgroundView === 'loading') {
+    return <LoadingLab />;
+  }
+
+  return <ComponentPlayground />;
+}
+
+/**
+ * ComponentPlayground — interactive prop editor with live preview and generated JSX.
+ */
+function ComponentPlayground() {
   const [playgroundState, setPlaygroundState] = useState(loadInitialState);
 
   useEffect(() => {
@@ -737,6 +816,73 @@ export function PlaygroundPage() {
         <div className="wb-playground__right">
           <div className={`wb-playground__preview wb-playground__preview--${config.previewLayout}`}>
             {config.renderPreview(props)}
+          </div>
+          <CodePanel jsxString={jsxString} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LoadingLab() {
+  const [loadingProps, setLoadingProps] = useState(loadInitialLoadingLabState);
+  const jsxString = useMemo(() => buildLoadingGridJsx(loadingProps), [loadingProps]);
+
+  useEffect(() => {
+    window.localStorage.setItem(LOADING_LAB_STORAGE_KEY, JSON.stringify(loadingProps));
+  }, [loadingProps]);
+
+  const updateLoadingProps = (updater) => {
+    setLoadingProps((current) => {
+      const nextProps = typeof updater === 'function' ? updater(current) : updater;
+      return normalizeLoadingGridProps(nextProps);
+    });
+  };
+
+  return (
+    <div className="wb-page wb-page--playground">
+      <div className="wb-page__header">
+        <div className="wb-page__eyebrow">Playground</div>
+        <h1 className="wb-page__title">Loading Lab</h1>
+        <p className="wb-page__subtitle">
+          Tune the grid loader pattern, motion, density, and accessible output before handing JSX to app teams.
+        </p>
+      </div>
+
+      <div className="wb-playground">
+        <div className="wb-playground__controls">
+          {LOADING_LAB_CONFIG.sections.map((section) => (
+            <ControlSection key={section.title} title={section.title}>
+              {section.fields.map((control) => (
+                <FieldControl
+                  key={control.key}
+                  field={control}
+                  value={loadingProps[control.key]}
+                  onChange={(value) => updateLoadingProps((currentProps) => ({
+                    ...currentProps,
+                    [control.key]: value,
+                  }))}
+                />
+              ))}
+            </ControlSection>
+          ))}
+        </div>
+
+        <div className="wb-playground__right">
+          <div className="wb-playground__preview wb-playground__preview--loading">
+            <LoadingGrid
+              pattern={loadingProps.pattern}
+              gridSize={Number(loadingProps.gridSize)}
+              speed={loadingProps.speed}
+              density={loadingProps.density}
+              accentRatio={loadingProps.accentRatio}
+              cellSize={loadingProps.cellSize}
+              gap={loadingProps.gap}
+              variant={loadingProps.variant}
+              paused={loadingProps.paused}
+              decorative={loadingProps.decorative}
+              label={loadingProps.label}
+            />
           </div>
           <CodePanel jsxString={jsxString} />
         </div>
@@ -934,8 +1080,45 @@ function loadInitialState() {
   }
 }
 
+function loadInitialLoadingLabState() {
+  if (typeof window === 'undefined') {
+    return deepClone(DEFAULT_LOADING_GRID_PROPS);
+  }
+
+  const raw = window.localStorage.getItem(LOADING_LAB_STORAGE_KEY);
+  if (!raw) {
+    return deepClone(DEFAULT_LOADING_GRID_PROPS);
+  }
+
+  try {
+    return normalizeLoadingGridProps(mergeWithDefaults(DEFAULT_LOADING_GRID_PROPS, JSON.parse(raw)));
+  } catch {
+    return deepClone(DEFAULT_LOADING_GRID_PROPS);
+  }
+}
+
 function normalizeComponentProps(name, props) {
   return COMPONENT_CONFIG[name].normalize(props);
+}
+
+function normalizeLoadingGridProps(props) {
+  return {
+    pattern: optionFromList(props.pattern, LOADING_GRID_PATTERN_OPTIONS, DEFAULT_LOADING_GRID_PROPS.pattern),
+    gridSize: optionFromList(String(props.gridSize), ['4', '5', '6'], DEFAULT_LOADING_GRID_PROPS.gridSize),
+    speed: optionFromList(props.speed, LOADING_GRID_SPEED_OPTIONS, DEFAULT_LOADING_GRID_PROPS.speed),
+    density: optionFromList(props.density, LOADING_GRID_DENSITY_OPTIONS, DEFAULT_LOADING_GRID_PROPS.density),
+    accentRatio: optionFromList(props.accentRatio, LOADING_GRID_ACCENT_OPTIONS, DEFAULT_LOADING_GRID_PROPS.accentRatio),
+    cellSize: optionFromList(props.cellSize, LOADING_GRID_CELL_OPTIONS, DEFAULT_LOADING_GRID_PROPS.cellSize),
+    gap: optionFromList(props.gap, LOADING_GRID_GAP_OPTIONS, DEFAULT_LOADING_GRID_PROPS.gap),
+    variant: optionFromList(props.variant, ['light', 'inverse'], DEFAULT_LOADING_GRID_PROPS.variant),
+    paused: Boolean(props.paused),
+    decorative: Boolean(props.decorative),
+    label: props.label || DEFAULT_LOADING_GRID_PROPS.label,
+  };
+}
+
+function optionFromList(value, options, defaultValue) {
+  return options.includes(value) ? value : defaultValue;
 }
 
 function normalizeSelectProps(props) {
@@ -1180,6 +1363,23 @@ function buildBadgeJsx(props) {
   return wrapJsx('Badge', attrs, props.label);
 }
 
+function buildLoadingGridJsx(props) {
+  const attrs = propLines([
+    stringProp('pattern', props.pattern, 'scatter'),
+    numberProp('gridSize', props.gridSize, 5),
+    stringProp('speed', props.speed, 'normal'),
+    stringProp('density', props.density, 'balanced'),
+    stringProp('accentRatio', props.accentRatio, 'medium'),
+    stringProp('cellSize', props.cellSize, 'md'),
+    stringProp('gap', props.gap, 'sm'),
+    stringProp('variant', props.variant, 'light'),
+    booleanProp('paused', props.paused),
+    booleanProp('decorative', props.decorative),
+    stringProp('label', props.label, 'Loading'),
+  ]);
+  return selfClosingJsx('LoadingGrid', attrs);
+}
+
 function buildMetricsJsx(props) {
   const attrs = propLines([
     optionalStringProp('title', props.title),
@@ -1230,6 +1430,12 @@ function optionalStringProp(name, value) {
 
 function booleanProp(name, value) {
   return value ? name : '';
+}
+
+function numberProp(name, value, defaultValue) {
+  const numericValue = Number(value);
+  if (numericValue === defaultValue) return '';
+  return `${name}={${numericValue}}`;
 }
 
 function iconProp(name, value) {

@@ -1,0 +1,156 @@
+.nos-loading-grid {
+  --nos-loading-grid-count: 5;
+  --nos-loading-grid-duration: calc(var(--duration-slow) + var(--duration-slow) + var(--duration-base));
+  --nos-loading-grid-cell-size: var(--spacing-3);
+  --nos-loading-grid-gap: var(--spacing-2);
+  --nos-loading-grid-background: var(--bg-surface);
+  --nos-loading-grid-border: var(--border-default);
+  --nos-loading-cell-rest: var(--color-neutral-200);
+  --nos-loading-cell-fill: var(--color-neutral-500);
+  --nos-loading-cell-accent: var(--color-brand-500);
+  --nos-loading-cell-idle-opacity: 0.2;
+  --nos-loading-cell-peak-opacity: 0.86;
+  --nos-loading-cell-peak: var(--nos-loading-cell-fill);
+
+  display: inline-grid;
+  grid-template-columns: repeat(var(--nos-loading-grid-count), var(--nos-loading-grid-cell-size));
+  gap: var(--nos-loading-grid-gap);
+  width: max-content;
+  padding: var(--spacing-3);
+  background: var(--nos-loading-grid-background);
+  border: 1px solid var(--nos-loading-grid-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  contain: layout paint style;
+}
+
+.nos-loading-grid--inverse {
+  --nos-loading-grid-background: var(--color-neutral-950);
+  --nos-loading-grid-border: var(--color-neutral-800);
+  --nos-loading-cell-rest: var(--color-neutral-800);
+  --nos-loading-cell-fill: var(--color-neutral-100);
+  --nos-loading-cell-accent: var(--color-brand-300);
+  --nos-loading-cell-idle-opacity: 0.28;
+  --nos-loading-cell-peak-opacity: 0.95;
+}
+
+.nos-loading-grid--speed-slow {
+  --nos-loading-grid-duration: calc(var(--duration-slow) + var(--duration-slow) + var(--duration-slow) + var(--duration-base));
+}
+
+.nos-loading-grid--speed-fast {
+  --nos-loading-grid-duration: calc(var(--duration-slow) + var(--duration-base));
+}
+
+.nos-loading-grid--cell-sm {
+  --nos-loading-grid-cell-size: var(--spacing-2);
+}
+
+.nos-loading-grid--cell-lg {
+  --nos-loading-grid-cell-size: var(--spacing-4);
+}
+
+.nos-loading-grid--gap-xs {
+  --nos-loading-grid-gap: var(--spacing-1);
+}
+
+.nos-loading-grid--gap-md {
+  --nos-loading-grid-gap: var(--spacing-3);
+}
+
+.nos-loading-grid__cell {
+  width: var(--nos-loading-grid-cell-size);
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background: var(--nos-loading-cell-rest);
+  opacity: var(--nos-loading-cell-idle-opacity);
+  transform: scale(0.72);
+  animation: nos-loading-grid-pulse var(--nos-loading-grid-duration) var(--easing-standard) infinite;
+  will-change: opacity, transform;
+}
+
+.nos-loading-grid__cell--active {
+  --nos-loading-cell-idle-opacity: 0.36;
+  --nos-loading-cell-peak: var(--nos-loading-cell-fill);
+}
+
+.nos-loading-grid__cell--accent {
+  --nos-loading-cell-peak: var(--nos-loading-cell-accent);
+}
+
+.nos-loading-grid--density-sparse .nos-loading-grid__cell--active {
+  --nos-loading-cell-idle-opacity: 0.3;
+}
+
+.nos-loading-grid--density-dense .nos-loading-grid__cell--active {
+  --nos-loading-cell-idle-opacity: 0.42;
+}
+
+.nos-loading-grid--paused .nos-loading-grid__cell {
+  animation-play-state: paused;
+}
+
+.nos-loading-grid__cell--phase-0 {
+  animation-delay: 0ms;
+}
+
+.nos-loading-grid__cell--phase-1 {
+  animation-delay: calc(0ms - var(--duration-instant));
+}
+
+.nos-loading-grid__cell--phase-2 {
+  animation-delay: calc(0ms - var(--duration-fast));
+}
+
+.nos-loading-grid__cell--phase-3 {
+  animation-delay: calc(0ms - var(--duration-base));
+}
+
+.nos-loading-grid__cell--phase-4 {
+  animation-delay: calc(0ms - var(--duration-slow));
+}
+
+.nos-loading-grid__cell--phase-5 {
+  animation-delay: calc(0ms - var(--duration-slow) - var(--duration-instant));
+}
+
+.nos-loading-grid__cell--phase-6 {
+  animation-delay: calc(0ms - var(--duration-slow) - var(--duration-fast));
+}
+
+.nos-loading-grid__cell--phase-7 {
+  animation-delay: calc(0ms - var(--duration-slow) - var(--duration-base));
+}
+
+@keyframes nos-loading-grid-pulse {
+  0%,
+  100% {
+    background: var(--nos-loading-cell-rest);
+    opacity: var(--nos-loading-cell-idle-opacity);
+    transform: scale(0.72);
+  }
+
+  36% {
+    background: var(--nos-loading-cell-peak);
+    opacity: var(--nos-loading-cell-peak-opacity);
+    transform: scale(1);
+  }
+
+  64% {
+    background: var(--nos-loading-cell-rest);
+    opacity: calc(var(--nos-loading-cell-idle-opacity) + 0.16);
+    transform: scale(0.82);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nos-loading-grid__cell {
+    animation: none;
+    transform: none;
+  }
+
+  .nos-loading-grid__cell--active {
+    background: var(--nos-loading-cell-peak);
+    opacity: 0.78;
+  }
+}
