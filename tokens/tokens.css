@@ -1,7 +1,9 @@
 /* Auto-generated from tokens.json. Do not edit directly — edit tokens.json and run `npm run tokens`. */
 
 :root {
+  --color-neutral-25: #FCFCFD;
   --color-neutral-50: #F9FAFB;
+  --color-neutral-75: #F6F7F8;
   --color-neutral-100: #F3F4F6;
   --color-neutral-200: #E5E7EB;
   --color-neutral-300: #D1D5DB;
