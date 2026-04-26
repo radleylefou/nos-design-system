@@ -26,7 +26,7 @@
 }
 
 .nos-textarea--error:focus {
-  box-shadow: 0 0 0 2px var(--bg-surface), 0 0 0 4px var(--color-semantic-error-600);
+  box-shadow: var(--shadow-focus-error);
 }
 
 .nos-textarea:disabled,
