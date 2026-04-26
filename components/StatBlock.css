@@ -24,6 +24,7 @@
 }
 
 .nos-stat__label {
+  font-family: var(--font-family-display);
   font-size: 11px;
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
@@ -39,11 +40,11 @@
 }
 
 .nos-stat__value {
-  font-family: var(--font-family-display);
+  font-family: var(--font-family-sans);
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
-  letter-spacing: var(--letter-spacing-normal);
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
   color: var(--fg-default);
 }
