@@ -76,6 +76,7 @@
 }
 
 .nos-metrics__value {
+  font-family: var(--font-family-display);
   font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--letter-spacing-normal);
