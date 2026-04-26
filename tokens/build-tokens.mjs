@@ -33,8 +33,14 @@ const isDtcgToken = (node) =>
   !Array.isArray(node) &&
   '$value' in node;
 
+// Token $types that represent non-CSS payloads (e.g., raw SVG path arrays for
+// icons). These are kept in tokens.json as a single source of truth, but are
+// skipped when emitting the CSS variables file.
+const SKIP_TYPES = new Set(['icon']);
+
 const flatten = (node, path = [], out = []) => {
   if (isDtcgToken(node)) {
+    if (SKIP_TYPES.has(node.$type)) return out;
     // DTCG leaf — use $value; ignore $type and other $ keys.
     out.push({ path, value: node.$value });
   } else if (node !== null && typeof node === 'object' && !Array.isArray(node)) {

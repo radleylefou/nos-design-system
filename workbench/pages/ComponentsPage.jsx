@@ -13,6 +13,19 @@ import {
   LoadingGrid,
   Metrics,
   SideNav,
+  Table,
+  Avatar,
+  ProgressBar,
+  ProgressRing,
+  StatBlock,
+  Divider,
+  DatePicker,
+  DateRangePicker,
+  Combobox,
+  TagInput,
+  NumberInput,
+  FileUpload,
+  FieldGroup,
 } from '../../components/index.js';
 import './ComponentsPage.css';
 
@@ -789,6 +802,541 @@ const DEMOS = {
       },
     ],
   },
+
+  /* ────────────────  Data Display  ──────────────── */
+
+  Table: {
+    type: 'Data Display',
+    description: 'Sortable data grid with selection, density modes, and a sticky-header option for browsing records.',
+    sections: [
+      {
+        title: 'Default',
+        render: () => <TableDemo />,
+        code: `<Table
+  columns={[
+    { key: 'name', header: 'Name', sortable: true },
+    { key: 'owner', header: 'Owner' },
+    { key: 'status', header: 'Status', render: (v) => <Badge variant={statusTone[v]}>{v}</Badge> },
+    { key: 'updated', header: 'Updated', sortable: true, align: 'right' },
+  ]}
+  data={rows}
+  onRowClick={openRow}
+/>`,
+      },
+      {
+        title: 'Selectable',
+        render: () => <SelectableTableDemo />,
+        code: `<Table
+  columns={columns}
+  data={rows}
+  selectable
+  selectedKeys={selected}
+  onSelectChange={setSelected}
+/>`,
+      },
+      {
+        title: 'Density',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)', width: '100%' }}>
+            <Table density="compact" columns={DEMO_TABLE_COLUMNS} data={DEMO_TABLE_ROWS.slice(0, 3)} />
+            <Table density="comfortable" columns={DEMO_TABLE_COLUMNS} data={DEMO_TABLE_ROWS.slice(0, 3)} />
+          </div>
+        ),
+        code: `<Table density="compact" columns={cols} data={rows} />
+<Table density="comfortable" columns={cols} data={rows} />`,
+      },
+      {
+        title: 'Empty and loading',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)', width: '100%' }}>
+            <Table columns={DEMO_TABLE_COLUMNS} data={[]} emptyState="No scopes yet — start by creating one." />
+            <Table columns={DEMO_TABLE_COLUMNS} data={DEMO_TABLE_ROWS} loading />
+          </div>
+        ),
+        code: `<Table columns={cols} data={[]} emptyState="No scopes yet — start by creating one." />
+<Table columns={cols} data={rows} loading />`,
+      },
+    ],
+  },
+
+  Avatar: {
+    type: 'Data Display',
+    description: 'Person, account, or entity badge. Image, initials, or icon — with optional status dot and grouped overflow.',
+    sections: [
+      {
+        title: 'Sizes',
+        render: () => (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-3)' }}>
+            <Avatar size="xs" name="Ada Lovelace" />
+            <Avatar size="sm" name="Ada Lovelace" />
+            <Avatar size="md" name="Ada Lovelace" />
+            <Avatar size="lg" name="Ada Lovelace" />
+            <Avatar size="xl" name="Ada Lovelace" />
+          </div>
+        ),
+        code: `<Avatar size="xs" name="Ada Lovelace" />
+<Avatar size="sm" name="Ada Lovelace" />
+<Avatar size="md" name="Ada Lovelace" />
+<Avatar size="lg" name="Ada Lovelace" />
+<Avatar size="xl" name="Ada Lovelace" />`,
+      },
+      {
+        title: 'Tones',
+        render: () => (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-3)' }}>
+            <Avatar name="Ada Lovelace" />
+            <Avatar name="Grace Hopper" />
+            <Avatar name="Linus Torvalds" />
+            <Avatar name="Margaret Hamilton" />
+            <Avatar name="Donald Knuth" />
+            <Avatar name="Anonymous" variant="neutral" />
+          </div>
+        ),
+        code: `<Avatar name="Ada Lovelace" />              {/* deterministic tone */}
+<Avatar name="Anonymous" variant="neutral" />`,
+      },
+      {
+        title: 'With status',
+        render: () => (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-3)' }}>
+            <Avatar name="Ada Lovelace" status="online" />
+            <Avatar name="Grace Hopper" status="busy" />
+            <Avatar name="Linus Torvalds" status="away" />
+            <Avatar name="Margaret Hamilton" status="offline" />
+          </div>
+        ),
+        code: `<Avatar name="Ada Lovelace" status="online" />
+<Avatar name="Grace Hopper" status="busy" />`,
+      },
+      {
+        title: 'Square + icon',
+        render: () => (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-3)' }}>
+            <Avatar shape="square" name="Acme Co." />
+            <Avatar shape="square" name="Globex" variant="brand" />
+            <Avatar
+              shape="square"
+              name="Files"
+              variant="neutral"
+              icon={
+                <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M2 4a1 1 0 011-1h4l1.5 2H13a1 1 0 011 1v6a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" />
+                </svg>
+              }
+            />
+          </div>
+        ),
+        code: `<Avatar shape="square" name="Acme Co." />
+<Avatar shape="square" icon={<FolderIcon />} name="Files" variant="neutral" />`,
+      },
+      {
+        title: 'Group with overflow',
+        render: () => (
+          <Avatar.Group max={3}>
+            <Avatar name="Ada Lovelace" />
+            <Avatar name="Grace Hopper" />
+            <Avatar name="Linus Torvalds" />
+            <Avatar name="Margaret Hamilton" />
+            <Avatar name="Donald Knuth" />
+            <Avatar name="Tim Berners-Lee" />
+          </Avatar.Group>
+        ),
+        code: `<Avatar.Group max={3}>
+  <Avatar name="Ada Lovelace" />
+  <Avatar name="Grace Hopper" />
+  <Avatar name="Linus Torvalds" />
+  <Avatar name="Margaret Hamilton" />
+  <Avatar name="Donald Knuth" />
+</Avatar.Group>`,
+      },
+    ],
+  },
+
+  ProgressBar: {
+    type: 'Data Display',
+    description: 'Linear progress for uploads, imports, completion meters, and indeterminate work.',
+    sections: [
+      {
+        title: 'Sizes',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)', width: '100%', maxWidth: 360 }}>
+            <ProgressBar size="sm" value={32} />
+            <ProgressBar size="md" value={62} />
+            <ProgressBar size="lg" value={84} />
+          </div>
+        ),
+        code: `<ProgressBar size="sm" value={32} />
+<ProgressBar size="md" value={62} />
+<ProgressBar size="lg" value={84} />`,
+      },
+      {
+        title: 'With label and value',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)', width: '100%', maxWidth: 360 }}>
+            <ProgressBar label="Uploading scope.pdf" value={42} showValue />
+            <ProgressBar label="Generating preview" value={87} showValue variant="success" />
+            <ProgressBar label="Quota usage" value={94} showValue variant="warning" />
+            <ProgressBar label="Failed deploy" value={60} showValue variant="error" />
+          </div>
+        ),
+        code: `<ProgressBar label="Uploading scope.pdf" value={42} showValue />
+<ProgressBar label="Quota usage" value={94} showValue variant="warning" />`,
+      },
+      {
+        title: 'Indeterminate',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 360 }}>
+            <ProgressBar label="Syncing…" />
+          </div>
+        ),
+        code: `<ProgressBar label="Syncing…" />   // value omitted = indeterminate`,
+      },
+    ],
+  },
+
+  ProgressRing: {
+    type: 'Data Display',
+    description: 'Circular progress for compact KPIs and inline meters.',
+    sections: [
+      {
+        title: 'Sizes and tones',
+        render: () => (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-5)' }}>
+            <ProgressRing value={32} />
+            <ProgressRing value={62} size={64} thickness={6} />
+            <ProgressRing value={87} size={80} thickness={8} variant="success" />
+            <ProgressRing value={94} size={64} thickness={6} variant="warning" />
+            <ProgressRing value={3} max={5} label="3/5" size={64} thickness={6} />
+          </div>
+        ),
+        code: `<ProgressRing value={62} size={64} thickness={6} />
+<ProgressRing value={3} max={5} label="3/5" />`,
+      },
+    ],
+  },
+
+  StatBlock: {
+    type: 'Data Display',
+    description: 'Single-metric tile. Use one in a Card or several in a grid; pair with Metrics module for full KPI rows.',
+    sections: [
+      {
+        title: 'Default',
+        render: () => (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 'var(--spacing-5)', width: '100%' }}>
+            <StatBlock label="Active Scopes" value="124" delta={{ direction: 'up', label: '+12' }} helper="vs last month" />
+            <StatBlock label="Avg. cycle time" value="4.2" unit="days" delta={{ direction: 'down', label: '−0.8d' }} trend="positive" helper="Faster than Q1" />
+            <StatBlock label="Awaiting review" value="6" delta={{ direction: 'flat', label: 'No change' }} helper="3 over 7 days" />
+          </div>
+        ),
+        code: `<StatBlock label="Active Scopes" value="124" delta={{ direction: 'up', label: '+12' }} />
+<StatBlock label="Avg. cycle time" value="4.2" unit="days" delta={{ direction: 'down', label: '−0.8d' }} trend="positive" />`,
+      },
+      {
+        title: 'Inside cards',
+        render: () => (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 'var(--spacing-4)', width: '100%' }}>
+            <Card>
+              <Card.Body>
+                <StatBlock label="Revenue" value="$48,210" delta={{ direction: 'up', label: '+12.4%' }} helper="vs last month" />
+              </Card.Body>
+            </Card>
+            <Card>
+              <Card.Body>
+                <StatBlock label="Refunds" value="$1,240" delta={{ direction: 'up', label: '+3.1%' }} trend="negative" helper="3 refunds this week" />
+              </Card.Body>
+            </Card>
+          </div>
+        ),
+        code: `<Card><Card.Body>
+  <StatBlock label="Revenue" value="$48,210" delta={{ direction: 'up', label: '+12.4%' }} />
+</Card.Body></Card>`,
+      },
+      {
+        title: 'Alignment',
+        render: () => (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 'var(--spacing-4)', width: '100%' }}>
+            <StatBlock align="start"  label="Start" value="42" />
+            <StatBlock align="center" label="Center" value="42" />
+            <StatBlock align="end"    label="End" value="42" />
+          </div>
+        ),
+        code: `<StatBlock align="start"  label="Start" value="42" />
+<StatBlock align="center" label="Center" value="42" />
+<StatBlock align="end"    label="End" value="42" />`,
+      },
+    ],
+  },
+
+  Divider: {
+    type: 'Layout',
+    description: 'Horizontal or vertical separator with optional inline label.',
+    sections: [
+      {
+        title: 'Horizontal',
+        render: () => (
+          <div style={{ width: '100%' }}>
+            <p style={{ margin: 0, color: 'var(--fg-muted)' }}>Section A</p>
+            <Divider />
+            <p style={{ margin: 0, color: 'var(--fg-muted)' }}>Section B</p>
+          </div>
+        ),
+        code: `<Divider />`,
+      },
+      {
+        title: 'With label',
+        render: () => (
+          <div style={{ width: '100%' }}>
+            <Divider label="Today" />
+            <Divider label="Yesterday" align="start" />
+            <Divider label="OR" variant="dashed" />
+          </div>
+        ),
+        code: `<Divider label="Today" />
+<Divider label="Yesterday" align="start" />
+<Divider label="OR" variant="dashed" />`,
+      },
+      {
+        title: 'Vertical',
+        render: () => (
+          <div style={{ display: 'inline-flex', alignItems: 'center', height: 24, color: 'var(--fg-muted)' }}>
+            <span>Draft</span>
+            <Divider orientation="vertical" />
+            <span>3 reviewers</span>
+            <Divider orientation="vertical" />
+            <span>Updated 2h ago</span>
+          </div>
+        ),
+        code: `<span>Draft</span>
+<Divider orientation="vertical" />
+<span>3 reviewers</span>`,
+      },
+    ],
+  },
+
+  /* ────────────────  Forms (extended)  ──────────────── */
+
+  DatePicker: {
+    description: 'Single-date picker with popover calendar. ISO date in, ISO date out.',
+    sections: [
+      {
+        title: 'Default',
+        render: () => <DatePickerDemo />,
+        code: `<DatePicker label="Due date" value={due} onChange={setDue} />`,
+      },
+      {
+        title: 'States',
+        render: () => (
+          <div style={{ display: 'grid', gap: 'var(--spacing-4)', width: '100%', maxWidth: 320 }}>
+            <DatePicker label="With helper" helperText="We'll send a reminder 24h before." />
+            <DatePicker label="Error" error="Choose a future date." />
+            <DatePicker label="Disabled" disabled defaultValue="2026-04-25" />
+          </div>
+        ),
+        code: `<DatePicker label="With helper" helperText="We'll send a reminder 24h before." />
+<DatePicker label="Error" error="Choose a future date." />
+<DatePicker label="Disabled" disabled defaultValue="2026-04-25" />`,
+      },
+    ],
+  },
+
+  DateRangePicker: {
+    description: 'Start/end date popover sharing the DatePicker calendar.',
+    sections: [
+      {
+        title: 'Default',
+        render: () => <DateRangePickerDemo />,
+        code: `<DateRangePicker label="Reporting window" value={range} onChange={setRange} />`,
+      },
+    ],
+  },
+
+  Combobox: {
+    description: 'Searchable single-select with keyboard navigation.',
+    sections: [
+      {
+        title: 'Default',
+        render: () => <ComboboxDemo />,
+        code: `<Combobox
+  label="Owner"
+  options={users}
+  value={owner}
+  onChange={setOwner}
+/>`,
+      },
+      {
+        title: 'With descriptions',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 360 }}>
+            <Combobox
+              label="Project"
+              placeholder="Search projects…"
+              options={[
+                { value: 'p1', label: 'Atlas Migration', description: 'Q2 — Engineering' },
+                { value: 'p2', label: 'Onboarding Revamp', description: 'Q2 — Growth' },
+                { value: 'p3', label: 'Billing v2', description: 'Q3 — Finance' },
+                { value: 'p4', label: 'Compliance Audit', description: 'Ongoing — Legal', disabled: true },
+              ]}
+            />
+          </div>
+        ),
+        code: `<Combobox
+  label="Project"
+  options={[
+    { value: 'p1', label: 'Atlas Migration', description: 'Q2 — Engineering' },
+    ...
+  ]}
+/>`,
+      },
+    ],
+  },
+
+  TagInput: {
+    description: 'Multi-value text input. Tags committed on Enter, Tab, or comma.',
+    sections: [
+      {
+        title: 'Default',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 480 }}>
+            <TagInput label="Recipients" defaultValue={['ada@nymbl.io', 'grace@nymbl.io']} />
+          </div>
+        ),
+        code: `<TagInput label="Recipients" defaultValue={['ada@nymbl.io', 'grace@nymbl.io']} />`,
+      },
+      {
+        title: 'With validation and cap',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 480 }}>
+            <TagInput
+              label="Tags"
+              helperText="Up to 5 lowercase tags."
+              maxTags={5}
+              validate={(v) => /^[a-z0-9-]+$/.test(v)}
+              defaultValue={['scope', 'q2']}
+            />
+          </div>
+        ),
+        code: `<TagInput
+  label="Tags"
+  maxTags={5}
+  validate={(v) => /^[a-z0-9-]+$/.test(v)}
+/>`,
+      },
+    ],
+  },
+
+  NumberInput: {
+    description: 'Numeric field with stepper buttons, clamping, and prefix/suffix slots.',
+    sections: [
+      {
+        title: 'Default',
+        render: () => <NumberInputDemo />,
+        code: `<NumberInput label="Quantity" min={0} step={1} value={qty} onChange={setQty} />`,
+      },
+      {
+        title: 'With affixes',
+        render: () => (
+          <div style={{ display: 'grid', gap: 'var(--spacing-4)', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', maxWidth: 480 }}>
+            <NumberInput label="Hours" suffix="hrs" step={0.5} precision={2} defaultValue={8} />
+            <NumberInput label="Budget" prefix="$" step={100} defaultValue={2400} />
+          </div>
+        ),
+        code: `<NumberInput label="Hours" suffix="hrs" step={0.5} precision={2} defaultValue={8} />
+<NumberInput label="Budget" prefix="$" step={100} defaultValue={2400} />`,
+      },
+      {
+        title: 'States',
+        render: () => (
+          <div style={{ display: 'grid', gap: 'var(--spacing-3)', maxWidth: 240 }}>
+            <NumberInput label="Disabled" disabled defaultValue={5} />
+            <NumberInput label="Error" error="Must be greater than 0." defaultValue={0} min={0} />
+          </div>
+        ),
+        code: `<NumberInput label="Disabled" disabled defaultValue={5} />
+<NumberInput label="Error" error="Must be greater than 0." defaultValue={0} />`,
+      },
+    ],
+  },
+
+  FileUpload: {
+    description: 'Drag-and-drop dropzone with click-to-browse. Emits File objects; upload logic stays with the host.',
+    sections: [
+      {
+        title: 'Default',
+        render: () => <FileUploadDemo />,
+        code: `<FileUpload label="Attachments" multiple onChange={setFiles} />`,
+      },
+      {
+        title: 'Constrained',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 480 }}>
+            <FileUpload
+              label="Cover image"
+              accept="image/*"
+              maxSize={2 * 1024 * 1024}
+              hint="Drop a PNG or JPG (max 2 MB)"
+            />
+          </div>
+        ),
+        code: `<FileUpload
+  label="Cover image"
+  accept="image/*"
+  maxSize={2 * 1024 * 1024}
+/>`,
+      },
+    ],
+  },
+
+  FieldGroup: {
+    type: 'Form layout',
+    description: 'Semantic grouping of related fields with shared title, description, and consistent column layout.',
+    sections: [
+      {
+        title: 'Single column',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 520 }}>
+            <FieldGroup title="Identity" description="Used in headers, exports, and audit trails.">
+              <Input label="Full name" defaultValue="Ada Lovelace" />
+              <Input label="Email" type="email" defaultValue="ada@nymbl.io" />
+            </FieldGroup>
+          </div>
+        ),
+        code: `<FieldGroup title="Identity" description="Used in headers, exports, and audit trails.">
+  <Input label="Full name" />
+  <Input label="Email" type="email" />
+</FieldGroup>`,
+      },
+      {
+        title: 'Two columns + actions',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 720 }}>
+            <FieldGroup
+              title="Billing address"
+              description="Where invoices are sent."
+              columns={2}
+              actions={<Button size="sm" variant="ghost">Copy from shipping</Button>}
+            >
+              <Input label="Street" />
+              <Input label="Apt / Suite" />
+              <Input label="City" />
+              <Input label="Postal code" />
+              <FieldGroup.Row>
+                <Input label="Notes for the courier" />
+              </FieldGroup.Row>
+            </FieldGroup>
+          </div>
+        ),
+        code: `<FieldGroup title="Billing address" columns={2} actions={<Button size="sm" variant="ghost">Copy from shipping</Button>}>
+  <Input label="Street" />
+  <Input label="Apt / Suite" />
+  <Input label="City" />
+  <Input label="Postal code" />
+  <FieldGroup.Row>
+    <Input label="Notes for the courier" />
+  </FieldGroup.Row>
+</FieldGroup>`,
+      },
+    ],
+  },
 };
 
 /* ── Demo helpers ─────────────────────────────────────────────────── */
@@ -872,3 +1420,109 @@ const IconPhone = () => (
     <path d="M3 2h3l1.5 4-2 1.2a10 10 0 004.3 4.3L11 9.5l4 1.5v3a1 1 0 01-1 1A15 15 0 012 3a1 1 0 011-1z" />
   </svg>
 );
+
+/* ── Batch 2 / 3 demo helpers ─────────────────────────────────────── */
+
+const STATUS_TONE = {
+  Draft: 'neutral',
+  'In Review': 'warning',
+  Approved: 'success',
+  Archived: 'neutral',
+  Rejected: 'error',
+};
+
+const DEMO_TABLE_COLUMNS = [
+  { key: 'name', header: 'Name', sortable: true },
+  { key: 'owner', header: 'Owner' },
+  {
+    key: 'status',
+    header: 'Status',
+    render: (v) => <Badge variant={STATUS_TONE[v]} dot>{v}</Badge>,
+  },
+  { key: 'updated', header: 'Updated', sortable: true, align: 'right' },
+];
+
+const DEMO_TABLE_ROWS = [
+  { id: 1, name: 'Atlas Migration', owner: 'Ada Lovelace',     status: 'In Review', updated: 'Apr 24' },
+  { id: 2, name: 'Onboarding Revamp', owner: 'Grace Hopper',   status: 'Draft',     updated: 'Apr 22' },
+  { id: 3, name: 'Billing v2',      owner: 'Linus Torvalds',   status: 'Approved',  updated: 'Apr 19' },
+  { id: 4, name: 'Compliance Audit', owner: 'Margaret Hamilton', status: 'Rejected', updated: 'Apr 11' },
+  { id: 5, name: 'Sunset legacy SDK', owner: 'Donald Knuth',   status: 'Archived',  updated: 'Mar 30' },
+];
+
+function TableDemo() {
+  return (
+    <Table
+      columns={DEMO_TABLE_COLUMNS}
+      data={DEMO_TABLE_ROWS}
+      defaultSort={{ key: 'updated', direction: 'desc' }}
+      onRowClick={() => {}}
+    />
+  );
+}
+
+function SelectableTableDemo() {
+  const [selected, setSelected] = useState([1, 3]);
+  return (
+    <Table
+      columns={DEMO_TABLE_COLUMNS}
+      data={DEMO_TABLE_ROWS}
+      selectable
+      selectedKeys={selected}
+      onSelectChange={setSelected}
+    />
+  );
+}
+
+function DatePickerDemo() {
+  const [value, setValue] = useState(null);
+  return (
+    <div style={{ width: '100%', maxWidth: 320 }}>
+      <DatePicker label="Due date" value={value} onChange={setValue} placeholder="Pick a date" />
+    </div>
+  );
+}
+
+function DateRangePickerDemo() {
+  const [range, setRange] = useState({ start: null, end: null });
+  return (
+    <div style={{ width: '100%', maxWidth: 360 }}>
+      <DateRangePicker label="Reporting window" value={range} onChange={setRange} />
+    </div>
+  );
+}
+
+function ComboboxDemo() {
+  const [owner, setOwner] = useState(null);
+  const options = [
+    { value: 'ada',    label: 'Ada Lovelace' },
+    { value: 'grace',  label: 'Grace Hopper' },
+    { value: 'linus',  label: 'Linus Torvalds' },
+    { value: 'maggie', label: 'Margaret Hamilton' },
+    { value: 'don',    label: 'Donald Knuth' },
+    { value: 'tim',    label: 'Tim Berners-Lee' },
+  ];
+  return (
+    <div style={{ width: '100%', maxWidth: 360 }}>
+      <Combobox label="Owner" options={options} value={owner} onChange={setOwner} placeholder="Search owners…" />
+    </div>
+  );
+}
+
+function NumberInputDemo() {
+  const [value, setValue] = useState(1);
+  return (
+    <div style={{ width: 200 }}>
+      <NumberInput label="Quantity" min={0} step={1} value={value} onChange={setValue} />
+    </div>
+  );
+}
+
+function FileUploadDemo() {
+  const [files, setFiles] = useState([]);
+  return (
+    <div style={{ width: '100%', maxWidth: 480 }}>
+      <FileUpload label="Attachments" multiple value={files} onChange={setFiles} />
+    </div>
+  );
+}

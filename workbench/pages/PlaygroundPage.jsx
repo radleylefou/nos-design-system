@@ -16,7 +16,7 @@ import {
 } from '../../components/index.js';
 import './PlaygroundPage.css';
 
-const STORAGE_KEY = 'nos-playground-state-v1';
+const STORAGE_KEY = 'nos-playground-state-v2';
 const LOADING_LAB_STORAGE_KEY = 'nos-loading-lab-state-v1';
 
 const ICON_OPTIONS = [
@@ -93,8 +93,8 @@ const DEFAULT_COMPONENT_PROPS = {
     disabled: false,
     loading: false,
     label: 'Button',
-    leadingIcon: 'none',
-    trailingIcon: 'none',
+    leadingIcon: false,
+    trailingIcon: false,
   },
   Input: {
     size: 'md',
@@ -277,8 +277,8 @@ const COMPONENT_CONFIG = {
           field.select('variant', 'Variant', ['primary', 'secondary', 'ghost', 'danger', 'super']),
           field.select('size', 'Size', ['sm', 'md', 'lg']),
           field.text('label', 'Label'),
-          field.select('leadingIcon', 'Leading icon', iconValues()),
-          field.select('trailingIcon', 'Trailing icon', iconValues()),
+          field.toggle('leadingIcon', 'Leading icon'),
+          field.toggle('trailingIcon', 'Trailing icon'),
           field.toggle('disabled', 'Disabled'),
           field.toggle('loading', 'Loading'),
         ],
@@ -291,8 +291,8 @@ const COMPONENT_CONFIG = {
         size={props.size}
         disabled={props.disabled}
         loading={props.loading}
-        leadingIcon={iconNode(props.leadingIcon)}
-        trailingIcon={iconNode(props.trailingIcon)}
+        leadingIcon={props.leadingIcon ? <IconPlus /> : undefined}
+        trailingIcon={props.trailingIcon ? <IconArrowRight /> : undefined}
       >
         {props.label}
       </Button>
@@ -1225,8 +1225,8 @@ function buildButtonJsx(props) {
     stringProp('size', props.size, 'md'),
     booleanProp('disabled', props.disabled),
     booleanProp('loading', props.loading),
-    iconProp('leadingIcon', props.leadingIcon),
-    iconProp('trailingIcon', props.trailingIcon),
+    booleanIconProp('leadingIcon', props.leadingIcon, 'IconPlus'),
+    booleanIconProp('trailingIcon', props.trailingIcon, 'IconArrowRight'),
   ]);
   return wrapJsx('Button', attrs, props.label);
 }
@@ -1441,6 +1441,11 @@ function numberProp(name, value, defaultValue) {
 function iconProp(name, value) {
   if (!value || value === 'none') return '';
   return `${name}={<${iconJsxName(value)} />}`;
+}
+
+function booleanIconProp(name, on, iconName) {
+  if (!on) return '';
+  return `${name}={<${iconName} />}`;
 }
 
 function objectProp(name, value, options = {}) {

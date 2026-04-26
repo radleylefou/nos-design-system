@@ -1,0 +1,96 @@
+.nos-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  width: 100%;
+}
+
+.nos-progress__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--spacing-3);
+}
+
+.nos-progress__label {
+  font-size: var(--font-size-xs);
+  color: var(--fg-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+.nos-progress__value {
+  font-size: var(--font-size-xs);
+  color: var(--fg-default);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--font-weight-semibold);
+}
+
+.nos-progress__track {
+  position: relative;
+  width: 100%;
+  background: var(--bg-muted);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.nos-progress--sm .nos-progress__track { height: 4px; }
+.nos-progress--md .nos-progress__track { height: 6px; }
+.nos-progress--lg .nos-progress__track { height: 10px; }
+
+.nos-progress__fill {
+  height: 100%;
+  border-radius: inherit;
+  transition: width var(--duration-base) var(--easing-standard);
+}
+
+.nos-progress--brand   .nos-progress__fill { background: var(--color-brand-500); }
+.nos-progress--success .nos-progress__fill { background: var(--color-semantic-success-500); }
+.nos-progress--warning .nos-progress__fill { background: var(--color-semantic-warning-500); }
+.nos-progress--error   .nos-progress__fill { background: var(--color-semantic-error-500); }
+
+.nos-progress--indeterminate .nos-progress__fill {
+  width: 40%;
+  animation: nos-progress-slide 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes nos-progress-slide {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(250%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nos-progress--indeterminate .nos-progress__fill {
+    animation: none;
+    width: 100%;
+    opacity: 0.6;
+  }
+}
+
+/* Ring */
+.nos-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nos-ring__track {
+  stroke: var(--bg-muted);
+}
+
+.nos-ring__fill {
+  transition: stroke-dashoffset var(--duration-base) var(--easing-standard);
+}
+
+.nos-ring--brand   .nos-ring__fill { stroke: var(--color-brand-500); }
+.nos-ring--success .nos-ring__fill { stroke: var(--color-semantic-success-500); }
+.nos-ring--warning .nos-ring__fill { stroke: var(--color-semantic-warning-500); }
+.nos-ring--error   .nos-ring__fill { stroke: var(--color-semantic-error-500); }
+
+.nos-ring__label {
+  position: absolute;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--fg-default);
+  font-variant-numeric: tabular-nums;
+}

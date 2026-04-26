@@ -5,10 +5,10 @@
 export const COMPONENT_CATEGORIES = [
   { label: 'Foundations', components: ['Button', 'Input', 'Card', 'Badge'] },
   { label: 'Modules',     components: ['Metrics', 'SideNav'] },
-  { label: 'Forms',        components: ['Select', 'Textarea', 'Checkbox', 'RadioGroup', 'Switch'] },
-  { label: 'Layout',       components: ['Tabs'] },
+  { label: 'Forms',        components: ['Select', 'Textarea', 'Checkbox', 'RadioGroup', 'Switch', 'NumberInput', 'Combobox', 'TagInput', 'DatePicker', 'DateRangePicker', 'FileUpload', 'FieldGroup'] },
+  { label: 'Layout',       components: ['Tabs', 'Divider'] },
   { label: 'Feedback',     components: ['LoadingGrid'] },
-  { label: 'Data Display', components: [] },
+  { label: 'Data Display', components: ['Table', 'Avatar', 'ProgressBar', 'ProgressRing', 'StatBlock'] },
 ];
 
-export const TOKEN_CATEGORIES = ['Color', 'Typography', 'Spacing', 'Radius'];
+export const TOKEN_CATEGORIES = ['Color', 'Typography', 'Spacing', 'Radius', 'Shadow', 'Border'];

@@ -6,7 +6,9 @@ const COMPONENT_GROUPS = COMPONENT_CATEGORIES.filter((category) => category.comp
 const PRIMARY_SECTIONS = [
   { id: 'component', label: 'Components' },
   { id: 'tokens', label: 'Tokens' },
+  { id: 'icons', label: 'Icons' },
   { id: 'playground', label: 'Playground' },
+  { id: 'changelog', label: 'Changelog' },
 ];
 
 const PLAYGROUND_VIEWS = [
@@ -155,6 +157,14 @@ function getSectionView(sectionId, currentView) {
       : { section: 'tokens', category: currentView.category || TOKEN_CATEGORIES[0] };
   }
 
+  if (sectionId === 'icons') {
+    return { section: 'icons' };
+  }
+
+  if (sectionId === 'changelog') {
+    return { section: 'changelog' };
+  }
+
   return currentView.section === 'playground'
     ? currentView
     : { section: 'playground', playgroundView: 'components' };
@@ -162,12 +172,16 @@ function getSectionView(sectionId, currentView) {
 
 function getPanelEyebrow(section) {
   if (section === 'tokens') return 'Design Tokens';
+  if (section === 'icons') return 'Foundations';
+  if (section === 'changelog') return 'NOS Design System';
   if (section === 'playground') return 'Workspace';
   return 'Component Library';
 }
 
 function getPanelTitle(section) {
   if (section === 'tokens') return 'Tokens';
+  if (section === 'icons') return 'Icons';
+  if (section === 'changelog') return 'Changelog';
   if (section === 'playground') return 'Playground';
   return 'Components';
 }

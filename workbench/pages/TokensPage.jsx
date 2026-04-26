@@ -6,11 +6,15 @@ import './TokensPage.css';
 const val = (token) =>
   token && typeof token === 'object' && '$value' in token ? token.$value : token;
 
+// Iterate non-metadata children of a DTCG group.
+const groupEntries = (group) =>
+  Object.entries(group || {}).filter(([key]) => !key.startsWith('$'));
+
 /**
  * TokensPage — renders one token category at a time.
  *
  * Props:
- *   category: "Color" | "Typography" | "Spacing" | "Radius"
+ *   category: "Color" | "Typography" | "Spacing" | "Radius" | "Shadow" | "Border"
  */
 export function TokensPage({ category }) {
   return (
@@ -28,6 +32,8 @@ export function TokensPage({ category }) {
       {category === 'Typography' && <TypographyView />}
       {category === 'Spacing'    && <SpacingView />}
       {category === 'Radius'     && <RadiusView />}
+      {category === 'Shadow'     && <ShadowView />}
+      {category === 'Border'     && <BorderView />}
     </div>
   );
 }
@@ -224,5 +230,166 @@ function RadiusView() {
         })}
       </div>
     </section>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Shadow
+// ---------------------------------------------------------------------------
+
+const SHADOW_GROUPS = [
+  {
+    title: 'Elevation',
+    description: 'General-purpose lift, from the faintest hairline to a hero modal.',
+    keys: ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+  },
+  {
+    title: 'Surface roles',
+    description: 'Tuned for specific overlay surfaces — use these instead of the size scale where possible.',
+    keys: ['dropdown', 'popover', 'modal', 'toast', 'inner'],
+  },
+  {
+    title: 'Focus rings',
+    description: 'Two-stop ring used on focus-visible. Inner stop matches the surface, outer matches the intent.',
+    keys: ['focus', 'focus-error', 'focus-success'],
+  },
+  {
+    title: 'Brand glow',
+    description: 'Reserved for primary CTAs and marketing surfaces.',
+    keys: ['brand-glow', 'brand-glow-hover'],
+  },
+];
+
+function ShadowView() {
+  return (
+    <>
+      {SHADOW_GROUPS.map((group) => (
+        <section className="wb-section" key={group.title}>
+          <header className="wb-section__head">
+            <h2 className="wb-section__title">{group.title}</h2>
+            <p className="wb-section__desc">{group.description}</p>
+          </header>
+          <div className="wb-shadow-grid">
+            {group.keys.map((key) => {
+              const token = tokens.shadow[key];
+              if (!token) return null;
+              const value = val(token);
+              const varName = `--shadow-${key}`;
+              const isFocus = key.startsWith('focus');
+              return (
+                <div className="wb-shadow-card" key={key}>
+                  <div
+                    className={`wb-shadow-card__sample ${isFocus ? 'is-focus' : ''}`}
+                    style={{ boxShadow: value }}
+                  />
+                  <div className="wb-shadow-card__meta">
+                    <code className="wb-shadow-card__name">{varName}</code>
+                    <CopyButton text={varName} />
+                  </div>
+                  <code className="wb-shadow-card__value" title={value}>{value}</code>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Border
+// ---------------------------------------------------------------------------
+
+const BORDER_GROUPS = [
+  {
+    title: 'Alpha (on light)',
+    description:
+      'Multiplying neutral-900 over the underlying surface keeps borders tonally consistent across white cards, brand washes, and tinted backgrounds.',
+    group: tokens.border.alpha,
+    prefix: 'border-alpha',
+    background: 'var(--bg-surface)',
+    swatch: 'light',
+  },
+  {
+    title: 'Alpha (on dark)',
+    description: 'Inverse alpha scale for use on dark surfaces, headers, and inverse-themed sections.',
+    group: tokens.border['on-dark'],
+    prefix: 'border-on-dark',
+    background: 'var(--bg-inverse)',
+    swatch: 'dark',
+  },
+  {
+    title: 'Brand alpha',
+    description: 'Tinted borders for brand-washed surfaces and selected states.',
+    group: tokens.border['brand-alpha'],
+    prefix: 'border-brand-alpha',
+    background: 'var(--color-brand-50)',
+    swatch: 'brand',
+  },
+];
+
+const SEMANTIC_BORDER_KEYS = ['subtle', 'default', 'strong', 'inverse', 'focus'];
+
+function BorderView() {
+  return (
+    <>
+      {BORDER_GROUPS.map((group) => (
+        <section className="wb-section" key={group.title}>
+          <header className="wb-section__head">
+            <h2 className="wb-section__title">{group.title}</h2>
+            <p className="wb-section__desc">{group.description}</p>
+          </header>
+          <div className={`wb-border-grid wb-border-grid--${group.swatch}`}>
+            {groupEntries(group.group).map(([key, token]) => {
+              const value = val(token);
+              const varName = `--${group.prefix}-${key}`;
+              return (
+                <div className="wb-border-card" key={key} style={{ background: group.background }}>
+                  <div
+                    className="wb-border-card__sample"
+                    style={{ border: `1.5px solid ${value}` }}
+                  />
+                  <div className="wb-border-card__meta">
+                    <div className="wb-border-card__step">{key}%</div>
+                    <code className="wb-border-card__name">{varName}</code>
+                    <code className="wb-border-card__value">{value}</code>
+                  </div>
+                  <CopyButton text={varName} />
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+
+      <section className="wb-section">
+        <header className="wb-section__head">
+          <h2 className="wb-section__title">Semantic roles</h2>
+          <p className="wb-section__desc">
+            Resolved aliases used by components. Most components reference these — not the raw alpha
+            tokens directly.
+          </p>
+        </header>
+        <div className="wb-token-list">
+          {SEMANTIC_BORDER_KEYS.map((key) => {
+            const token = tokens.semantic.border[key];
+            if (!token) return null;
+            const ref = val(token);
+            const varName = `--border-${key}`;
+            return (
+              <div className="wb-token-row" key={key}>
+                <div className="wb-token-row__preview">
+                  <div className="wb-border-sample" style={{ border: `1.5px solid var(${varName})` }} />
+                </div>
+                <code className="wb-token-row__name">{varName}</code>
+                <span className="wb-token-row__value">{ref}</span>
+                <CopyButton text={varName} />
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    </>
   );
 }
