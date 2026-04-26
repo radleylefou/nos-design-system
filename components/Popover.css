@@ -1,0 +1,50 @@
+.nos-popover-anchor {
+  display: inline-flex;
+}
+
+.nos-popover {
+  position: fixed;
+  z-index: var(--z-dropdown);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-popover);
+  outline: none;
+
+  /* Enter animation */
+  animation: nos-popover-in var(--duration-fast) var(--easing-decelerate) both;
+}
+
+@keyframes nos-popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.nos-popover--top,
+.nos-popover--top-start,
+.nos-popover--top-end {
+  animation-name: nos-popover-in-up;
+}
+
+@keyframes nos-popover-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nos-popover {
+    animation: none;
+  }
+}

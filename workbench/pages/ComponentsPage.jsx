@@ -26,6 +26,20 @@ import {
   NumberInput,
   FileUpload,
   FieldGroup,
+  // Batch 5 — NOS domain
+  StatusPill,
+  HierarchyTree,
+  RequirementList,
+  Timeline,
+  CommentThread,
+  Stepper,
+  // Batch 6 — polish & overlay
+  Popover,
+  Menu,
+  Accordion,
+  Alert,
+  Banner,
+  Kbd,
 } from '../../components/index.js';
 import './ComponentsPage.css';
 
@@ -1286,6 +1300,762 @@ const DEMOS = {
     ],
   },
 
+  // ── Batch 6 — Polish & Overlay ─────────────────────────────────────
+
+  Kbd: {
+    type: 'Foundation',
+    description: 'Keyboard key display. Renders single keys or chord combinations with a distinct physical key appearance.',
+    sections: [
+      {
+        title: 'Single keys',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Kbd>⌘</Kbd>
+            <Kbd>⇧</Kbd>
+            <Kbd>⌥</Kbd>
+            <Kbd>Ctrl</Kbd>
+            <Kbd>Enter</Kbd>
+            <Kbd>Esc</Kbd>
+            <Kbd>Tab</Kbd>
+            <Kbd>K</Kbd>
+          </div>
+        ),
+        code: `<Kbd>⌘</Kbd>
+<Kbd>Enter</Kbd>
+<Kbd>Esc</Kbd>`,
+      },
+      {
+        title: 'Chord combinations',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-4)', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Kbd>{['⌘', 'K']}</Kbd>
+            <Kbd>{['⌘', 'S']}</Kbd>
+            <Kbd>{['⌘', '⇧', 'P']}</Kbd>
+            <Kbd>{['Ctrl', 'Z']}</Kbd>
+          </div>
+        ),
+        code: `<Kbd>{['⌘', 'K']}</Kbd>
+<Kbd>{['⌘', '⇧', 'P']}</Kbd>`,
+      },
+      {
+        title: 'Convenience aliases',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Kbd.Cmd />
+            <Kbd.Ctrl />
+            <Kbd.Shift />
+            <Kbd.Alt />
+            <Kbd.Enter />
+            <Kbd.Esc />
+          </div>
+        ),
+        code: `<Kbd.Cmd />
+<Kbd.Ctrl />
+<Kbd.Shift />
+<Kbd.Alt />
+<Kbd.Enter />
+<Kbd.Esc />`,
+      },
+      {
+        title: 'Size: sm',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Kbd size="sm">{['⌘', 'K']}</Kbd>
+            <Kbd size="sm">Enter</Kbd>
+            <Kbd size="sm">Esc</Kbd>
+          </div>
+        ),
+        code: `<Kbd size="sm">{['⌘', 'K']}</Kbd>`,
+      },
+      {
+        title: 'In context',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)' }}>
+            {[
+              { label: 'Quick open', chord: ['⌘', 'K'] },
+              { label: 'Save scope', chord: ['⌘', 'S'] },
+              { label: 'Command palette', chord: ['⌘', '⇧', 'P'] },
+              { label: 'Dismiss', chord: ['Esc'] },
+            ].map(({ label, chord }) => (
+              <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 'var(--spacing-2) var(--spacing-3)', background: 'var(--bg-surface)', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border-default)' }}>
+                <span style={{ fontSize: 'var(--font-size-sm)', color: 'var(--fg-default)' }}>{label}</span>
+                <Kbd size="sm">{chord.length === 1 ? chord[0] : chord}</Kbd>
+              </div>
+            ))}
+          </div>
+        ),
+        code: `<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+  <span>Quick open</span>
+  <Kbd size="sm">{['⌘', 'K']}</Kbd>
+</div>`,
+      },
+    ],
+  },
+
+  Alert: {
+    type: 'Feedback',
+    description: 'Inline contextual message for feedback, warnings, and status updates within page content.',
+    sections: [
+      {
+        title: 'Variants',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)', width: '100%', maxWidth: 560 }}>
+            <Alert variant="info" title="Scope under review">
+              This scope has been submitted and is awaiting approval from the project lead.
+            </Alert>
+            <Alert variant="success" title="Scope approved">
+              All requirements have been reviewed and the scope has been marked as approved.
+            </Alert>
+            <Alert variant="warning" title="Effort estimate missing">
+              3 requirements don't have hours logged. Update them before the review deadline.
+            </Alert>
+            <Alert variant="error" title="Submission blocked">
+              The scope cannot be submitted while requirements are in a rejected state.
+            </Alert>
+          </div>
+        ),
+        code: `<Alert variant="info" title="Scope under review">
+  This scope has been submitted and is awaiting approval.
+</Alert>
+<Alert variant="success" title="Scope approved">
+  All requirements have been reviewed.
+</Alert>
+<Alert variant="warning" title="Effort estimate missing">
+  3 requirements don't have hours logged.
+</Alert>
+<Alert variant="error" title="Submission blocked">
+  Cannot submit while requirements are rejected.
+</Alert>`,
+      },
+      {
+        title: 'Dismissible',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)', width: '100%', maxWidth: 560 }}>
+            <Alert variant="info" title="New template available" dismissible>
+              A new scope template for compliance workflows has been added. Apply it from the Templates tab.
+            </Alert>
+            <Alert variant="warning" title="Review deadline approaching" dismissible>
+              The Q2 compliance scope is due for review in 2 days.
+            </Alert>
+          </div>
+        ),
+        code: `<Alert variant="info" title="New template available" dismissible>
+  A new scope template has been added.
+</Alert>`,
+      },
+      {
+        title: 'Title only',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)', width: '100%', maxWidth: 560 }}>
+            <Alert variant="success" title="Scope saved successfully." dismissible />
+            <Alert variant="error" title="Failed to submit — try again." dismissible />
+          </div>
+        ),
+        code: `<Alert variant="success" title="Scope saved successfully." dismissible />`,
+      },
+    ],
+  },
+
+  Banner: {
+    type: 'Feedback',
+    description: 'Full-width strip for page-level announcements and system-wide status messages.',
+    sections: [
+      {
+        title: 'Variants',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)', width: '100%' }}>
+            <Banner variant="info" title="Maintenance window tonight">
+              NOS will be offline from 11 PM – 1 AM for scheduled maintenance. Save your work before then.
+            </Banner>
+            <Banner variant="success" title="Q2 scopes have been published">
+              All approved scopes for Q2 are now visible to stakeholders.
+            </Banner>
+            <Banner variant="warning" title="Data export is temporarily unavailable">
+              The export service is degraded. Engineering is investigating.
+            </Banner>
+            <Banner variant="error" title="Sync failure detected">
+              Changes made in the last 10 minutes may not have been saved. Please refresh and verify.
+            </Banner>
+          </div>
+        ),
+        code: `<Banner variant="info" title="Maintenance window tonight">
+  NOS will be offline from 11 PM – 1 AM.
+</Banner>`,
+      },
+      {
+        title: 'Dismissible',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)', width: '100%' }}>
+            <Banner variant="info" title="Welcome back, Alex." dismissible>
+              You have 3 scopes pending review and 1 comment awaiting response.
+            </Banner>
+          </div>
+        ),
+        code: `<Banner variant="info" title="Welcome back, Alex." dismissible>
+  You have 3 scopes pending review.
+</Banner>`,
+      },
+    ],
+  },
+
+  Accordion: {
+    type: 'Layout',
+    description: 'Collapsible content sections for progressive disclosure of related information.',
+    sections: [
+      {
+        title: 'Default (single open)',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 560 }}>
+            <Accordion>
+              <Accordion.Item title="Scope overview" defaultOpen>
+                This scope covers the end-to-end data migration from the legacy Atlas system to the new NOS platform. All L1–L3 requirements must be reviewed before submission.
+              </Accordion.Item>
+              <Accordion.Item title="Requirements">
+                Twelve functional requirements have been identified across three capability areas: data ingestion, transformation, and validation. Six are currently approved.
+              </Accordion.Item>
+              <Accordion.Item title="Acceptance criteria">
+                All records must be migrated with zero data loss. Post-migration audit report required within 5 business days.
+              </Accordion.Item>
+              <Accordion.Item title="Out of scope">
+                Legacy system decommission, user training, and downstream API changes are not included in this scope.
+              </Accordion.Item>
+            </Accordion>
+          </div>
+        ),
+        code: `<Accordion>
+  <Accordion.Item title="Scope overview" defaultOpen>
+    This scope covers the end-to-end data migration…
+  </Accordion.Item>
+  <Accordion.Item title="Requirements">
+    Twelve functional requirements have been identified…
+  </Accordion.Item>
+</Accordion>`,
+      },
+      {
+        title: 'Multiple open',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 560 }}>
+            <Accordion multiple>
+              <Accordion.Item title="Data ingestion" defaultOpen>
+                Raw records are pulled from the Atlas export via SFTP. Batch jobs run nightly at 2 AM.
+              </Accordion.Item>
+              <Accordion.Item title="Transformation rules" defaultOpen>
+                Field mappings follow the NOS canonical schema. Date fields are normalized to ISO 8601.
+              </Accordion.Item>
+              <Accordion.Item title="Validation & QA">
+                Each batch is validated against checksum totals. Failures trigger an alert to the data team.
+              </Accordion.Item>
+            </Accordion>
+          </div>
+        ),
+        code: `<Accordion multiple>
+  <Accordion.Item title="Data ingestion" defaultOpen>…</Accordion.Item>
+  <Accordion.Item title="Transformation rules" defaultOpen>…</Accordion.Item>
+  <Accordion.Item title="Validation & QA">…</Accordion.Item>
+</Accordion>`,
+      },
+      {
+        title: 'Disabled item',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 560 }}>
+            <Accordion>
+              <Accordion.Item title="Published requirements">
+                Six requirements are currently approved and published to the client portal.
+              </Accordion.Item>
+              <Accordion.Item title="Locked history" disabled>
+                Audit history is locked pending compliance review.
+              </Accordion.Item>
+            </Accordion>
+          </div>
+        ),
+        code: `<Accordion.Item title="Locked history" disabled>
+  Audit history is locked pending compliance review.
+</Accordion.Item>`,
+      },
+    ],
+  },
+
+  Popover: {
+    type: 'Overlay',
+    description: 'Anchor-based floating panel. Foundation for Menu, Combobox, and Tooltip.',
+    sections: [
+      {
+        title: 'Basic',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap' }}>
+            <Popover
+              trigger={<Button variant="outline" size="sm">Scope info</Button>}
+              content={
+                <div style={{ padding: 'var(--spacing-3)', display: 'flex', flexDirection: 'column', gap: 'var(--spacing-2)', minWidth: 220 }}>
+                  <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--fg-subtle)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Scope details</div>
+                  {[['Client', 'Nymbl Internal'], ['Created', 'Apr 3, 2025'], ['Modified', 'Apr 24, 2025'], ['Status', 'In Review']].map(([k, v]) => (
+                    <div key={k} style={{ display: 'flex', justifyContent: 'space-between', gap: 'var(--spacing-4)' }}>
+                      <span style={{ fontSize: 'var(--font-size-sm)', color: 'var(--fg-subtle)' }}>{k}</span>
+                      <span style={{ fontSize: 'var(--font-size-sm)', color: 'var(--fg-default)', fontWeight: 'var(--font-weight-medium)' }}>{v}</span>
+                    </div>
+                  ))}
+                </div>
+              }
+            />
+            <Popover
+              placement="bottom-end"
+              trigger={<Button variant="outline" size="sm">Placement: bottom-end</Button>}
+              content={<div style={{ padding: 'var(--spacing-3)', fontSize: 'var(--font-size-sm)', color: 'var(--fg-subtle)' }}>Anchored to the right edge of the trigger.</div>}
+            />
+          </div>
+        ),
+        code: `<Popover
+  trigger={<Button>Scope info</Button>}
+  content={<div>Panel content</div>}
+/>`,
+      },
+      {
+        title: 'Placements',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-2)', flexWrap: 'wrap', justifyContent: 'center', padding: 'var(--spacing-6) 0' }}>
+            {['bottom-start', 'bottom', 'bottom-end', 'top-start', 'top', 'top-end'].map((p) => (
+              <Popover
+                key={p}
+                placement={p}
+                trigger={<Button variant="ghost" size="sm">{p}</Button>}
+                content={<div style={{ padding: 'var(--spacing-2) var(--spacing-3)', fontSize: 'var(--font-size-sm)', color: 'var(--fg-subtle)' }}>Placed {p}</div>}
+              />
+            ))}
+          </div>
+        ),
+        code: `<Popover placement="top-start" trigger={<Button>Open</Button>} content={<div>…</div>} />`,
+      },
+    ],
+  },
+
+  Menu: {
+    type: 'Overlay',
+    description: 'Contextual action list anchored to a trigger. Keyboard navigable, supports icons and danger variants.',
+    sections: [
+      {
+        title: 'Items array (simple)',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap' }}>
+            <Menu
+              trigger={<Button variant="outline" size="sm">Scope actions</Button>}
+              items={[
+                { label: 'Open scope', onClick: () => {} },
+                { label: 'Duplicate', onClick: () => {} },
+                { label: 'Export as PDF', onClick: () => {} },
+                { separator: true },
+                { label: 'Archive scope', variant: 'danger', onClick: () => {} },
+              ]}
+            />
+            <Menu
+              trigger={<Button variant="ghost" size="sm">···</Button>}
+              items={[
+                { label: 'Edit requirement', onClick: () => {} },
+                { label: 'Change status', onClick: () => {} },
+                { separator: true },
+                { label: 'Remove', variant: 'danger', onClick: () => {} },
+              ]}
+            />
+          </div>
+        ),
+        code: `<Menu
+  trigger={<Button variant="outline" size="sm">Scope actions</Button>}
+  items={[
+    { label: 'Open scope', onClick: () => {} },
+    { label: 'Duplicate', onClick: () => {} },
+    { separator: true },
+    { label: 'Archive scope', variant: 'danger', onClick: () => {} },
+  ]}
+/>`,
+      },
+      {
+        title: 'Compound (custom items)',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)' }}>
+            <Menu trigger={<Button variant="outline" size="sm">Assign owner</Button>}>
+              <Menu.Item onClick={() => {}}>Ada Lovelace</Menu.Item>
+              <Menu.Item onClick={() => {}}>Grace Hopper</Menu.Item>
+              <Menu.Item onClick={() => {}}>Margaret Hamilton</Menu.Item>
+              <Menu.Separator />
+              <Menu.Item onClick={() => {}}>Unassign</Menu.Item>
+            </Menu>
+          </div>
+        ),
+        code: `<Menu trigger={<Button>Assign owner</Button>}>
+  <Menu.Item onClick={() => {}}>Ada Lovelace</Menu.Item>
+  <Menu.Item onClick={() => {}}>Grace Hopper</Menu.Item>
+  <Menu.Separator />
+  <Menu.Item onClick={() => {}}>Unassign</Menu.Item>
+</Menu>`,
+      },
+      {
+        title: 'Disabled items',
+        render: () => (
+          <Menu
+            trigger={<Button variant="outline" size="sm">Status change</Button>}
+            items={[
+              { label: 'Set to Draft', onClick: () => {} },
+              { label: 'Submit for review', onClick: () => {} },
+              { label: 'Approve', disabled: true, onClick: () => {} },
+              { label: 'Reject', disabled: true, onClick: () => {} },
+              { separator: true },
+              { label: 'Archive', variant: 'danger', onClick: () => {} },
+            ]}
+          />
+        ),
+        code: `<Menu
+  trigger={<Button>Status change</Button>}
+  items={[
+    { label: 'Submit for review', onClick: () => {} },
+    { label: 'Approve', disabled: true, onClick: () => {} },
+  ]}
+/>`,
+      },
+    ],
+  },
+
+  // ── Batch 5 — NOS Domain ───────────────────────────────────────────
+
+  StatusPill: {
+    type: 'NOS Domain',
+    description: 'Badge preset enforcing canonical scope status labels and colors across all NOS views.',
+    sections: [
+      {
+        title: 'All statuses',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
+            <StatusPill status="draft" />
+            <StatusPill status="in-review" />
+            <StatusPill status="approved" />
+            <StatusPill status="rejected" />
+            <StatusPill status="archived" />
+          </div>
+        ),
+        code: `<StatusPill status="draft" />
+<StatusPill status="in-review" />
+<StatusPill status="approved" />
+<StatusPill status="rejected" />
+<StatusPill status="archived" />`,
+      },
+      {
+        title: 'Size: sm',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
+            <StatusPill status="draft" size="sm" />
+            <StatusPill status="in-review" size="sm" />
+            <StatusPill status="approved" size="sm" />
+            <StatusPill status="rejected" size="sm" />
+            <StatusPill status="archived" size="sm" />
+          </div>
+        ),
+        code: `<StatusPill status="approved" size="sm" />`,
+      },
+      {
+        title: 'No dot',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
+            <StatusPill status="draft" dot={false} />
+            <StatusPill status="in-review" dot={false} />
+            <StatusPill status="approved" dot={false} />
+            <StatusPill status="rejected" dot={false} />
+          </div>
+        ),
+        code: `<StatusPill status="approved" dot={false} />`,
+      },
+      {
+        title: 'In context — scope list',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-2)', width: '100%', maxWidth: 560 }}>
+            {[
+              { name: 'Atlas Data Migration', status: 'in-review', client: 'Nymbl Internal' },
+              { name: 'Onboarding Revamp v2', status: 'approved', client: 'TechCorp Ltd.' },
+              { name: 'Legacy SDK Sunset', status: 'draft', client: 'Nymbl Internal' },
+              { name: 'Compliance Audit 2025', status: 'rejected', client: 'Acme Industries' },
+              { name: 'Billing Pipeline v3', status: 'archived', client: 'Cloudworks Inc.' },
+            ].map(({ name, status, client }) => (
+              <div key={name} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--spacing-3) var(--spacing-4)', background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)' }}>
+                <div>
+                  <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--fg-default)' }}>{name}</div>
+                  <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--fg-subtle)' }}>{client}</div>
+                </div>
+                <StatusPill status={status} size="sm" />
+              </div>
+            ))}
+          </div>
+        ),
+        code: `// In a scope list row:
+<StatusPill status={scope.status} size="sm" />`,
+      },
+    ],
+  },
+
+  HierarchyTree: {
+    type: 'NOS Domain',
+    description: 'Collapsible L1/L2/L3 tree for representing scope structure, capability breakdown, and requirement nesting.',
+    sections: [
+      {
+        title: 'Scope hierarchy',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 560 }}>
+            <HierarchyTree>
+              <HierarchyTree.Node label="Data Migration" meta={<Badge variant="info" size="sm" dot>In Review</Badge>}>
+                <HierarchyTree.Node label="Ingestion" meta={<span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--fg-subtle)' }}>40 hrs</span>}>
+                  <HierarchyTree.Node label="SFTP batch job setup" leaf meta={<Badge variant="success" size="sm" dot>Approved</Badge>} />
+                  <HierarchyTree.Node label="Schema validation rules" leaf meta={<Badge variant="neutral" size="sm" dot>Draft</Badge>} />
+                </HierarchyTree.Node>
+                <HierarchyTree.Node label="Transformation" meta={<span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--fg-subtle)' }}>24 hrs</span>}>
+                  <HierarchyTree.Node label="Field mapping to NOS schema" leaf meta={<Badge variant="success" size="sm" dot>Approved</Badge>} />
+                  <HierarchyTree.Node label="Date normalization (ISO 8601)" leaf meta={<Badge variant="success" size="sm" dot>Approved</Badge>} />
+                </HierarchyTree.Node>
+                <HierarchyTree.Node label="Validation & QA" meta={<span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--fg-subtle)' }}>16 hrs</span>}>
+                  <HierarchyTree.Node label="Checksum verification" leaf meta={<Badge variant="error" size="sm" dot>Rejected</Badge>} />
+                </HierarchyTree.Node>
+              </HierarchyTree.Node>
+            </HierarchyTree>
+          </div>
+        ),
+        code: `<HierarchyTree>
+  <HierarchyTree.Node label="Data Migration">
+    <HierarchyTree.Node label="Ingestion">
+      <HierarchyTree.Node label="SFTP batch job setup" leaf />
+    </HierarchyTree.Node>
+  </HierarchyTree.Node>
+</HierarchyTree>`,
+      },
+      {
+        title: 'Selected and disabled',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 480 }}>
+            <HierarchyTree>
+              <HierarchyTree.Node label="Onboarding Revamp" defaultExpanded>
+                <HierarchyTree.Node label="User registration flow" leaf selected />
+                <HierarchyTree.Node label="Email verification" leaf />
+                <HierarchyTree.Node label="SSO integration" leaf disabled />
+              </HierarchyTree.Node>
+            </HierarchyTree>
+          </div>
+        ),
+        code: `<HierarchyTree.Node label="User registration flow" leaf selected />
+<HierarchyTree.Node label="SSO integration" leaf disabled />`,
+      },
+    ],
+  },
+
+  RequirementList: {
+    type: 'NOS Domain',
+    description: 'Structured list of scope requirements with status, priority, owner, and action slots.',
+    sections: [
+      {
+        title: 'Basic list',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 680 }}>
+            <RequirementList>
+              <RequirementList.Item number="1.1" status="approved" priority="high" owner="A. Lovelace">
+                The system shall export all scope records to CSV with full field fidelity.
+              </RequirementList.Item>
+              <RequirementList.Item number="1.2" status="in-review" priority="high" owner="G. Hopper">
+                All data transformations must be idempotent and re-runnable without side effects.
+              </RequirementList.Item>
+              <RequirementList.Item number="1.3" status="draft" priority="medium" owner="M. Hamilton">
+                The migration log shall be retained for a minimum of 90 days in the audit trail.
+              </RequirementList.Item>
+              <RequirementList.Item number="1.4" status="rejected" priority="low" owner="D. Knuth">
+                Legacy record IDs should be preserved as a secondary identifier in the NOS schema.
+              </RequirementList.Item>
+              <RequirementList.Item number="1.5" status="approved" priority="medium" owner="A. Lovelace">
+                A post-migration validation report must be generated and reviewed within 5 business days.
+              </RequirementList.Item>
+            </RequirementList>
+          </div>
+        ),
+        code: `<RequirementList>
+  <RequirementList.Item number="1.1" status="approved" priority="high" owner="A. Lovelace">
+    The system shall export all scope records to CSV with full field fidelity.
+  </RequirementList.Item>
+</RequirementList>`,
+      },
+      {
+        title: 'With actions slot',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 680 }}>
+            <RequirementList>
+              {[
+                { num: '2.1', text: 'User authentication must support SSO via SAML 2.0.', status: 'approved', priority: 'high', owner: 'G. Hopper' },
+                { num: '2.2', text: 'Session tokens must expire after 8 hours of inactivity.', status: 'in-review', priority: 'medium', owner: 'M. Hamilton' },
+                { num: '2.3', text: 'All API endpoints must require bearer token authentication.', status: 'draft', priority: 'high', owner: 'A. Lovelace' },
+              ].map(({ num, text, status, priority, owner }) => (
+                <RequirementList.Item
+                  key={num}
+                  number={num}
+                  status={status}
+                  priority={priority}
+                  owner={owner}
+                  actions={
+                    <Menu
+                      trigger={<Button variant="ghost" size="sm">···</Button>}
+                      items={[
+                        { label: 'Edit', onClick: () => {} },
+                        { label: 'Change status', onClick: () => {} },
+                        { separator: true },
+                        { label: 'Remove', variant: 'danger', onClick: () => {} },
+                      ]}
+                    />
+                  }
+                >
+                  {text}
+                </RequirementList.Item>
+              ))}
+            </RequirementList>
+          </div>
+        ),
+        code: `<RequirementList.Item
+  number="2.1"
+  status="approved"
+  priority="high"
+  owner="G. Hopper"
+  actions={<Menu trigger={<Button size="sm">···</Button>} items={[…]} />}
+>
+  User authentication must support SSO via SAML 2.0.
+</RequirementList.Item>`,
+      },
+    ],
+  },
+
+  Timeline: {
+    type: 'NOS Domain',
+    description: 'Vertical activity feed for change logs, audit trails, and event histories.',
+    sections: [
+      {
+        title: 'Scope activity',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 480 }}>
+            <Timeline>
+              <Timeline.Item actor="R. Lefou" action="changed status to" highlight="In Review" timestamp="2h ago" />
+              <Timeline.Item actor="A. Lovelace" action="approved requirement" highlight="1.4 — Legacy ID preservation" timestamp="1d ago" />
+              <Timeline.Item actor="G. Hopper" action="added comment on" highlight="Requirement 1.2" timestamp="2d ago" />
+              <Timeline.Item actor="M. Hamilton" action="rejected requirement" highlight="1.4" timestamp="3d ago">
+                Rejection reason: ID conflicts with existing NOS schema — needs redesign.
+              </Timeline.Item>
+              <Timeline.Item actor="System" action="scope created" highlight="Atlas Data Migration" timestamp="Apr 3, 2025" />
+            </Timeline>
+          </div>
+        ),
+        code: `<Timeline>
+  <Timeline.Item
+    actor="R. Lefou"
+    action="changed status to"
+    highlight="In Review"
+    timestamp="2h ago"
+  />
+  <Timeline.Item actor="System" action="scope created" highlight="Atlas Data Migration" timestamp="Apr 3, 2025" />
+</Timeline>`,
+      },
+      {
+        title: 'With body content',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 480 }}>
+            <Timeline>
+              <Timeline.Item actor="A. Smith" action="left a comment" timestamp="1d ago">
+                <div style={{ marginTop: 'var(--spacing-2)', padding: 'var(--spacing-3)', background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)', fontSize: 'var(--font-size-sm)', color: 'var(--fg-default)', lineHeight: 'var(--line-height-relaxed)' }}>
+                  "The acceptance criteria for requirement 1.3 needs to be more specific about the retention policy — 90 days from migration date or from creation date?"
+                </div>
+              </Timeline.Item>
+              <Timeline.Item actor="R. Lefou" action="updated effort estimate" highlight="from 40 hrs to 52 hrs" timestamp="3d ago" />
+              <Timeline.Item actor="A. Lovelace" action="added team member" highlight="Grace Hopper" timestamp="5d ago" />
+            </Timeline>
+          </div>
+        ),
+        code: `<Timeline.Item actor="A. Smith" action="left a comment" timestamp="1d ago">
+  <div>Comment body content…</div>
+</Timeline.Item>`,
+      },
+    ],
+  },
+
+  CommentThread: {
+    type: 'NOS Domain',
+    description: 'Threaded review comments for in-scope discussions, requirement feedback, and resolution tracking.',
+    sections: [
+      {
+        title: 'Thread with replies',
+        render: () => <CommentThreadDemo />,
+        code: `<CommentThread onSubmit={(text) => console.log(text)}>
+  <CommentThread.Comment author="R. Lefou" timestamp="2d ago" onResolve={() => {}}>
+    The acceptance criterion for req 1.3 is ambiguous.
+    <CommentThread.Reply author="A. Lovelace" timestamp="1d ago">
+      I've updated the text — retention is from migration date.
+    </CommentThread.Reply>
+  </CommentThread.Comment>
+</CommentThread>`,
+      },
+      {
+        title: 'Resolved thread',
+        render: () => (
+          <div style={{ width: '100%', maxWidth: 480 }}>
+            <CommentThread>
+              <CommentThread.Comment author="G. Hopper" timestamp="5d ago" resolved>
+                Should we add a rollback requirement to the migration scope?
+                <CommentThread.Reply author="A. Lovelace" timestamp="4d ago">
+                  Good catch — added as requirement 1.6.
+                </CommentThread.Reply>
+                <CommentThread.Reply author="G. Hopper" timestamp="4d ago">
+                  Confirmed, looks good.
+                </CommentThread.Reply>
+              </CommentThread.Comment>
+            </CommentThread>
+          </div>
+        ),
+        code: `<CommentThread.Comment author="G. Hopper" timestamp="5d ago" resolved>
+  Should we add a rollback requirement?
+</CommentThread.Comment>`,
+      },
+    ],
+  },
+
+  Stepper: {
+    type: 'Layout',
+    description: 'Multi-step progress indicator for sequential flows like scope creation and submission wizards.',
+    sections: [
+      {
+        title: 'Horizontal',
+        render: () => <StepperDemo orientation="horizontal" />,
+        code: `<Stepper
+  steps={[
+    { label: 'Scope details' },
+    { label: 'Requirements', description: 'Add L1–L3 items' },
+    { label: 'Team & effort' },
+    { label: 'Review & submit' },
+  ]}
+  currentStep={1}
+  onStepClick={(i) => setStep(i)}
+/>`,
+      },
+      {
+        title: 'Vertical',
+        render: () => <StepperDemo orientation="vertical" />,
+        code: `<Stepper
+  orientation="vertical"
+  steps={[…]}
+  currentStep={2}
+/>`,
+      },
+      {
+        title: 'Size: sm',
+        render: () => (
+          <Stepper
+            size="sm"
+            steps={[
+              { label: 'Details' },
+              { label: 'Requirements' },
+              { label: 'Review' },
+            ]}
+            currentStep={1}
+          />
+        ),
+        code: `<Stepper size="sm" steps={[…]} currentStep={1} />`,
+      },
+    ],
+  },
+
   FieldGroup: {
     type: 'Form layout',
     description: 'Semantic grouping of related fields with shared title, description, and consistent column layout.',
@@ -1523,6 +2293,84 @@ function FileUploadDemo() {
   return (
     <div style={{ width: '100%', maxWidth: 480 }}>
       <FileUpload label="Attachments" multiple value={files} onChange={setFiles} />
+    </div>
+  );
+}
+
+/* ── Batch 5 & 6 interactive helpers ─────────────────────────────── */
+
+function CommentThreadDemo() {
+  const [comments, setComments] = useState([
+    {
+      id: 1,
+      author: 'R. Lefou',
+      timestamp: '2d ago',
+      text: 'The acceptance criterion for requirement 1.3 is ambiguous — does "90 days" mean from migration date or from record creation date?',
+      resolved: false,
+      replies: [
+        { id: 11, author: 'A. Lovelace', timestamp: '1d ago', text: "Good catch. I've updated the text — retention is from migration date, aligned with the compliance team's guidance." },
+      ],
+    },
+    {
+      id: 2,
+      author: 'D. Knuth',
+      timestamp: '4d ago',
+      text: 'Requirement 1.4 seems low-priority but could block the downstream CRM integration. Suggest bumping to high.',
+      resolved: false,
+      replies: [],
+    },
+  ]);
+
+  const handleSubmit = (text) => {
+    setComments((prev) => [
+      ...prev,
+      { id: Date.now(), author: 'You', timestamp: 'just now', text, resolved: false, replies: [] },
+    ]);
+  };
+
+  const handleResolve = (id) => {
+    setComments((prev) => prev.map((c) => c.id === id ? { ...c, resolved: !c.resolved } : c));
+  };
+
+  return (
+    <div style={{ width: '100%', maxWidth: 480 }}>
+      <CommentThread onSubmit={handleSubmit} placeholder="Add a comment on this requirement…">
+        {comments.map((c) => (
+          <CommentThread.Comment
+            key={c.id}
+            author={c.author}
+            timestamp={c.timestamp}
+            resolved={c.resolved}
+            onResolve={() => handleResolve(c.id)}
+          >
+            {c.text}
+            {c.replies.map((r) => (
+              <CommentThread.Reply key={r.id} author={r.author} timestamp={r.timestamp}>
+                {r.text}
+              </CommentThread.Reply>
+            ))}
+          </CommentThread.Comment>
+        ))}
+      </CommentThread>
+    </div>
+  );
+}
+
+function StepperDemo({ orientation }) {
+  const [step, setStep] = useState(1);
+  const steps = [
+    { label: 'Scope details', description: 'Name, client, and description' },
+    { label: 'Requirements', description: 'Add L1–L3 items' },
+    { label: 'Team & effort', description: 'Assign owners and hours' },
+    { label: 'Review & submit', description: 'Final check before approval' },
+  ];
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)', width: '100%' }}>
+      <Stepper steps={steps} currentStep={step} orientation={orientation} onStepClick={setStep} />
+      <div style={{ display: 'flex', gap: 'var(--spacing-2)' }}>
+        <Button size="sm" variant="outline" disabled={step === 0} onClick={() => setStep((s) => Math.max(0, s - 1))}>Back</Button>
+        <Button size="sm" disabled={step === steps.length - 1} onClick={() => setStep((s) => Math.min(steps.length - 1, s + 1))}>Next</Button>
+      </div>
     </div>
   );
 }

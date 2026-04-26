@@ -30,3 +30,18 @@ export { TagInput } from './TagInput.jsx';
 export { NumberInput } from './NumberInput.jsx';
 export { FileUpload } from './FileUpload.jsx';
 export { FieldGroup } from './FieldGroup.jsx';
+
+// NOS domain primitives — Batch 5
+export { StatusPill, STATUS_OPTIONS } from './StatusPill.jsx';
+export { HierarchyTree } from './HierarchyTree.jsx';
+export { RequirementList } from './RequirementList.jsx';
+export { Timeline } from './Timeline.jsx';
+export { CommentThread } from './CommentThread.jsx';
+export { Stepper } from './Stepper.jsx';
+
+// Polish & secondary — Batch 6
+export { Popover } from './Popover.jsx';
+export { Menu } from './Menu.jsx';
+export { Accordion } from './Accordion.jsx';
+export { Alert, Banner } from './Alert.jsx';
+export { Kbd } from './Kbd.jsx';
