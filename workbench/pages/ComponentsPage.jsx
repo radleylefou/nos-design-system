@@ -47,16 +47,28 @@ import './ComponentsPage.css';
  * ComponentsPage — review/authoring view for a single component.
  * Each section has an independent "Show / Hide code" toggle.
  */
-export function ComponentsPage({ componentId }) {
+export function ComponentsPage({ componentId, categoryId, onNavigate }) {
   const entry = DEMOS[componentId];
 
   if (!entry) {
     return (
       <div className="wb-page">
         <div className="wb-page__header">
-          <div className="wb-page__eyebrow">Component</div>
+          {categoryId && onNavigate ? (
+            <button
+              type="button"
+              className="wb-page__eyebrow wb-eyebrow-link"
+              onClick={() => onNavigate({ section: 'component', categoryId })}
+            >
+              {categoryId}
+            </button>
+          ) : (
+            categoryId && <div className="wb-page__eyebrow">{categoryId}</div>
+          )}
           <h1 className="wb-page__title">{componentId}</h1>
-          <p className="wb-page__subtitle">No demo registered yet for this component.</p>
+          <p className="wb-page__subtitle">
+            No demo registered for this component yet. Select another component from the sidebar.
+          </p>
         </div>
       </div>
     );
@@ -65,7 +77,17 @@ export function ComponentsPage({ componentId }) {
   return (
     <div className="wb-page">
       <div className="wb-page__header">
-        <div className="wb-page__eyebrow">{entry.type || 'Component'}</div>
+        {categoryId && onNavigate ? (
+          <button
+            type="button"
+            className="wb-page__eyebrow wb-eyebrow-link"
+            onClick={() => onNavigate({ section: 'component', categoryId })}
+          >
+            {categoryId}
+          </button>
+        ) : (
+          categoryId && <div className="wb-page__eyebrow">{categoryId}</div>
+        )}
         <h1 className="wb-page__title">{componentId}</h1>
         <p className="wb-page__subtitle">{entry.description}</p>
       </div>
@@ -547,11 +569,39 @@ const DEMOS = {
     ],
   },
 
-  Badge: {
-    description: 'Compact status/tag label. Six semantic variants, optional leading dot.',
+  'Badges & Status': {
+    description: 'Compact metadata labels and canonical NOS status pills. Use Badge for generic labels, and StatusPill when the value is a standard scope status.',
     sections: [
       {
-        title: 'Variants',
+        title: 'When to use which',
+        render: () => (
+          <div className="wb-demo-grid wb-demo-grid--wide">
+            <div className="wb-demo-panel">
+              <h3>Badge</h3>
+              <p>Use for generic tags, small labels, health states, and inline metadata where the caller controls the visible text.</p>
+              <div style={{ display: 'flex', gap: 'var(--spacing-2)', flexWrap: 'wrap' }}>
+                <Badge variant="brand">New</Badge>
+                <Badge variant="info" dot>Beta</Badge>
+                <Badge variant="success">Active</Badge>
+              </div>
+            </div>
+            <div className="wb-demo-panel">
+              <h3>StatusPill</h3>
+              <p>Use for canonical NOS scope statuses. The component owns the label and semantic color mapping.</p>
+              <div style={{ display: 'flex', gap: 'var(--spacing-2)', flexWrap: 'wrap' }}>
+                <StatusPill status="draft" />
+                <StatusPill status="in-review" />
+                <StatusPill status="approved" />
+              </div>
+            </div>
+          </div>
+        ),
+        code: `<Badge variant="brand">New</Badge>
+<Badge variant="info" dot>Beta</Badge>
+<StatusPill status="in-review" />`,
+      },
+      {
+        title: 'Badge variants',
         render: () => (
           <>
             <Badge>Neutral</Badge>
@@ -570,7 +620,7 @@ const DEMOS = {
 <Badge variant="info">Info</Badge>`,
       },
       {
-        title: 'With status dot',
+        title: 'Badge with status dot',
         render: () => (
           <>
             <Badge dot>Idle</Badge>
@@ -583,6 +633,60 @@ const DEMOS = {
 <Badge variant="success" dot>Active</Badge>
 <Badge variant="warning" dot>Degraded</Badge>
 <Badge variant="error" dot>Down</Badge>`,
+      },
+      {
+        title: 'StatusPill statuses',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
+            <StatusPill status="draft" />
+            <StatusPill status="in-review" />
+            <StatusPill status="approved" />
+            <StatusPill status="rejected" />
+            <StatusPill status="archived" />
+          </div>
+        ),
+        code: `<StatusPill status="draft" />
+<StatusPill status="in-review" />
+<StatusPill status="approved" />
+<StatusPill status="rejected" />
+<StatusPill status="archived" />`,
+      },
+      {
+        title: 'StatusPill size and dot',
+        render: () => (
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
+            <StatusPill status="draft" size="sm" />
+            <StatusPill status="in-review" size="sm" />
+            <StatusPill status="approved" dot={false} />
+            <StatusPill status="rejected" dot={false} />
+          </div>
+        ),
+        code: `<StatusPill status="approved" size="sm" />
+<StatusPill status="rejected" dot={false} />`,
+      },
+      {
+        title: 'StatusPill in context',
+        render: () => (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-2)', width: '100%', maxWidth: 560 }}>
+            {[
+              { name: 'Atlas Data Migration', status: 'in-review', client: 'Nymbl Internal' },
+              { name: 'Onboarding Revamp v2', status: 'approved', client: 'TechCorp Ltd.' },
+              { name: 'Legacy SDK Sunset', status: 'draft', client: 'Nymbl Internal' },
+              { name: 'Compliance Audit 2025', status: 'rejected', client: 'Acme Industries' },
+              { name: 'Billing Pipeline v3', status: 'archived', client: 'Cloudworks Inc.' },
+            ].map(({ name, status, client }) => (
+              <div key={name} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--spacing-3) var(--spacing-4)', background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)' }}>
+                <div>
+                  <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--fg-default)' }}>{name}</div>
+                  <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--fg-subtle)' }}>{client}</div>
+                </div>
+                <StatusPill status={status} size="sm" />
+              </div>
+            ))}
+          </div>
+        ),
+        code: `// In a scope list row:
+<StatusPill status={scope.status} size="sm" />`,
       },
     ],
   },
@@ -966,12 +1070,35 @@ const DEMOS = {
     ],
   },
 
-  ProgressBar: {
+  Progress: {
     type: 'Data Display',
-    description: 'Linear progress for uploads, imports, completion meters, and indeterminate work.',
+    description: 'Linear and circular progress indicators for determinate completion, compact KPIs, and indeterminate work.',
     sections: [
       {
-        title: 'Sizes',
+        title: 'When to use which',
+        render: () => (
+          <div className="wb-demo-grid wb-demo-grid--wide">
+            <div className="wb-demo-panel">
+              <h3>ProgressBar</h3>
+              <p>Use for uploads, imports, setup tasks, quota meters, and other horizontal completion states with room for labels.</p>
+              <ProgressBar label="Uploading scope.pdf" value={42} showValue />
+            </div>
+            <div className="wb-demo-panel">
+              <h3>ProgressRing</h3>
+              <p>Use for compact KPI cards, dense dashboards, and circular meters where the value needs to sit in a small footprint.</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-4)' }}>
+                <ProgressRing value={62} />
+                <ProgressRing value={3} max={5} label="3/5" />
+              </div>
+            </div>
+          </div>
+        ),
+        code: `<ProgressBar label="Uploading scope.pdf" value={42} showValue />
+<ProgressRing value={62} />
+<ProgressRing value={3} max={5} label="3/5" />`,
+      },
+      {
+        title: 'ProgressBar sizes',
         render: () => (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)', width: '100%', maxWidth: 360 }}>
             <ProgressBar size="sm" value={32} />
@@ -984,7 +1111,7 @@ const DEMOS = {
 <ProgressBar size="lg" value={84} />`,
       },
       {
-        title: 'With label and value',
+        title: 'ProgressBar with label and value',
         render: () => (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-4)', width: '100%', maxWidth: 360 }}>
             <ProgressBar label="Uploading scope.pdf" value={42} showValue />
@@ -997,7 +1124,7 @@ const DEMOS = {
 <ProgressBar label="Quota usage" value={94} showValue variant="warning" />`,
       },
       {
-        title: 'Indeterminate',
+        title: 'ProgressBar indeterminate',
         render: () => (
           <div style={{ width: '100%', maxWidth: 360 }}>
             <ProgressBar label="Syncing…" />
@@ -1005,15 +1132,8 @@ const DEMOS = {
         ),
         code: `<ProgressBar label="Syncing…" />   // value omitted = indeterminate`,
       },
-    ],
-  },
-
-  ProgressRing: {
-    type: 'Data Display',
-    description: 'Circular progress for compact KPIs and inline meters.',
-    sections: [
       {
-        title: 'Sizes and tones',
+        title: 'ProgressRing sizes and tones',
         render: () => (
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-5)' }}>
             <ProgressRing value={32} />
@@ -1129,16 +1249,35 @@ const DEMOS = {
 
   /* ────────────────  Forms (extended)  ──────────────── */
 
-  DatePicker: {
-    description: 'Single-date picker with popover calendar. ISO date in, ISO date out.',
+  'Date Pickers': {
+    description: 'Single-date and date-range controls that share calendar behavior and exchange ISO date strings.',
     sections: [
       {
-        title: 'Default',
+        title: 'When to use which',
+        render: () => (
+          <div className="wb-demo-grid wb-demo-grid--wide">
+            <div className="wb-demo-panel">
+              <h3>DatePicker</h3>
+              <p>Use when the workflow needs exactly one date, such as a due date, reminder date, or scheduled review.</p>
+              <DatePicker label="Due date" defaultValue="2026-04-25" />
+            </div>
+            <div className="wb-demo-panel">
+              <h3>DateRangePicker</h3>
+              <p>Use when the workflow needs a start and end boundary, such as reporting windows and project phases.</p>
+              <DateRangePicker label="Reporting window" />
+            </div>
+          </div>
+        ),
+        code: `<DatePicker label="Due date" value={due} onChange={setDue} />
+<DateRangePicker label="Reporting window" value={range} onChange={setRange} />`,
+      },
+      {
+        title: 'DatePicker default',
         render: () => <DatePickerDemo />,
         code: `<DatePicker label="Due date" value={due} onChange={setDue} />`,
       },
       {
-        title: 'States',
+        title: 'DatePicker states',
         render: () => (
           <div style={{ display: 'grid', gap: 'var(--spacing-4)', width: '100%', maxWidth: 320 }}>
             <DatePicker label="With helper" helperText="We'll send a reminder 24h before." />
@@ -1150,14 +1289,8 @@ const DEMOS = {
 <DatePicker label="Error" error="Choose a future date." />
 <DatePicker label="Disabled" disabled defaultValue="2026-04-25" />`,
       },
-    ],
-  },
-
-  DateRangePicker: {
-    description: 'Start/end date popover sharing the DatePicker calendar.',
-    sections: [
       {
-        title: 'Default',
+        title: 'DateRangePicker default',
         render: () => <DateRangePickerDemo />,
         code: `<DateRangePicker label="Reporting window" value={range} onChange={setRange} />`,
       },
@@ -1392,12 +1525,39 @@ const DEMOS = {
     ],
   },
 
-  Alert: {
+  'Alerts & Banners': {
     type: 'Feedback',
-    description: 'Inline contextual message for feedback, warnings, and status updates within page content.',
+    description: 'Contextual system messages for inline page feedback and full-width page-level notices.',
     sections: [
       {
-        title: 'Variants',
+        title: 'When to use which',
+        render: () => (
+          <div className="wb-demo-grid wb-demo-grid--wide">
+            <div className="wb-demo-panel">
+              <h3>Alert</h3>
+              <p>Use inside page content, cards, and forms when the message belongs to a specific section or action.</p>
+              <Alert variant="warning" title="Effort estimate missing">
+                3 requirements don't have hours logged.
+              </Alert>
+            </div>
+            <div className="wb-demo-panel">
+              <h3>Banner</h3>
+              <p>Use for page-level announcements, broad system state, and messages that should span the available content width.</p>
+              <Banner variant="info" title="Maintenance window tonight">
+                NOS will be offline from 11 PM – 1 AM.
+              </Banner>
+            </div>
+          </div>
+        ),
+        code: `<Alert variant="warning" title="Effort estimate missing">
+  3 requirements don't have hours logged.
+</Alert>
+<Banner variant="info" title="Maintenance window tonight">
+  NOS will be offline from 11 PM – 1 AM.
+</Banner>`,
+      },
+      {
+        title: 'Alert variants',
         render: () => (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)', width: '100%', maxWidth: 560 }}>
             <Alert variant="info" title="Scope under review">
@@ -1428,40 +1588,33 @@ const DEMOS = {
 </Alert>`,
       },
       {
-        title: 'Dismissible',
+        title: 'Alert dismissable',
         render: () => (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)', width: '100%', maxWidth: 560 }}>
-            <Alert variant="info" title="New template available" dismissible>
+            <Alert variant="info" title="New template available" dismissable>
               A new scope template for compliance workflows has been added. Apply it from the Templates tab.
             </Alert>
-            <Alert variant="warning" title="Review deadline approaching" dismissible>
+            <Alert variant="warning" title="Review deadline approaching" dismissable>
               The Q2 compliance scope is due for review in 2 days.
             </Alert>
           </div>
         ),
-        code: `<Alert variant="info" title="New template available" dismissible>
+        code: `<Alert variant="info" title="New template available" dismissable>
   A new scope template has been added.
 </Alert>`,
       },
       {
-        title: 'Title only',
+        title: 'Alert title only',
         render: () => (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)', width: '100%', maxWidth: 560 }}>
-            <Alert variant="success" title="Scope saved successfully." dismissible />
-            <Alert variant="error" title="Failed to submit — try again." dismissible />
+            <Alert variant="success" title="Scope saved successfully." dismissable />
+            <Alert variant="error" title="Failed to submit — try again." dismissable />
           </div>
         ),
-        code: `<Alert variant="success" title="Scope saved successfully." dismissible />`,
+        code: `<Alert variant="success" title="Scope saved successfully." dismissable />`,
       },
-    ],
-  },
-
-  Banner: {
-    type: 'Feedback',
-    description: 'Full-width strip for page-level announcements and system-wide status messages.',
-    sections: [
       {
-        title: 'Variants',
+        title: 'Banner variants',
         render: () => (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)', width: '100%' }}>
             <Banner variant="info" title="Maintenance window tonight">
@@ -1483,15 +1636,15 @@ const DEMOS = {
 </Banner>`,
       },
       {
-        title: 'Dismissible',
+        title: 'Banner dismissable',
         render: () => (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)', width: '100%' }}>
-            <Banner variant="info" title="Welcome back, Alex." dismissible>
+            <Banner variant="info" title="Welcome back, Alex." dismissable>
               You have 3 scopes pending review and 1 comment awaiting response.
             </Banner>
           </div>
         ),
-        code: `<Banner variant="info" title="Welcome back, Alex." dismissible>
+        code: `<Banner variant="info" title="Welcome back, Alex." dismissable>
   You have 3 scopes pending review.
 </Banner>`,
       },
@@ -1575,12 +1728,49 @@ const DEMOS = {
     ],
   },
 
-  Popover: {
+  'Popover & Menu': {
     type: 'Overlay',
-    description: 'Anchor-based floating panel. Foundation for Menu, Combobox, and Tooltip.',
+    description: 'Anchored overlay primitives for custom panels and contextual action menus.',
     sections: [
       {
-        title: 'Basic',
+        title: 'When to use which',
+        render: () => (
+          <div className="wb-demo-grid wb-demo-grid--wide">
+            <div className="wb-demo-panel">
+              <h3>Popover</h3>
+              <p>Use when the panel content is custom: details, compact forms, rich previews, or non-menu controls.</p>
+              <Popover
+                trigger={<Button variant="outline" size="sm">Scope info</Button>}
+                content={<div style={{ padding: 'var(--spacing-3)', fontSize: 'var(--font-size-sm)', color: 'var(--fg-subtle)' }}>Custom detail content.</div>}
+              />
+            </div>
+            <div className="wb-demo-panel">
+              <h3>Menu</h3>
+              <p>Use for a list of actions anchored to a trigger. Menu builds on Popover and adds item semantics.</p>
+              <Menu
+                trigger={<Button variant="outline" size="sm">Scope actions</Button>}
+                items={[
+                  { label: 'Open scope', onClick: () => {} },
+                  { label: 'Duplicate', onClick: () => {} },
+                  { separator: true },
+                  { label: 'Archive scope', variant: 'danger', onClick: () => {} },
+                ]}
+              />
+            </div>
+          </div>
+        ),
+        code: `<Popover trigger={<Button>Scope info</Button>} content={<div>Custom detail content.</div>} />
+<Menu
+  trigger={<Button>Scope actions</Button>}
+  items={[
+    { label: 'Open scope', onClick: () => {} },
+    { separator: true },
+    { label: 'Archive scope', variant: 'danger', onClick: () => {} },
+  ]}
+/>`,
+      },
+      {
+        title: 'Popover basic',
         render: () => (
           <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap' }}>
             <Popover
@@ -1610,7 +1800,7 @@ const DEMOS = {
 />`,
       },
       {
-        title: 'Placements',
+        title: 'Popover placements',
         render: () => (
           <div style={{ display: 'flex', gap: 'var(--spacing-2)', flexWrap: 'wrap', justifyContent: 'center', padding: 'var(--spacing-6) 0' }}>
             {['bottom-start', 'bottom', 'bottom-end', 'top-start', 'top', 'top-end'].map((p) => (
@@ -1625,15 +1815,8 @@ const DEMOS = {
         ),
         code: `<Popover placement="top-start" trigger={<Button>Open</Button>} content={<div>…</div>} />`,
       },
-    ],
-  },
-
-  Menu: {
-    type: 'Overlay',
-    description: 'Contextual action list anchored to a trigger. Keyboard navigable, supports icons and danger variants.',
-    sections: [
       {
-        title: 'Items array (simple)',
+        title: 'Menu items array',
         render: () => (
           <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap' }}>
             <Menu
@@ -1668,7 +1851,7 @@ const DEMOS = {
 />`,
       },
       {
-        title: 'Compound (custom items)',
+        title: 'Menu compound custom items',
         render: () => (
           <div style={{ display: 'flex', gap: 'var(--spacing-3)' }}>
             <Menu trigger={<Button variant="outline" size="sm">Assign owner</Button>}>
@@ -1688,7 +1871,7 @@ const DEMOS = {
 </Menu>`,
       },
       {
-        title: 'Disabled items',
+        title: 'Menu disabled items',
         render: () => (
           <Menu
             trigger={<Button variant="outline" size="sm">Status change</Button>}
@@ -1714,79 +1897,6 @@ const DEMOS = {
   },
 
   // ── Batch 5 — NOS Domain ───────────────────────────────────────────
-
-  StatusPill: {
-    type: 'NOS Domain',
-    description: 'Badge preset enforcing canonical scope status labels and colors across all NOS views.',
-    sections: [
-      {
-        title: 'All statuses',
-        render: () => (
-          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
-            <StatusPill status="draft" />
-            <StatusPill status="in-review" />
-            <StatusPill status="approved" />
-            <StatusPill status="rejected" />
-            <StatusPill status="archived" />
-          </div>
-        ),
-        code: `<StatusPill status="draft" />
-<StatusPill status="in-review" />
-<StatusPill status="approved" />
-<StatusPill status="rejected" />
-<StatusPill status="archived" />`,
-      },
-      {
-        title: 'Size: sm',
-        render: () => (
-          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
-            <StatusPill status="draft" size="sm" />
-            <StatusPill status="in-review" size="sm" />
-            <StatusPill status="approved" size="sm" />
-            <StatusPill status="rejected" size="sm" />
-            <StatusPill status="archived" size="sm" />
-          </div>
-        ),
-        code: `<StatusPill status="approved" size="sm" />`,
-      },
-      {
-        title: 'No dot',
-        render: () => (
-          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
-            <StatusPill status="draft" dot={false} />
-            <StatusPill status="in-review" dot={false} />
-            <StatusPill status="approved" dot={false} />
-            <StatusPill status="rejected" dot={false} />
-          </div>
-        ),
-        code: `<StatusPill status="approved" dot={false} />`,
-      },
-      {
-        title: 'In context — scope list',
-        render: () => (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-2)', width: '100%', maxWidth: 560 }}>
-            {[
-              { name: 'Atlas Data Migration', status: 'in-review', client: 'Nymbl Internal' },
-              { name: 'Onboarding Revamp v2', status: 'approved', client: 'TechCorp Ltd.' },
-              { name: 'Legacy SDK Sunset', status: 'draft', client: 'Nymbl Internal' },
-              { name: 'Compliance Audit 2025', status: 'rejected', client: 'Acme Industries' },
-              { name: 'Billing Pipeline v3', status: 'archived', client: 'Cloudworks Inc.' },
-            ].map(({ name, status, client }) => (
-              <div key={name} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--spacing-3) var(--spacing-4)', background: 'var(--bg-surface)', border: '1px solid var(--border-default)', borderRadius: 'var(--radius-md)' }}>
-                <div>
-                  <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 'var(--font-weight-semibold)', color: 'var(--fg-default)' }}>{name}</div>
-                  <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--fg-subtle)' }}>{client}</div>
-                </div>
-                <StatusPill status={status} size="sm" />
-              </div>
-            ))}
-          </div>
-        ),
-        code: `// In a scope list row:
-<StatusPill status={scope.status} size="sm" />`,
-      },
-    ],
-  },
 
   HierarchyTree: {
     type: 'NOS Domain',

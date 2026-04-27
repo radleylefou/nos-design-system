@@ -2,6 +2,10 @@
   max-width: none;
 }
 
+.wb-playground-tabs {
+  margin-bottom: var(--spacing-6);
+}
+
 .wb-playground {
   display: grid;
   grid-template-columns: calc(var(--spacing-24) * 3) 1fr;

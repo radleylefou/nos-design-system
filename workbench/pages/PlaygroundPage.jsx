@@ -727,15 +727,42 @@ const DEFAULT_PLAYGROUND_STATE = {
   componentPropsByName: DEFAULT_COMPONENT_PROPS,
 };
 
+const PLAYGROUND_VIEWS = [
+  { id: 'components', label: 'Components' },
+  { id: 'loading', label: 'Loading Lab' },
+];
+
 /**
  * PlaygroundPage — workspace for component props and focused component labs.
+ *
+ * Props:
+ *   playgroundView: initial view ("components" | "loading"), defaults to "components"
  */
 export function PlaygroundPage({ playgroundView = 'components' }) {
-  if (playgroundView === 'loading') {
-    return <LoadingLab />;
-  }
+  const [active, setActive] = useState(
+    PLAYGROUND_VIEWS.some((v) => v.id === playgroundView) ? playgroundView : 'components'
+  );
 
-  return <ComponentPlayground />;
+  return (
+    <>
+      <div className="wb-page-tabs wb-playground-tabs" role="tablist" aria-label="Playground views">
+        {PLAYGROUND_VIEWS.map((v) => (
+          <button
+            key={v.id}
+            type="button"
+            role="tab"
+            aria-selected={active === v.id}
+            className={`wb-page-tabs__item ${active === v.id ? 'wb-page-tabs__item--active' : ''}`}
+            onClick={() => setActive(v.id)}
+          >
+            {v.label}
+          </button>
+        ))}
+      </div>
+
+      {active === 'loading' ? <LoadingLab /> : <ComponentPlayground />}
+    </>
+  );
 }
 
 /**

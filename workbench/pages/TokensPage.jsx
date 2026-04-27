@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import tokens from '../../tokens/tokens.json';
+import { TOKEN_CATEGORIES } from '../nav.js';
 import './TokensPage.css';
 
 // Extract $value from a DTCG token object, or return the value as-is.
@@ -11,29 +12,46 @@ const groupEntries = (group) =>
   Object.entries(group || {}).filter(([key]) => !key.startsWith('$'));
 
 /**
- * TokensPage — renders one token category at a time.
+ * TokensPage — renders design tokens with an inline category tab bar.
  *
  * Props:
- *   category: "Color" | "Typography" | "Spacing" | "Radius" | "Shadow" | "Border"
+ *   category: initial active category (optional, defaults to "Color")
  */
-export function TokensPage({ category }) {
+export function TokensPage({ category = 'Color' }) {
+  const [active, setActive] = useState(category);
+
   return (
     <div className="wb-page">
       <div className="wb-page__header">
-        <div className="wb-page__eyebrow">Tokens</div>
-        <h1 className="wb-page__title">{category}</h1>
+        <div className="wb-page__eyebrow">Design Tokens</div>
+        <h1 className="wb-page__title">Tokens</h1>
         <p className="wb-page__subtitle">
           Edit <code className="wb-inline-code">tokens/tokens.json</code> and run{' '}
           <code className="wb-inline-code">npm run tokens</code> to regenerate.
         </p>
       </div>
 
-      {category === 'Color'      && <ColorView />}
-      {category === 'Typography' && <TypographyView />}
-      {category === 'Spacing'    && <SpacingView />}
-      {category === 'Radius'     && <RadiusView />}
-      {category === 'Shadow'     && <ShadowView />}
-      {category === 'Border'     && <BorderView />}
+      <div className="wb-page-tabs" role="tablist" aria-label="Token categories">
+        {TOKEN_CATEGORIES.map((cat) => (
+          <button
+            key={cat}
+            type="button"
+            role="tab"
+            aria-selected={active === cat}
+            className={`wb-page-tabs__item ${active === cat ? 'wb-page-tabs__item--active' : ''}`}
+            onClick={() => setActive(cat)}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {active === 'Color'      && <ColorView />}
+      {active === 'Typography' && <TypographyView />}
+      {active === 'Spacing'    && <SpacingView />}
+      {active === 'Radius'     && <RadiusView />}
+      {active === 'Shadow'     && <ShadowView />}
+      {active === 'Border'     && <BorderView />}
     </div>
   );
 }
@@ -104,12 +122,205 @@ function SwatchGroup({ title, swatches, prefix }) {
 // Typography
 // ---------------------------------------------------------------------------
 
+const TYPOGRAPHY_FONT_ROLES = [
+  {
+    key: 'sans',
+    label: 'Sans',
+    role: 'Primary UI font',
+    usage: 'Use for product UI, body copy, labels, controls, tables, and documentation.',
+    sample: 'Guidance dashboard',
+  },
+  {
+    key: 'mono',
+    label: 'Mono',
+    role: 'Technical font',
+    usage: 'Use for code, tokens, keyboard shortcuts, IDs, and fixed-width technical values.',
+    sample: 'scope_id: NOS-4821',
+  },
+  {
+    key: 'display',
+    label: 'Display',
+    role: 'Dashboard display font',
+    usage: 'Use sparingly for metric labels, dashboard eyebrows, and high-emphasis operational moments.',
+    sample: 'UTILIZATION',
+  },
+];
+
+const TYPOGRAPHY_STYLES = [
+  {
+    name: 'Page title',
+    description: 'Top-level workbench and app page headings.',
+    fontFamily: 'sans',
+    fontSize: '3xl',
+    fontWeight: 'semibold',
+    lineHeight: 'tight',
+    letterSpacing: 'normal',
+    sample: 'Components',
+  },
+  {
+    name: 'Section title',
+    description: 'Uppercase section labels and compact module headings.',
+    fontFamily: 'sans',
+    fontSize: 'xs',
+    fontWeight: 'semibold',
+    lineHeight: 'tight',
+    letterSpacing: 'wide',
+    transform: 'uppercase',
+    sample: 'Design Tokens',
+  },
+  {
+    name: 'Body',
+    description: 'Default readable product copy and descriptions.',
+    fontFamily: 'sans',
+    fontSize: 'base',
+    fontWeight: 'regular',
+    lineHeight: 'normal',
+    letterSpacing: 'normal',
+    sample: 'Use restrained typography to keep dense NOS workflows readable.',
+  },
+  {
+    name: 'Caption',
+    description: 'Secondary metadata, helper copy, timestamps, and quiet row details.',
+    fontFamily: 'sans',
+    fontSize: 'xs',
+    fontWeight: 'medium',
+    lineHeight: 'normal',
+    letterSpacing: 'normal',
+    sample: 'Updated 2 hours ago',
+  },
+  {
+    name: 'Code',
+    description: 'Inline code, token names, generated JSX, and identifiers.',
+    fontFamily: 'mono',
+    fontSize: 'xs',
+    fontWeight: 'regular',
+    lineHeight: 'relaxed',
+    letterSpacing: 'normal',
+    sample: '--font-size-sm',
+  },
+  {
+    name: 'Metric label',
+    description: 'Compact dashboard labels that benefit from a more technical display face.',
+    fontFamily: 'display',
+    fontSize: 'sm',
+    fontWeight: 'semibold',
+    lineHeight: 'tight',
+    letterSpacing: 'wide',
+    transform: 'uppercase',
+    sample: 'TRUE CAPACITY',
+  },
+  {
+    name: 'Metric value',
+    description: 'Large numerical readouts in metrics, stat blocks, and dashboards.',
+    fontFamily: 'sans',
+    fontSize: '4xl',
+    fontWeight: 'bold',
+    lineHeight: 'tight',
+    letterSpacing: 'normal',
+    numeric: true,
+    sample: '115.00 hrs',
+  },
+];
+
 function TypographyView() {
+  const families = Object.entries(tokens.typography['font-family']);
   const sizes = Object.entries(tokens.typography['font-size']);
   const weights = Object.entries(tokens.typography['font-weight']);
 
   return (
     <>
+      <section className="wb-section">
+        <header className="wb-section__head">
+          <h2 className="wb-section__title">Fonts used</h2>
+          <p className="wb-section__desc">
+            NOS uses Geist for most interface typography, a system monospace stack for technical content, and Bitcount Single as a restrained display face for dashboard moments.
+          </p>
+        </header>
+        <div className="wb-font-grid">
+          {TYPOGRAPHY_FONT_ROLES.map((font) => {
+            const token = tokens.typography['font-family'][font.key];
+            if (!token) return null;
+            const value = val(token);
+            const varName = `--font-family-${font.key}`;
+            return (
+              <article className="wb-font-card" key={font.key}>
+                <div className="wb-font-card__sample" style={{ fontFamily: `var(${varName})` }}>
+                  {font.sample}
+                </div>
+                <div className="wb-font-card__body">
+                  <div className="wb-font-card__label">{font.label}</div>
+                  <div className="wb-font-card__role">{font.role}</div>
+                  <p className="wb-font-card__usage">{font.usage}</p>
+                  <code className="wb-font-card__stack">{value}</code>
+                </div>
+                <CopyButton text={varName} />
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="wb-section">
+        <h2 className="wb-section__title">Font family tokens</h2>
+        <div className="wb-token-list">
+          {families.map(([key, token]) => {
+            const value = val(token);
+            const varName = `--font-family-${key}`;
+            return (
+              <div className="wb-token-row wb-token-row--wide-preview" key={key}>
+                <div className="wb-token-row__preview" style={{ fontFamily: `var(${varName})` }}>
+                  The quick brown fox
+                </div>
+                <code className="wb-token-row__name">{varName}</code>
+                <span className="wb-token-row__value">{value}</span>
+                <CopyButton text={varName} />
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="wb-section">
+        <header className="wb-section__head">
+          <h2 className="wb-section__title">Type styles</h2>
+          <p className="wb-section__desc">
+            These are recommended combinations of existing tokens. They are documentation recipes, not additional generated CSS variables.
+          </p>
+        </header>
+        <div className="wb-type-style-grid">
+          {TYPOGRAPHY_STYLES.map((style) => {
+            const cssVar = (group, key) => `var(--${group}-${key})`;
+            const sampleStyle = {
+              fontFamily: cssVar('font-family', style.fontFamily),
+              fontSize: cssVar('font-size', style.fontSize),
+              fontWeight: cssVar('font-weight', style.fontWeight),
+              lineHeight: cssVar('line-height', style.lineHeight),
+              letterSpacing: cssVar('letter-spacing', style.letterSpacing),
+              textTransform: style.transform || 'none',
+              fontVariantNumeric: style.numeric ? 'tabular-nums' : undefined,
+            };
+            return (
+              <article className="wb-type-style" key={style.name}>
+                <div className="wb-type-style__sample" style={sampleStyle}>{style.sample}</div>
+                <div className="wb-type-style__meta">
+                  <div>
+                    <h3>{style.name}</h3>
+                    <p>{style.description}</p>
+                  </div>
+                  <div className="wb-type-style__tokens">
+                    <code>--font-family-{style.fontFamily}</code>
+                    <code>--font-size-{style.fontSize}</code>
+                    <code>--font-weight-{style.fontWeight}</code>
+                    <code>--line-height-{style.lineHeight}</code>
+                    <code>--letter-spacing-{style.letterSpacing}</code>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
       <section className="wb-section">
         <h2 className="wb-section__title">Font size</h2>
         <div className="wb-token-list">

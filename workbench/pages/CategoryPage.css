@@ -1,0 +1,120 @@
+.wb-category-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  max-width: 960px;
+}
+
+/* ── Header ───────────────────────────────────────────────────────── */
+
+.wb-category-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.wb-category-page__eyebrow {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--fg-brand);
+}
+
+.wb-category-page__title {
+  margin: 0;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--fg-default);
+  letter-spacing: -0.02em;
+}
+
+.wb-category-page__desc {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--fg-muted);
+  line-height: var(--line-height-normal);
+}
+
+/* ── Grid ─────────────────────────────────────────────────────────── */
+
+.wb-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--spacing-4);
+}
+
+/* ── Card ─────────────────────────────────────────────────────────── */
+
+.wb-category-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
+}
+
+.wb-category-card:hover {
+  border-color: var(--border-brand-alpha-30);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-brand-50);
+}
+
+.wb-category-card:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.wb-category-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.wb-category-card__label {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--fg-default);
+}
+
+.wb-category-card__desc {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--fg-muted);
+}
+
+.wb-category-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+}
+
+.wb-category-card__count {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--fg-subtle);
+}
+
+.wb-category-card__arrow {
+  font-size: var(--font-size-sm);
+  color: var(--fg-subtle);
+}
+
+.wb-category-card:hover .wb-category-card__arrow {
+  color: var(--fg-brand);
+}

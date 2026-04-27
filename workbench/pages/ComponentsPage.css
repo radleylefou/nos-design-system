@@ -10,27 +10,49 @@
   background: transparent;
   border: 1px solid var(--border-default);
   border-radius: var(--radius-sm);
-  padding: 3px var(--spacing-3);
+  padding: var(--spacing-1) var(--spacing-3);
   font-family: inherit;
-  font-size: 10px;
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--fg-subtle);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--fg-muted);
   cursor: pointer;
   transition:
     background-color var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard),
     color var(--duration-fast) var(--easing-standard);
 }
 
 .wb-code-toggle:hover {
-  background: var(--bg-subtle);
-  color: var(--fg-default);
+  background: var(--color-brand-50);
+  border-color: var(--border-brand-alpha-30);
+  color: var(--fg-brand);
 }
 
 .wb-code-toggle:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus);
+}
+
+/* Clickable eyebrow link */
+.wb-eyebrow-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--easing-standard);
+}
+
+.wb-eyebrow-link:hover {
+  color: var(--fg-brand);
+  text-decoration: underline;
+}
+
+.wb-eyebrow-link:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
 }
 
 /* Code block */
@@ -44,7 +66,7 @@
 
 .wb-code-block code {
   font-family: var(--font-family-mono);
-  font-size: 12.5px;
+  font-size: var(--font-size-xs);
   line-height: 1.7;
   color: var(--color-neutral-300);
   white-space: pre;

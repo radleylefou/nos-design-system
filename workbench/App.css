@@ -5,6 +5,10 @@
   background: var(--bg-canvas);
 }
 
+.wb-app:has(.wb-sidebar--no-panel) {
+  grid-template-columns: calc(var(--spacing-24) * 2) 1fr;
+}
+
 .wb-main {
   overflow-y: auto;
   padding: var(--spacing-10) var(--spacing-12);
@@ -28,15 +32,15 @@
 }
 
 .wb-page__eyebrow {
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-semibold);
   color: var(--fg-brand);
-  letter-spacing: 0.1em;
+  letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
 }
 
 .wb-page__title {
-  font-size: 38px;
+  font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
   color: var(--fg-default);
   line-height: 1.1;
@@ -52,6 +56,46 @@
   margin-top: var(--spacing-1);
 }
 
+/* Inline page tab bar — used by TokensPage, PlaygroundPage, etc. */
+.wb-page-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.wb-page-tabs__item {
+  padding: var(--spacing-2) var(--spacing-4);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  color: var(--fg-muted);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard);
+}
+
+.wb-page-tabs__item:hover {
+  color: var(--fg-default);
+}
+
+.wb-page-tabs__item:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.wb-page-tabs__item--active {
+  color: var(--fg-brand);
+  border-bottom-color: var(--fg-brand);
+  font-weight: var(--font-weight-semibold);
+}
+
 /* Section shell */
 .wb-section {
   display: flex;
@@ -60,11 +104,11 @@
 }
 
 .wb-section__title {
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   color: var(--fg-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--letter-spacing-wide);
 }
 
 /* Demo canvas */

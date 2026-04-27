@@ -201,7 +201,95 @@
 }
 
 .wb-sidebar__secondary-item--active {
+  background: var(--color-brand-50);
+  color: var(--fg-brand);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ── Collapsed panel (component category grid landing) ────────────── */
+
+.wb-sidebar--no-panel {
+  grid-template-columns: calc(var(--spacing-24) * 2);
+}
+
+.wb-sidebar--no-panel .wb-sidebar__panel {
+  display: none;
+}
+
+/* ── Component tab switcher ───────────────────────────────────────── */
+
+.wb-sidebar__component-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1);
+  margin-top: var(--spacing-3);
+}
+
+.wb-sidebar__tab-item {
+  padding: var(--spacing-1) var(--spacing-2);
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-full);
+  color: var(--fg-muted);
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard),
+    color var(--duration-fast) var(--easing-standard);
+}
+
+.wb-sidebar__tab-item:hover {
+  background: var(--bg-surface);
+  border-color: var(--border-strong);
+  color: var(--fg-default);
+}
+
+.wb-sidebar__tab-item:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.wb-sidebar__tab-item--active {
+  background: var(--color-brand-50);
+  border-color: var(--border-brand-alpha-30);
+  color: var(--fg-brand);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ── Back button ──────────────────────────────────────────────────── */
+
+.wb-sidebar__back-btn {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 var(--spacing-3);
+  min-height: calc(var(--spacing-7) + var(--spacing-1));
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--fg-subtle);
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--easing-standard),
+    color var(--duration-fast) var(--easing-standard);
+}
+
+.wb-sidebar__back-btn:hover {
   background: var(--bg-surface);
   color: var(--fg-default);
-  box-shadow: var(--shadow-xs);
+}
+
+.wb-sidebar__back-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
 }

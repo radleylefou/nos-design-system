@@ -1,0 +1,169 @@
+/* HomePage — landing view styles. Reuses .wb-page* classes from App.css. */
+
+.wb-home {
+  max-width: 900px;
+}
+
+.wb-home__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.wb-home__section-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* ── Recently Added ──────────────────────────────────────────────── */
+
+.wb-home__recent-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--spacing-4);
+}
+
+.wb-home__recent-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  transition:
+    border-color var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard);
+}
+
+.wb-home__recent-card:hover {
+  border-color: var(--border-brand-alpha-30);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-brand-50);
+}
+
+.wb-home__recent-category {
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--fg-brand);
+}
+
+.wb-home__recent-name {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--fg-default);
+}
+
+.wb-home__recent-desc {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--fg-muted);
+}
+
+.wb-home__recent-link {
+  align-self: flex-start;
+  margin-top: var(--spacing-2);
+  padding: 0;
+  background: none;
+  border: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--fg-brand);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color var(--duration-fast) var(--easing-standard);
+}
+
+.wb-home__recent-link:hover {
+  color: var(--color-brand-700);
+}
+
+.wb-home__recent-link:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.wb-home__recent-date {
+  margin-top: var(--spacing-2);
+  padding-top: var(--spacing-3);
+  border-top: 1px solid var(--border-subtle);
+  font-size: var(--font-size-xs);
+  color: var(--fg-subtle);
+}
+
+/* ── Section navigation tiles ────────────────────────────────────── */
+
+.wb-home__sections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--spacing-4);
+}
+
+.wb-home__section-tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
+}
+
+.wb-home__section-tile:hover {
+  border-color: var(--border-brand-alpha-30);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-brand-50);
+}
+
+.wb-home__section-tile:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.wb-home__section-tile-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.wb-home__section-tile-label {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--fg-default);
+}
+
+.wb-home__section-tile-desc {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  color: var(--fg-muted);
+}
+
+.wb-home__section-tile-arrow {
+  align-self: flex-end;
+  font-size: var(--font-size-sm);
+  color: var(--fg-subtle);
+  transition: color var(--duration-fast) var(--easing-standard);
+}
+
+.wb-home__section-tile:hover .wb-home__section-tile-arrow {
+  color: var(--fg-brand);
+}
