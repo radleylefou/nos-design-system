@@ -1,7 +1,7 @@
 /* ── Page overrides ───────────────────────────────────────────────── */
 
 .wb-changelog {
-  max-width: 760px;
+  max-width: calc(var(--spacing-24) * 8);
 }
 
 /* ── Type filters ─────────────────────────────────────────────────── */
@@ -20,29 +20,31 @@
   gap: var(--spacing-2);
   height: 32px;
   padding: 0 var(--spacing-3);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
+  background: var(--wb-surface);
+  border: 1px solid var(--wb-border);
   border-radius: var(--radius-full);
   font-family: inherit;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
-  color: var(--fg-muted);
+  color: var(--wb-muted);
   cursor: pointer;
   transition:
-    border-color var(--duration-fast) var(--easing-standard),
-    background-color var(--duration-fast) var(--easing-standard),
-    color var(--duration-fast) var(--easing-standard);
+    border-color var(--duration-slow) var(--wb-motion),
+    background-color var(--duration-slow) var(--wb-motion),
+    color var(--duration-slow) var(--wb-motion),
+    transform var(--duration-slow) var(--wb-motion);
 }
 
 .wb-changelog__filter:hover {
-  border-color: var(--border-strong);
-  color: var(--fg-default);
+  border-color: var(--wb-border-strong);
+  color: var(--wb-text);
+  transform: translateY(calc(var(--spacing-0) - var(--spacing-1)));
 }
 
 .wb-changelog__filter.is-active {
-  background: var(--bg-inverse);
-  border-color: var(--bg-inverse);
-  color: var(--fg-inverse);
+  background: var(--wb-active-bg);
+  border-color: var(--wb-active-bg);
+  color: var(--wb-active-fg);
 }
 
 .wb-changelog__filter:focus-visible {
@@ -63,12 +65,20 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  padding: var(--spacing-2) var(--spacing-6);
+  background:
+    linear-gradient(180deg, var(--wb-surface), var(--wb-surface-muted));
+  border: 1px solid var(--wb-border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    inset 0 1px 0 var(--border-on-dark-30),
+    var(--shadow-xs);
 }
 
 .wb-changelog__empty {
   padding: var(--spacing-12) 0;
   text-align: center;
-  color: var(--fg-muted);
+  color: var(--wb-muted);
   font-size: var(--font-size-sm);
 }
 
@@ -79,7 +89,7 @@
   grid-template-columns: 160px 1fr;
   gap: 0 var(--spacing-8);
   padding: var(--spacing-8) 0;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--wb-border-soft);
   position: relative;
 }
 
@@ -103,21 +113,21 @@
 .wb-release__version {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  color: var(--fg-default);
-  letter-spacing: -0.01em;
+  color: var(--wb-text);
+  letter-spacing: 0;
   font-variant-numeric: tabular-nums;
 }
 
 .wb-release__date {
   font-size: var(--font-size-xs);
-  color: var(--fg-subtle);
+  color: var(--wb-subtle);
   font-variant-numeric: tabular-nums;
 }
 
 .wb-release__summary {
   margin: 0;
   font-size: var(--font-size-xs);
-  color: var(--fg-muted);
+  color: var(--wb-muted);
   line-height: var(--line-height-relaxed);
 }
 
@@ -140,7 +150,7 @@
   grid-template-rows: auto auto;
   gap: 0 var(--spacing-3);
   padding: var(--spacing-3) 0;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--wb-border-soft);
   align-items: baseline;
 }
 
@@ -164,7 +174,7 @@
 
 .wb-entry__text {
   font-size: var(--font-size-sm);
-  color: var(--fg-default);
+  color: var(--wb-text);
   line-height: var(--line-height-relaxed);
 }
 
@@ -186,4 +196,16 @@
   font-weight: var(--font-weight-semibold);
   border-radius: var(--radius-sm);
   white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .wb-release,
+  .wb-entry {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3);
+  }
+
+  .wb-entry__tags {
+    grid-column: 1;
+  }
 }

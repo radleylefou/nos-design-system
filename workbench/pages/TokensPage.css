@@ -1,35 +1,37 @@
 .wb-inline-code {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-default);
+  background: var(--color-neutral-100);
+  border: 1px solid var(--wb-border);
   padding: 1px var(--spacing-2);
   border-radius: var(--radius-sm);
-  color: var(--fg-default);
+  color: var(--wb-text);
 }
 
 /* Copy button — shared with PlaygroundPage */
 .wb-copy-btn {
-  background: transparent;
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-sm);
+  background: var(--wb-surface);
+  border: 1px solid var(--wb-border);
+  border-radius: var(--radius-full);
   padding: 2px var(--spacing-2);
   font-family: inherit;
   font-size: 10px;
   font-weight: var(--font-weight-semibold);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--fg-subtle);
+  color: var(--wb-subtle);
   cursor: pointer;
   transition:
-    background-color var(--duration-fast) var(--easing-standard),
-    color var(--duration-fast) var(--easing-standard);
+    background-color var(--duration-slow) var(--wb-motion),
+    color var(--duration-slow) var(--wb-motion),
+    transform var(--duration-slow) var(--wb-motion);
   white-space: nowrap;
 }
 
 .wb-copy-btn:hover {
-  background: var(--bg-subtle);
-  color: var(--fg-default);
+  background: var(--wb-active-bg);
+  color: var(--wb-active-fg);
+  transform: translateY(calc(var(--spacing-0) - var(--spacing-1)));
 }
 
 .wb-copy-btn:focus-visible {
@@ -44,9 +46,10 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
   gap: 0;
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  border: 1px solid var(--wb-border);
+  border-radius: var(--radius-xl);
   overflow: hidden;
+  box-shadow: var(--shadow-xs);
 }
 
 .wb-swatch {
@@ -70,9 +73,9 @@
   flex-direction: column;
   gap: 2px;
   padding: var(--spacing-2) var(--spacing-2);
-  border-top: 1px solid var(--border-default);
-  border-right: 1px solid var(--border-default);
-  background: var(--bg-surface);
+  border-top: 1px solid var(--wb-border);
+  border-right: 1px solid var(--wb-border);
+  background: var(--wb-surface);
 }
 
 .wb-swatch:last-child .wb-swatch__meta {
@@ -82,14 +85,14 @@
 .wb-swatch__step {
   font-size: 10px;
   font-weight: var(--font-weight-semibold);
-  color: var(--fg-default);
+  color: var(--wb-text);
   letter-spacing: 0.02em;
 }
 
 .wb-swatch__hex {
   font-family: var(--font-family-mono);
   font-size: 9px;
-  color: var(--fg-muted);
+  color: var(--wb-muted);
   text-transform: uppercase;
 }
 
@@ -98,10 +101,11 @@
 .wb-token-list {
   display: flex;
   flex-direction: column;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  background: var(--wb-surface);
+  border: 1px solid var(--wb-border);
+  border-radius: var(--radius-xl);
   overflow: hidden;
+  box-shadow: var(--shadow-xs);
 }
 
 .wb-token-row {
@@ -110,7 +114,7 @@
   align-items: center;
   gap: var(--spacing-4);
   padding: var(--spacing-3) var(--spacing-5);
-  border-bottom: 1px solid var(--border-default);
+  border-bottom: 1px solid var(--wb-border-soft);
 }
 
 .wb-token-row--wide-preview {
@@ -122,23 +126,23 @@
 }
 
 .wb-token-row:nth-child(even) {
-  background: var(--bg-canvas);
+  background: var(--wb-surface-muted);
 }
 
 .wb-token-row__preview {
-  color: var(--fg-default);
+  color: var(--wb-text);
 }
 
 .wb-token-row__name {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  color: var(--fg-default);
+  color: var(--wb-text);
 }
 
 .wb-token-row__value {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  color: var(--fg-muted);
+  color: var(--wb-muted);
   word-break: break-word;
 }
 
@@ -154,17 +158,21 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
-  padding: var(--spacing-5);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  background:
+    linear-gradient(180deg, var(--wb-surface), var(--wb-surface-muted));
+  border: 1px solid var(--wb-border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    inset 0 1px 0 var(--border-on-dark-30),
+    var(--shadow-xs);
 }
 
 .wb-font-card__sample {
   min-height: 88px;
   display: flex;
   align-items: center;
-  color: var(--fg-default);
+  color: var(--wb-text);
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
@@ -177,14 +185,14 @@
 }
 
 .wb-font-card__label {
-  color: var(--fg-default);
+  color: var(--wb-text);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
 }
 
 .wb-font-card__role {
-  color: var(--fg-subtle);
+  color: var(--wb-subtle);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-wide);
@@ -194,14 +202,14 @@
 
 .wb-font-card__usage {
   margin: 0;
-  color: var(--fg-muted);
+  color: var(--wb-muted);
   font-size: var(--font-size-sm);
   line-height: var(--line-height-normal);
 }
 
 .wb-font-card__stack {
   display: block;
-  color: var(--fg-subtle);
+  color: var(--wb-subtle);
   font-family: var(--font-family-mono);
   font-size: var(--font-size-2xs);
   line-height: var(--line-height-normal);
@@ -218,14 +226,18 @@
   grid-template-columns: minmax(220px, 0.75fr) minmax(0, 1fr);
   gap: var(--spacing-6);
   align-items: center;
-  padding: var(--spacing-5);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  padding: var(--spacing-6);
+  background:
+    linear-gradient(180deg, var(--wb-surface), var(--wb-surface-muted));
+  border: 1px solid var(--wb-border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    inset 0 1px 0 var(--border-on-dark-30),
+    var(--shadow-xs);
 }
 
 .wb-type-style__sample {
-  color: var(--fg-default);
+  color: var(--wb-text);
   overflow-wrap: anywhere;
 }
 
@@ -237,7 +249,7 @@
 
 .wb-type-style__meta h3 {
   margin: 0 0 var(--spacing-1);
-  color: var(--fg-default);
+  color: var(--wb-text);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
@@ -245,7 +257,7 @@
 
 .wb-type-style__meta p {
   margin: 0;
-  color: var(--fg-muted);
+  color: var(--wb-muted);
   font-size: var(--font-size-sm);
   line-height: var(--line-height-normal);
 }
@@ -258,9 +270,9 @@
 
 .wb-type-style__tokens code {
   padding: 2px var(--spacing-2);
-  color: var(--fg-muted);
-  background: var(--bg-subtle);
-  border: 1px solid var(--border-default);
+  color: var(--wb-muted);
+  background: var(--color-neutral-100);
+  border: 1px solid var(--wb-border);
   border-radius: var(--radius-sm);
   font-family: var(--font-family-mono);
   font-size: var(--font-size-2xs);
@@ -270,10 +282,10 @@
 /* Spacing bars */
 .wb-spacing-bar {
   height: 6px;
-  background: var(--color-brand-500);
+  background: var(--color-neutral-900);
   border-radius: 1px;
   min-width: 2px;
-  opacity: 0.7;
+  opacity: 0.78;
 }
 
 /* Radius grid */
@@ -289,16 +301,16 @@
   align-items: flex-start;
   gap: var(--spacing-3);
   padding: var(--spacing-4) var(--spacing-5);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
+  background: var(--wb-surface);
+  border: 1px solid var(--wb-border);
+  border-radius: var(--radius-xl);
 }
 
 .wb-radius-preview {
   width: 48px;
   height: 48px;
-  background: var(--color-brand-50);
-  border: 1.5px solid var(--border-brand-alpha-30);
+  background: var(--color-neutral-100);
+  border: 1.5px solid var(--wb-border-strong);
 }
 
 /* ── Section heads with a description ────────────────────────────── */
@@ -315,7 +327,7 @@
   margin: 0;
   max-width: 640px;
   font-size: var(--font-size-sm);
-  color: var(--fg-muted);
+  color: var(--wb-muted);
   line-height: var(--line-height-normal);
 }
 
@@ -326,9 +338,9 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: var(--spacing-5);
   padding: var(--spacing-6);
-  background: var(--bg-canvas);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  background: var(--wb-surface-muted);
+  border: 1px solid var(--wb-border-soft);
+  border-radius: var(--radius-xl);
 }
 
 .wb-shadow-card {
@@ -340,15 +352,15 @@
 
 .wb-shadow-card__sample {
   height: 88px;
-  background: var(--bg-surface);
+  background: var(--wb-surface);
   border-radius: var(--radius-md);
 }
 
 .wb-shadow-card__sample.is-focus {
   height: 56px;
   margin: 16px 16px 0;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
+  background: var(--wb-surface);
+  border: 1px solid var(--wb-border);
 }
 
 .wb-shadow-card__meta {
@@ -361,7 +373,7 @@
 .wb-shadow-card__name {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  color: var(--fg-default);
+  color: var(--wb-text);
 }
 
 .wb-shadow-card__value {
@@ -372,7 +384,7 @@
   font-family: var(--font-family-mono);
   font-size: 10px;
   line-height: 1.4;
-  color: var(--fg-subtle);
+  color: var(--wb-subtle);
   word-break: break-all;
 }
 
@@ -384,7 +396,7 @@
   gap: 1px;
   background: var(--border-subtle);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   overflow: hidden;
 }
 
@@ -427,7 +439,7 @@
 .wb-border-card__name {
   font-family: var(--font-family-mono);
   font-size: 10px;
-  color: var(--fg-muted);
+  color: var(--wb-muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -440,7 +452,7 @@
 .wb-border-card__value {
   font-family: var(--font-family-mono);
   font-size: 10px;
-  color: var(--fg-subtle);
+  color: var(--wb-subtle);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -454,5 +466,14 @@
   width: 80px;
   height: 28px;
   border-radius: var(--radius-sm);
-  background: var(--bg-surface);
+  background: var(--wb-surface);
+}
+
+@media (max-width: 760px) {
+  .wb-token-row,
+  .wb-token-row--wide-preview,
+  .wb-type-style {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
 }

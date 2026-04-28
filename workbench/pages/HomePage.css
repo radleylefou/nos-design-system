@@ -1,7 +1,7 @@
 /* HomePage — landing view styles. Reuses .wb-page* classes from App.css. */
 
 .wb-home {
-  max-width: 900px;
+  max-width: calc(var(--spacing-24) * 10);
 }
 
 .wb-home__section {
@@ -15,7 +15,7 @@
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
-  color: var(--fg-muted);
+  color: var(--wb-muted);
 }
 
 /* ── Recently Added ──────────────────────────────────────────────── */
@@ -23,27 +23,33 @@
 .wb-home__recent-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: var(--spacing-4);
+  gap: var(--spacing-2);
 }
 
 .wb-home__recent-card {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
-  padding: var(--spacing-5);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xs);
+  gap: var(--spacing-3);
+  min-height: calc(var(--spacing-24) * 2);
+  padding: var(--spacing-6);
+  background:
+    linear-gradient(180deg, var(--wb-surface), var(--wb-surface-muted));
+  border: 1px solid var(--wb-border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    inset 0 1px 0 var(--border-on-dark-30),
+    var(--shadow-xs);
   transition:
-    border-color var(--duration-fast) var(--easing-standard),
-    box-shadow var(--duration-fast) var(--easing-standard);
+    background-color var(--duration-slow) var(--wb-motion),
+    box-shadow var(--duration-slow) var(--wb-motion),
+    transform var(--duration-slow) var(--wb-motion);
 }
 
 .wb-home__recent-card:hover {
-  border-color: var(--border-brand-alpha-30);
-  box-shadow: var(--shadow-sm);
-  background: var(--color-brand-50);
+  box-shadow:
+    inset 0 1px 0 var(--border-on-dark-30),
+    var(--wb-shadow-soft);
+  transform: translateY(calc(var(--spacing-0) - var(--spacing-1)));
 }
 
 .wb-home__recent-category {
@@ -51,7 +57,7 @@
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
-  color: var(--fg-brand);
+  color: var(--wb-subtle);
 }
 
 .wb-home__recent-name {
@@ -59,32 +65,37 @@
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
-  color: var(--fg-default);
+  color: var(--wb-text);
 }
 
 .wb-home__recent-desc {
   margin: 0;
   font-size: var(--font-size-sm);
   line-height: var(--line-height-normal);
-  color: var(--fg-muted);
+  color: var(--wb-muted);
 }
 
 .wb-home__recent-link {
   align-self: flex-start;
   margin-top: var(--spacing-2);
-  padding: 0;
-  background: none;
-  border: none;
+  padding: var(--spacing-2) var(--spacing-3);
+  background: var(--color-neutral-100);
+  border: 1px solid var(--wb-border-soft);
+  border-radius: var(--radius-full);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  color: var(--fg-brand);
+  color: var(--wb-text);
   cursor: pointer;
-  border-radius: var(--radius-sm);
-  transition: color var(--duration-fast) var(--easing-standard);
+  transition:
+    background-color var(--duration-slow) var(--wb-motion),
+    color var(--duration-slow) var(--wb-motion),
+    transform var(--duration-slow) var(--wb-motion);
 }
 
 .wb-home__recent-link:hover {
-  color: var(--color-brand-700);
+  background: var(--wb-active-bg);
+  color: var(--wb-active-fg);
+  transform: translateY(calc(var(--spacing-0) - var(--spacing-1)));
 }
 
 .wb-home__recent-link:focus-visible {
@@ -95,9 +106,9 @@
 .wb-home__recent-date {
   margin-top: var(--spacing-2);
   padding-top: var(--spacing-3);
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid var(--wb-border-soft);
   font-size: var(--font-size-xs);
-  color: var(--fg-subtle);
+  color: var(--wb-subtle);
 }
 
 /* ── Section navigation tiles ────────────────────────────────────── */
@@ -105,7 +116,7 @@
 .wb-home__sections-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: var(--spacing-4);
+  gap: var(--spacing-2);
 }
 
 .wb-home__section-tile {
@@ -113,23 +124,27 @@
   flex-direction: column;
   justify-content: space-between;
   gap: var(--spacing-4);
-  padding: var(--spacing-5);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xs);
+  min-height: calc(var(--spacing-24) * 1.75);
+  padding: var(--spacing-6);
+  background:
+    linear-gradient(180deg, var(--wb-surface), var(--wb-surface-muted));
+  border: 1px solid var(--wb-border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    inset 0 1px 0 var(--border-on-dark-30),
+    var(--shadow-xs);
   text-align: left;
   cursor: pointer;
   transition:
-    border-color var(--duration-fast) var(--easing-standard),
-    box-shadow var(--duration-fast) var(--easing-standard),
-    background-color var(--duration-fast) var(--easing-standard);
+    box-shadow var(--duration-slow) var(--wb-motion),
+    transform var(--duration-slow) var(--wb-motion);
 }
 
 .wb-home__section-tile:hover {
-  border-color: var(--border-brand-alpha-30);
-  box-shadow: var(--shadow-sm);
-  background: var(--color-brand-50);
+  box-shadow:
+    inset 0 1px 0 var(--border-on-dark-30),
+    var(--wb-shadow-soft);
+  transform: translateY(calc(var(--spacing-0) - var(--spacing-1)));
 }
 
 .wb-home__section-tile:focus-visible {
@@ -147,23 +162,36 @@
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
-  color: var(--fg-default);
+  color: var(--wb-text);
 }
 
 .wb-home__section-tile-desc {
   margin: 0;
   font-size: var(--font-size-sm);
   line-height: var(--line-height-normal);
-  color: var(--fg-muted);
+  color: var(--wb-muted);
 }
 
 .wb-home__section-tile-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   align-self: flex-end;
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+  background: var(--color-neutral-100);
+  border: 1px solid var(--wb-border-soft);
+  border-radius: var(--radius-full);
   font-size: var(--font-size-sm);
-  color: var(--fg-subtle);
-  transition: color var(--duration-fast) var(--easing-standard);
+  color: var(--wb-subtle);
+  transition:
+    background-color var(--duration-slow) var(--wb-motion),
+    color var(--duration-slow) var(--wb-motion),
+    transform var(--duration-slow) var(--wb-motion);
 }
 
 .wb-home__section-tile:hover .wb-home__section-tile-arrow {
-  color: var(--fg-brand);
+  background: var(--wb-active-bg);
+  color: var(--wb-active-fg);
+  transform: translateX(var(--spacing-1));
 }

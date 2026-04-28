@@ -16,6 +16,7 @@ const INITIAL_VIEW = { section: 'home' };
 
 export function App() {
   const [view, setView] = useState(INITIAL_VIEW);
+  const viewKey = getViewKey(view);
 
   function handleSelectCategory(categoryLabel) {
     const cat = COMPONENT_CATEGORIES.find((c) => c.label === categoryLabel);
@@ -26,19 +27,31 @@ export function App() {
     <div className="wb-app">
       <Sidebar view={view} onNavigate={setView} />
       <main className="wb-main">
-        {view.section === 'home' && <HomePage onNavigate={setView} />}
-        {view.section === 'component' && !view.categoryId && (
-          <CategoryPage onSelectCategory={handleSelectCategory} />
-        )}
-        {view.section === 'component' && view.categoryId && view.componentId && (
-          <ComponentsPage componentId={view.componentId} categoryId={view.categoryId} onNavigate={setView} />
-        )}
-        {view.section === 'tokens'       && <TokensPage category={view.category} />}
-        {view.section === 'icons'        && <IconsPage />}
-        {view.section === 'changelog'    && <ChangelogPage />}
-        {view.section === 'playground'   && <PlaygroundPage playgroundView={view.playgroundView} />}
-        {view.section === 'pageExamples' && <PageExamplesPage />}
+        <div key={viewKey} className="wb-motion-enter">
+          {view.section === 'home' && <HomePage onNavigate={setView} />}
+          {view.section === 'component' && !view.categoryId && (
+            <CategoryPage onSelectCategory={handleSelectCategory} />
+          )}
+          {view.section === 'component' && view.categoryId && view.componentId && (
+            <ComponentsPage componentId={view.componentId} categoryId={view.categoryId} onNavigate={setView} />
+          )}
+          {view.section === 'tokens'       && <TokensPage category={view.category} />}
+          {view.section === 'icons'        && <IconsPage />}
+          {view.section === 'changelog'    && <ChangelogPage />}
+          {view.section === 'playground'   && <PlaygroundPage playgroundView={view.playgroundView} />}
+          {view.section === 'pageExamples' && <PageExamplesPage />}
+        </div>
       </main>
     </div>
   );
+}
+
+function getViewKey(view) {
+  return [
+    view.section,
+    view.categoryId,
+    view.componentId,
+    view.category,
+    view.playgroundView,
+  ].filter(Boolean).join(':');
 }

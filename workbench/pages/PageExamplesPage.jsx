@@ -24,22 +24,16 @@ export function PageExamplesPage() {
 
       <section className="wb-section">
         <div className="wb-section__title">Planned examples</div>
-        <div className="wb-demo wb-demo--module" style={{ flexDirection: 'column', gap: 'var(--spacing-0)' }}>
+        <div className="wb-demo wb-demo--module wb-planned-list">
           {PLANNED_EXAMPLES.map((ex, i) => (
             <div
               key={ex.name}
-              style={{
-                display: 'flex',
-                alignItems: 'baseline',
-                gap: 'var(--spacing-3)',
-                padding: 'var(--spacing-4) 0',
-                borderBottom: i < PLANNED_EXAMPLES.length - 1 ? '1px solid var(--border-subtle)' : 'none',
-              }}
+              className={`wb-planned-list__row${i < PLANNED_EXAMPLES.length - 1 ? '' : ' wb-planned-list__row--last'}`}
             >
-              <span style={{ fontWeight: 'var(--font-weight-semibold)', color: 'var(--fg-default)', fontSize: 'var(--font-size-sm)', minWidth: '160px' }}>
+              <span className="wb-planned-list__name">
                 {ex.name}
               </span>
-              <span style={{ fontSize: 'var(--font-size-sm)', color: 'var(--fg-muted)' }}>
+              <span className="wb-planned-list__desc">
                 {ex.description}
               </span>
             </div>

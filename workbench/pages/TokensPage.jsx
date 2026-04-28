@@ -46,12 +46,14 @@ export function TokensPage({ category = 'Color' }) {
         ))}
       </div>
 
-      {active === 'Color'      && <ColorView />}
-      {active === 'Typography' && <TypographyView />}
-      {active === 'Spacing'    && <SpacingView />}
-      {active === 'Radius'     && <RadiusView />}
-      {active === 'Shadow'     && <ShadowView />}
-      {active === 'Border'     && <BorderView />}
+      <div key={active} className="wb-motion-enter wb-motion-enter--tab">
+        {active === 'Color'      && <ColorView />}
+        {active === 'Typography' && <TypographyView />}
+        {active === 'Spacing'    && <SpacingView />}
+        {active === 'Radius'     && <RadiusView />}
+        {active === 'Shadow'     && <ShadowView />}
+        {active === 'Border'     && <BorderView />}
+      </div>
     </div>
   );
 }

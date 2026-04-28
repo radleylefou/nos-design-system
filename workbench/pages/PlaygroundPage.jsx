@@ -760,7 +760,9 @@ export function PlaygroundPage({ playgroundView = 'components' }) {
         ))}
       </div>
 
-      {active === 'loading' ? <LoadingLab /> : <ComponentPlayground />}
+      <div key={active} className="wb-motion-enter wb-motion-enter--tab">
+        {active === 'loading' ? <LoadingLab /> : <ComponentPlayground />}
+      </div>
     </>
   );
 }

@@ -1,8 +1,9 @@
 .wb-category-page {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-8);
-  max-width: 960px;
+  gap: var(--spacing-12);
+  max-width: calc(var(--spacing-24) * 10);
+  margin: 0 auto;
 }
 
 /* ── Header ───────────────────────────────────────────────────────── */
@@ -10,31 +11,36 @@
 .wb-category-page__header {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--spacing-4);
 }
 
 .wb-category-page__eyebrow {
+  align-self: flex-start;
   margin: 0;
+  padding: var(--spacing-1) var(--spacing-3);
+  background: var(--color-neutral-100);
+  border: 1px solid var(--wb-border-soft);
+  border-radius: var(--radius-full);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
-  color: var(--fg-brand);
+  color: var(--wb-muted);
 }
 
 .wb-category-page__title {
   margin: 0;
-  font-size: var(--font-size-3xl);
+  font-size: calc(var(--font-size-4xl) * 1.3);
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height-tight);
-  color: var(--fg-default);
-  letter-spacing: -0.02em;
+  color: var(--wb-text);
+  letter-spacing: 0;
 }
 
 .wb-category-page__desc {
   margin: 0;
   font-size: var(--font-size-sm);
-  color: var(--fg-muted);
+  color: var(--wb-muted);
   line-height: var(--line-height-normal);
 }
 
@@ -43,7 +49,7 @@
 .wb-category-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: var(--spacing-4);
+  gap: var(--spacing-2);
 }
 
 /* ── Card ─────────────────────────────────────────────────────────── */
@@ -53,23 +59,27 @@
   flex-direction: column;
   justify-content: space-between;
   gap: var(--spacing-4);
-  padding: var(--spacing-5);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xs);
+  min-height: calc(var(--spacing-24) * 1.75);
+  padding: var(--spacing-6);
+  background:
+    linear-gradient(180deg, var(--wb-surface), var(--wb-surface-muted));
+  border: 1px solid var(--wb-border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    inset 0 1px 0 var(--border-on-dark-30),
+    var(--shadow-xs);
   text-align: left;
   cursor: pointer;
   transition:
-    border-color var(--duration-fast) var(--easing-standard),
-    box-shadow var(--duration-fast) var(--easing-standard),
-    background-color var(--duration-fast) var(--easing-standard);
+    box-shadow var(--duration-slow) var(--wb-motion),
+    transform var(--duration-slow) var(--wb-motion);
 }
 
 .wb-category-card:hover {
-  border-color: var(--border-brand-alpha-30);
-  box-shadow: var(--shadow-sm);
-  background: var(--color-brand-50);
+  box-shadow:
+    inset 0 1px 0 var(--border-on-dark-30),
+    var(--wb-shadow-soft);
+  transform: translateY(calc(var(--spacing-0) - var(--spacing-1)));
 }
 
 .wb-category-card:focus-visible {
@@ -87,14 +97,14 @@
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
-  color: var(--fg-default);
+  color: var(--wb-text);
 }
 
 .wb-category-card__desc {
   margin: 0;
   font-size: var(--font-size-sm);
   line-height: var(--line-height-normal);
-  color: var(--fg-muted);
+  color: var(--wb-muted);
 }
 
 .wb-category-card__footer {
@@ -107,14 +117,34 @@
 .wb-category-card__count {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
-  color: var(--fg-subtle);
+  color: var(--wb-subtle);
 }
 
 .wb-category-card__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+  background: var(--color-neutral-100);
+  border: 1px solid var(--wb-border-soft);
+  border-radius: var(--radius-full);
   font-size: var(--font-size-sm);
-  color: var(--fg-subtle);
+  color: var(--wb-subtle);
+  transition:
+    background-color var(--duration-slow) var(--wb-motion),
+    color var(--duration-slow) var(--wb-motion),
+    transform var(--duration-slow) var(--wb-motion);
 }
 
 .wb-category-card:hover .wb-category-card__arrow {
-  color: var(--fg-brand);
+  background: var(--wb-active-bg);
+  color: var(--wb-active-fg);
+  transform: translateX(var(--spacing-1));
+}
+
+@media (max-width: 960px) {
+  .wb-category-page {
+    gap: var(--spacing-8);
+  }
 }
