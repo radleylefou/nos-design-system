@@ -1,0 +1,73 @@
+/* PipelineTable — full-width data table with search toolbar and row actions. */
+
+.nos-pt {
+  background: #ffffff;
+  border: 1px solid var(--color-brand-50);
+  border-radius: 14px;
+  overflow: hidden;
+  font-family: var(--font-family-sans);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Scrollable table body ───────────────────────────────────────────────── */
+
+.nos-pt__scroll {
+  overflow-x: auto;
+}
+
+.nos-pt__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: max-content;
+}
+
+/* ── Column header bar ───────────────────────────────────────────────────── */
+
+.nos-pt__col-header-row {
+  background: var(--color-brand-50);
+}
+
+.nos-pt__col-header {
+  padding: 0 var(--spacing-4);
+  height: 30px;
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  letter-spacing: 0.15px;
+  text-transform: uppercase;
+  color: var(--color-neutral-500);
+  white-space: nowrap;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.nos-pt__col-header--actions {
+  width: 100px;
+}
+
+/* ── Data rows ───────────────────────────────────────────────────────────── */
+
+.nos-pt__row {
+  border-bottom: 1px solid var(--color-brand-50);
+  transition: background 0.1s ease;
+}
+
+.nos-pt__row:hover {
+  background: var(--color-brand-50);
+}
+
+.nos-pt__row--last {
+  border-bottom: none;
+}
+
+.nos-pt__cell {
+  padding: var(--spacing-3) var(--spacing-4);
+  vertical-align: middle;
+  height: 52px;
+}
+
+.nos-pt__cell--actions {
+  width: 100px;
+  text-align: right;
+}

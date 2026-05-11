@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import tokens from '../../tokens/tokens.json';
 import { TOKEN_CATEGORIES } from '../nav.js';
+import { WorkbenchTransition } from '../WorkbenchTransition.jsx';
 import './TokensPage.css';
 
 // Extract $value from a DTCG token object, or return the value as-is.
@@ -46,14 +47,14 @@ export function TokensPage({ category = 'Color' }) {
         ))}
       </div>
 
-      <div key={active} className="wb-motion-enter wb-motion-enter--tab">
+      <WorkbenchTransition transitionKey={active} variant="tab" className="wb-token-panel">
         {active === 'Color'      && <ColorView />}
         {active === 'Typography' && <TypographyView />}
         {active === 'Spacing'    && <SpacingView />}
         {active === 'Radius'     && <RadiusView />}
         {active === 'Shadow'     && <ShadowView />}
         {active === 'Border'     && <BorderView />}
-      </div>
+      </WorkbenchTransition>
     </div>
   );
 }

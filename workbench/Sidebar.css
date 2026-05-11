@@ -1,6 +1,7 @@
 .wb-sidebar {
-  display: grid;
-  grid-template-columns: calc(var(--spacing-24) * 2) calc(var(--spacing-24) * 2 + var(--spacing-2));
+  display: flex;
+  flex-direction: column;
+  width: calc(var(--spacing-24) * 2);
   height: 100%;
   min-height: 0;
   background: var(--wb-surface);
@@ -12,11 +13,11 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-8);
-  min-width: 0;
+  flex: 1;
+  min-height: 0;
   padding: var(--spacing-5) var(--spacing-4);
   background:
     linear-gradient(180deg, var(--wb-surface), var(--color-neutral-50));
-  border-right: 1px solid var(--wb-border);
 }
 
 .wb-sidebar__brand {
@@ -121,212 +122,9 @@
   transform: none;
 }
 
-.wb-sidebar__panel {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-  background:
-    linear-gradient(180deg, var(--color-neutral-50), var(--color-neutral-75));
-  border-right: 1px solid var(--wb-border);
-}
-
-.wb-sidebar__panel-header {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
-  padding: var(--spacing-5) var(--spacing-5) var(--spacing-4);
-  border-bottom: 1px solid var(--wb-border);
-}
-
-.wb-sidebar__panel-eyebrow {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
-  color: var(--wb-subtle);
-  text-transform: uppercase;
-}
-
-.wb-sidebar__panel-title {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
-  color: var(--wb-text);
-}
-
-.wb-sidebar__panel-body {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  padding: var(--spacing-4);
-}
-
-.wb-sidebar__secondary-nav {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-5);
-}
-
-.wb-sidebar__group {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-}
-
-.wb-sidebar__group-label {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
-  color: var(--wb-subtle);
-  text-transform: uppercase;
-}
-
-.wb-sidebar__group-items {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
-}
-
-.wb-sidebar__secondary-item {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  min-height: calc(var(--spacing-8) + var(--spacing-1));
-  padding: 0 var(--spacing-3);
-  border: 0;
-  border-radius: var(--radius-md);
-  background: transparent;
-  color: var(--wb-muted);
-  font-family: inherit;
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-tight);
-  text-align: left;
-  cursor: pointer;
-  transition:
-    background-color var(--duration-slow) var(--wb-motion),
-    color var(--duration-slow) var(--wb-motion),
-    transform var(--duration-slow) var(--wb-motion);
-}
-
-.wb-sidebar__secondary-item:hover {
-  background: var(--wb-surface);
-  color: var(--wb-text);
-  transform: translateX(var(--spacing-1));
-}
-
-.wb-sidebar__secondary-item:focus-visible {
-  outline: none;
-  box-shadow: var(--shadow-focus);
-}
-
-.wb-sidebar__secondary-item--active {
-  background: var(--wb-surface);
-  color: var(--wb-text);
-  font-weight: var(--font-weight-semibold);
-  box-shadow:
-    inset 0 0 0 1px var(--wb-border),
-    var(--shadow-xs);
-}
-
-.wb-sidebar__secondary-item--active:hover {
-  background: var(--wb-surface);
-  color: var(--wb-text);
-  transform: none;
-}
-
-/* ── Collapsed panel (component category grid landing) ────────────── */
-
-.wb-sidebar--no-panel {
-  grid-template-columns: calc(var(--spacing-24) * 2);
-}
-
-.wb-sidebar--no-panel .wb-sidebar__panel {
-  display: none;
-}
-
-/* ── Component tab switcher ───────────────────────────────────────── */
-
-.wb-sidebar__component-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-1);
-  margin-top: var(--spacing-3);
-}
-
-.wb-sidebar__tab-item {
-  padding: var(--spacing-1) var(--spacing-2);
-  background: transparent;
-  border: 1px solid var(--wb-border);
-  border-radius: var(--radius-full);
-  color: var(--wb-muted);
-  font-family: inherit;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-tight);
-  white-space: nowrap;
-  cursor: pointer;
-  transition:
-    background-color var(--duration-slow) var(--wb-motion),
-    border-color var(--duration-slow) var(--wb-motion),
-    color var(--duration-slow) var(--wb-motion);
-}
-
-.wb-sidebar__tab-item:hover {
-  background: var(--wb-surface);
-  border-color: var(--wb-border-strong);
-  color: var(--wb-text);
-}
-
-.wb-sidebar__tab-item:focus-visible {
-  outline: none;
-  box-shadow: var(--shadow-focus);
-}
-
-.wb-sidebar__tab-item--active {
-  background: var(--wb-active-bg);
-  border-color: var(--wb-active-bg);
-  color: var(--wb-active-fg);
-  font-weight: var(--font-weight-semibold);
-}
-
-/* ── Back button ──────────────────────────────────────────────────── */
-
-.wb-sidebar__back-btn {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 0 var(--spacing-3);
-  min-height: calc(var(--spacing-6) + var(--spacing-1));
-  border: 0;
-  border-radius: var(--radius-md);
-  background: transparent;
-  color: var(--wb-subtle);
-  font-family: inherit;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-tight);
-  text-align: left;
-  cursor: pointer;
-  transition:
-    background-color var(--duration-slow) var(--wb-motion),
-    color var(--duration-slow) var(--wb-motion);
-}
-
-.wb-sidebar__back-btn:hover {
-  background: var(--wb-surface);
-  color: var(--wb-text);
-}
-
-.wb-sidebar__back-btn:focus-visible {
-  outline: none;
-  box-shadow: var(--shadow-focus);
-}
-
 @media (max-width: 960px) {
-  .wb-sidebar,
-  .wb-sidebar--no-panel {
-    grid-template-columns: 1fr;
+  .wb-sidebar {
+    width: 100%;
     height: auto;
     border-right: 0;
     border-bottom: 1px solid var(--wb-border);
@@ -335,26 +133,14 @@
   .wb-sidebar__rail {
     gap: var(--spacing-4);
     padding: var(--spacing-4);
-    border-right: 0;
   }
 
-  .wb-sidebar__primary-nav,
-  .wb-sidebar__group-items {
+  .wb-sidebar__primary-nav {
     flex-direction: row;
     flex-wrap: wrap;
   }
 
-  .wb-sidebar__primary-item,
-  .wb-sidebar__secondary-item {
+  .wb-sidebar__primary-item {
     width: auto;
-  }
-
-  .wb-sidebar__panel {
-    border-right: 0;
-    border-top: 1px solid var(--wb-border);
-  }
-
-  .wb-sidebar__panel-body {
-    padding: var(--spacing-3) var(--spacing-4);
   }
 }

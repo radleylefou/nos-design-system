@@ -1,0 +1,96 @@
+/* MonthlyGlance — inner stat grid (chrome from DashboardCard). */
+
+.nos-mg {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-2) var(--spacing-3);
+  font-family: var(--font-family-sans);
+}
+
+/* ── Row ─────────────────────────────────────────────────────────────────── */
+
+.nos-mg__row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-4);
+  padding: var(--spacing-3) 0;
+}
+
+.nos-mg__row--divided {
+  border-bottom: 1px solid var(--color-brand-100);
+}
+
+/* ── Stat cell ───────────────────────────────────────────────────────────── */
+
+.nos-mg__stat {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.nos-mg__label-row {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.nos-mg__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+  color: var(--color-neutral-500);
+  white-space: nowrap;
+}
+
+.nos-mg__value-row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-2);
+}
+
+.nos-mg__value {
+  font-size: 32px;
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  color: var(--color-neutral-700);
+  white-space: nowrap;
+}
+
+/* ── Badges ──────────────────────────────────────────────────────────────── */
+
+.nos-mg__badge {
+  font-family: var(--font-family-sans);
+  white-space: nowrap;
+}
+
+/* Delta badge — shown next to value, medium weight, slightly smaller */
+.nos-mg__badge--delta {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  padding-bottom: 6px;
+}
+
+/* Status badge — shown next to label, regular weight, xs */
+.nos-mg__badge--status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+}
+
+.nos-mg__badge-dot {
+  font-size: 16px;
+  line-height: 0;
+  position: relative;
+  top: 1px;
+}
+
+/* Tone colors */
+.nos-mg__badge--success { color: var(--color-semantic-success-600); }
+.nos-mg__badge--warning { color: var(--color-semantic-warning-600); }
+.nos-mg__badge--danger  { color: var(--color-semantic-error-600); }
+.nos-mg__badge--info    { color: var(--color-brand-500); }

@@ -16,18 +16,16 @@
   --wb-shadow-soft: var(--shadow-lg);
   --wb-shadow-lift: var(--shadow-xl);
   --wb-motion: cubic-bezier(0.32, 0.72, 0, 1);
+  --wb-motion-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --wb-motion-exit: cubic-bezier(0.4, 0, 1, 1);
   --shadow-focus: 0 0 0 2px var(--wb-surface), 0 0 0 4px var(--color-neutral-900);
 
   display: grid;
-  grid-template-columns: calc(var(--spacing-24) * 4 + var(--spacing-2)) 1fr;
+  grid-template-columns: calc(var(--spacing-24) * 2) 1fr;
   height: 100vh;
   background:
     linear-gradient(135deg, var(--wb-bg-soft), var(--wb-bg) 52%, var(--color-neutral-100));
   color: var(--wb-text);
-}
-
-.wb-app:has(.wb-sidebar--no-panel) {
-  grid-template-columns: calc(var(--spacing-24) * 2) 1fr;
 }
 
 .wb-main {
@@ -36,24 +34,42 @@
   scrollbar-gutter: stable;
 }
 
-.wb-motion-enter {
-  animation: wb-content-enter 180ms var(--wb-motion) both;
+.wb-transition {
+  animation: wb-content-enter 260ms var(--wb-motion-enter) both;
+  transform-origin: top center;
   will-change: opacity, transform;
 }
 
-.wb-motion-enter--tab {
-  animation-duration: 160ms;
+.wb-transition--tab {
+  animation-duration: 220ms;
+}
+
+.wb-transition--exit {
+  animation: wb-content-exit 120ms var(--wb-motion-exit) both;
+  pointer-events: none;
 }
 
 @keyframes wb-content-enter {
   from {
     opacity: 0;
-    transform: translateY(var(--spacing-2));
+    transform: translate3d(0, var(--spacing-2), 0);
   }
 
   to {
     opacity: 1;
-    transform: translateY(var(--spacing-0));
+    transform: translate3d(0, var(--spacing-0), 0);
+  }
+}
+
+@keyframes wb-content-exit {
+  from {
+    opacity: 1;
+    transform: translate3d(0, var(--spacing-0), 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, calc(var(--spacing-0) - var(--spacing-2)), 0);
   }
 }
 
@@ -232,8 +248,7 @@
 }
 
 @media (max-width: 960px) {
-  .wb-app,
-  .wb-app:has(.wb-sidebar--no-panel) {
+  .wb-app {
     grid-template-columns: 1fr;
     height: auto;
     min-height: 100dvh;
@@ -267,8 +282,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wb-motion-enter,
-  .wb-motion-enter--tab {
+  .wb-transition,
+  .wb-transition--tab,
+  .wb-transition--exit {
     animation: none;
     will-change: auto;
   }

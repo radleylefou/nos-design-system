@@ -1,0 +1,94 @@
+/* TableCell — Reusable cell primitives for NOS data tables. */
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+
+.nos-tc {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-family-sans);
+  min-width: 0;
+}
+
+/* ── TableCellText ───────────────────────────────────────────────────────── */
+
+.nos-tc--text {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  color: var(--color-neutral-700);
+  white-space: nowrap;
+}
+
+/* ── TableCellSubtext ────────────────────────────────────────────────────── */
+
+.nos-tc--subtext {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.nos-tc__primary {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  color: var(--color-neutral-700);
+  white-space: nowrap;
+}
+
+.nos-tc__secondary {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+  color: var(--color-neutral-500);
+  white-space: nowrap;
+}
+
+/* ── TableCellIcon ───────────────────────────────────────────────────────── */
+
+.nos-tc--icon {
+  gap: 10px;
+}
+
+.nos-tc__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--color-neutral-400);
+  width: 18px;
+  height: 18px;
+}
+
+.nos-tc__icon svg,
+.nos-tc__icon img {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── TableCellLink ───────────────────────────────────────────────────────── */
+
+.nos-tc--link {
+  gap: var(--spacing-1);
+}
+
+.nos-tc--clickable {
+  cursor: pointer;
+}
+
+.nos-tc--clickable:hover .nos-tc__primary {
+  text-decoration: underline;
+}
+
+.nos-tc__chevron {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-neutral-400);
+  flex-shrink: 0;
+}
+
+/* ── TableCellActions ────────────────────────────────────────────────────── */
+
+.nos-tc--actions {
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+}
+

@@ -1,0 +1,100 @@
+/* TableHeader — reusable table toolbar/header row. */
+
+.nos-th {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  background: var(--color-brand-50);
+  border-bottom: 1px solid var(--color-brand-100);
+  flex-shrink: 0;
+  font-family: var(--font-family-sans);
+}
+
+/* ── Title area ──────────────────────────────────────────────────────────── */
+
+.nos-th__title-area {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-right: auto;
+}
+
+.nos-th__title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.4;
+  color: var(--color-neutral-700);
+}
+
+.nos-th__subtext {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+  color: var(--color-neutral-500);
+}
+
+/* ── Search input ────────────────────────────────────────────────────────── */
+
+.nos-th__search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 240px;
+  height: 34px;
+  padding: 0 var(--spacing-2) 0 10px;
+  background: #ffffff;
+  border: 1px solid var(--color-brand-100);
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.nos-th__search-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-neutral-400);
+  flex-shrink: 0;
+}
+
+.nos-th__search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+  color: var(--color-neutral-700);
+  background: transparent;
+}
+
+.nos-th__search-input::placeholder {
+  color: var(--color-neutral-400);
+}
+
+.nos-th__kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  font-family: var(--font-family-sans);
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-400);
+  background: #ffffff;
+  border: 1px solid #d3d3e7;
+  border-radius: 4px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* ── Action buttons ──────────────────────────────────────────────────────── */
+
+.nos-th__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
