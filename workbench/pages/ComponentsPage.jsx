@@ -224,14 +224,22 @@ function ComponentDetail({ componentId, categoryId, onNavigate }) {
 
 function ComponentCard({ name, categoryLabel, onNavigate }) {
   const demo = DEMOS[name];
+  const navigate = () =>
+    onNavigate({ section: 'component', categoryId: categoryLabel, componentId: name });
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      navigate();
+    }
+  };
 
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
       className="comp-card"
-      onClick={() =>
-        onNavigate({ section: 'component', categoryId: categoryLabel, componentId: name })
-      }
+      onClick={navigate}
+      onKeyDown={handleKeyDown}
     >
       <div className="comp-card__preview">
         {demo?.preview ? (
@@ -246,6 +254,6 @@ function ComponentCard({ name, categoryLabel, onNavigate }) {
           <span className="comp-card__description">{demo.description}</span>
         )}
       </div>
-    </button>
+    </div>
   );
 }

@@ -1,0 +1,20 @@
+/* Overlay — centered modal scrim. */
+
+.nos-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-5);
+  background: var(--overlay-scrim);
+}
+
+@media (max-width: 720px) {
+  .nos-overlay {
+    align-items: flex-start;
+    padding: var(--spacing-4);
+    overflow-y: auto;
+  }
+}

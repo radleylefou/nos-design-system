@@ -1,8 +1,9 @@
 import { useId } from 'react';
+import { Field } from './Field.jsx';
 import './Textarea.css';
 
 /**
- * Textarea — multi-line text field. Reuses the .nos-field chrome from Input.
+ * Textarea — multi-line text field using the shared Field label and control chrome.
  *
  * Props:
  *   label       — text label rendered above the field
@@ -28,6 +29,7 @@ export function Textarea({
   const autoId = useId();
   const ta = id || autoId;
   const hasError = Boolean(error);
+  const feedbackId = error || helperText ? `${ta}-feedback` : undefined;
 
   const fieldCls = [
     'nos-field',
@@ -37,26 +39,26 @@ export function Textarea({
   ].filter(Boolean).join(' ');
 
   return (
-    <div className={`nos-input${className ? ' ' + className : ''}`}>
-      {label && (
-        <label className="nos-input__label" htmlFor={ta}>{label}</label>
-      )}
+    <Field
+      className={className}
+      label={label}
+      htmlFor={ta}
+      helperText={helperText}
+      error={error}
+      feedbackId={feedbackId}
+    >
       <div className={fieldCls}>
         <textarea
           id={ta}
           rows={rows}
           disabled={disabled}
           aria-invalid={hasError || undefined}
+          aria-describedby={feedbackId}
           className="nos-field__control nos-field__control--textarea"
           style={{ resize }}
           {...rest}
         />
       </div>
-      {(error || helperText) && (
-        <p className={`nos-input__hint${hasError ? ' nos-input__hint--error' : ''}`}>
-          {error || helperText}
-        </p>
-      )}
-    </div>
+    </Field>
   );
 }

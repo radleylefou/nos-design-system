@@ -1,4 +1,5 @@
 import { useId } from 'react';
+import { Field } from './Field.jsx';
 import './Input.css';
 
 /**
@@ -34,6 +35,7 @@ export function Input({
   const autoId = useId();
   const inputId = id || autoId;
   const hasError = Boolean(error);
+  const feedbackId = error || helperText ? `${inputId}-feedback` : undefined;
 
   const fieldCls = [
     'nos-field',
@@ -45,12 +47,14 @@ export function Input({
   ].filter(Boolean).join(' ');
 
   return (
-    <div className={`nos-input${className ? ' ' + className : ''}`}>
-      {label && (
-        <label className="nos-input__label" htmlFor={inputId}>
-          {label}
-        </label>
-      )}
+    <Field
+      className={className}
+      label={label}
+      htmlFor={inputId}
+      helperText={helperText}
+      error={error}
+      feedbackId={feedbackId}
+    >
       <div className={fieldCls}>
         {leadingIcon && (
           <span className="nos-field__icon nos-field__icon--leading" aria-hidden="true">
@@ -61,6 +65,7 @@ export function Input({
           id={inputId}
           disabled={disabled}
           aria-invalid={hasError || undefined}
+          aria-describedby={feedbackId}
           className="nos-field__control"
           {...rest}
         />
@@ -70,11 +75,6 @@ export function Input({
           </span>
         )}
       </div>
-      {(error || helperText) && (
-        <p className={`nos-input__hint${hasError ? ' nos-input__hint--error' : ''}`}>
-          {error || helperText}
-        </p>
-      )}
-    </div>
+    </Field>
   );
 }

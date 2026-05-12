@@ -1,4 +1,5 @@
 import { useId } from 'react';
+import { Field } from './Field.jsx';
 import './Select.css';
 
 /**
@@ -30,6 +31,7 @@ export function Select({
   const autoId = useId();
   const selectId = id || autoId;
   const hasError = Boolean(error);
+  const feedbackId = error || helperText ? `${selectId}-feedback` : undefined;
 
   const fieldCls = [
     'nos-field',
@@ -40,15 +42,20 @@ export function Select({
   ].filter(Boolean).join(' ');
 
   return (
-    <div className={`nos-input${className ? ' ' + className : ''}`}>
-      {label && (
-        <label className="nos-input__label" htmlFor={selectId}>{label}</label>
-      )}
+    <Field
+      className={className}
+      label={label}
+      htmlFor={selectId}
+      helperText={helperText}
+      error={error}
+      feedbackId={feedbackId}
+    >
       <div className={fieldCls}>
         <select
           id={selectId}
           disabled={disabled}
           aria-invalid={hasError || undefined}
+          aria-describedby={feedbackId}
           className="nos-field__control nos-field__control--select"
           defaultValue={rest.value === undefined && rest.defaultValue === undefined && placeholder ? '' : undefined}
           {...rest}
@@ -66,11 +73,6 @@ export function Select({
           </svg>
         </span>
       </div>
-      {(error || helperText) && (
-        <p className={`nos-input__hint${hasError ? ' nos-input__hint--error' : ''}`}>
-          {error || helperText}
-        </p>
-      )}
-    </div>
+    </Field>
   );
 }

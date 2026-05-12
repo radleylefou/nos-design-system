@@ -27,6 +27,7 @@ export function Checkbox({
   const autoId = useId();
   const inputId = id || autoId;
   const hasError = Boolean(error);
+  const feedbackId = error || helperText ? `${inputId}-feedback` : undefined;
 
   const rootCls = [
     'nos-checkbox',
@@ -43,6 +44,7 @@ export function Checkbox({
           type="checkbox"
           disabled={disabled}
           aria-invalid={hasError || undefined}
+          aria-describedby={feedbackId}
           className="nos-checkbox__input"
           {...rest}
         />
@@ -54,7 +56,7 @@ export function Checkbox({
         {label && <span className="nos-checkbox__label">{label}</span>}
       </label>
       {(error || helperText) && (
-        <p className={`nos-checkbox__hint${hasError ? ' nos-checkbox__hint--error' : ''}`}>
+        <p id={feedbackId} className={`nos-checkbox__hint${hasError ? ' nos-checkbox__hint--error' : ''}`}>
           {error || helperText}
         </p>
       )}

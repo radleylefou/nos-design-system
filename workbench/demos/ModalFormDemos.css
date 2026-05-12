@@ -1,0 +1,133 @@
+/* Workbench-only compositions for modal/form primitives. */
+
+.demo-overlay-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  max-width: calc(var(--spacing-24) * 4);
+  padding: var(--spacing-5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-popover);
+  color: var(--fg-default);
+  font-family: var(--font-family-sans);
+}
+
+.demo-overlay-panel h3,
+.demo-overlay-panel p {
+  margin: 0;
+}
+
+.demo-overlay-panel h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+}
+
+.demo-overlay-panel p {
+  color: var(--fg-muted);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+}
+
+.demo-overlay-reference {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--spacing-20);
+  width: 100%;
+  border-radius: var(--radius-lg);
+  background: var(--overlay-scrim);
+  color: var(--fg-inverse);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+}
+
+.demo-modal-preview {
+  max-width: 100%;
+}
+
+.demo-modal-preview .nos-modal {
+  width: min(100%, calc(var(--spacing-24) * 3));
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-xl);
+}
+
+.demo-time-entry {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.demo-time-entry__divider {
+  height: 1px;
+  background: var(--border-default);
+}
+
+.demo-date-field,
+.demo-hours-group__item {
+  height: calc(var(--spacing-8) + var(--spacing-1));
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  color: var(--color-neutral-700);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-none);
+}
+
+.demo-date-field {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  justify-content: flex-start;
+  padding: 0 var(--spacing-3);
+  cursor: pointer;
+}
+
+.demo-date-field svg {
+  margin-left: auto;
+  color: var(--color-neutral-700);
+}
+
+.demo-date-field:focus-visible,
+.demo-hours-group__item:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.demo-date-field__primary {
+  color: var(--color-brand-500);
+}
+
+.demo-date-field__dot {
+  width: var(--spacing-1);
+  height: var(--spacing-1);
+  border-radius: var(--radius-full);
+  background: var(--color-neutral-500);
+}
+
+.demo-hours-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+}
+
+.demo-hours-group__item {
+  padding: 0 var(--spacing-3);
+  cursor: pointer;
+}
+
+.demo-hours-group__item:hover {
+  border-color: var(--color-brand-300);
+  background: var(--color-brand-50);
+}
+
+.demo-hours-group__item--active {
+  border-color: var(--color-brand-500);
+  color: var(--color-brand-500);
+}
