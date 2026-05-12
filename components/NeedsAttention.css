@@ -40,7 +40,7 @@
   font-family: var(--font-family-sans);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-700);
 }
 
@@ -49,7 +49,7 @@
   font-family: var(--font-family-sans);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-500);
 }
 
@@ -63,4 +63,3 @@
 
 .nos-na__item--brand { background: var(--color-brand-50); }
 .nos-na__item--brand .nos-na__bar { background: var(--color-brand-400); }
-

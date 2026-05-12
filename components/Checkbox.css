@@ -79,14 +79,14 @@
 .nos-checkbox__label {
   font-size: var(--font-size-sm);
   color: var(--color-neutral-900);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
 }
 
 .nos-checkbox__hint {
   margin: 0 0 0 24px; /* aligns under the label (16px box + 8px gap) */
   font-size: var(--font-size-xs);
   color: var(--color-neutral-500);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
 }
 
 .nos-checkbox__hint--error {

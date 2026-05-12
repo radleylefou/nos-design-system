@@ -31,10 +31,10 @@
 .nos-pt__col-header {
   padding: 0 var(--spacing-4);
   height: 30px;
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-medium);
-  line-height: 1;
-  letter-spacing: 0.15px;
+  line-height: var(--line-height-none);
+  letter-spacing: var(--letter-spacing-caps);
   text-transform: uppercase;
   color: var(--color-neutral-500);
   white-space: nowrap;

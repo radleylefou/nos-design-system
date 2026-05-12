@@ -151,7 +151,7 @@
   color: var(--wb-muted);
   font-family: inherit;
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-weight-regular);
   line-height: var(--line-height-tight);
   text-align: left;
   cursor: pointer;
@@ -425,7 +425,7 @@
   font-size: calc(var(--font-size-4xl) * 1.2);
   font-weight: var(--font-weight-bold);
   color: var(--wb-text);
-  line-height: 1.1;
+  line-height: var(--line-height-display);
   margin: 0;
 }
 
@@ -547,7 +547,7 @@
 .wb-code-block code {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  line-height: 1.7;
+  line-height: var(--line-height-relaxed);
   color: var(--color-neutral-300);
   white-space: pre;
 }

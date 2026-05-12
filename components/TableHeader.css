@@ -23,14 +23,14 @@
 .nos-th__title {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-700);
 }
 
 .nos-th__subtext {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-500);
 }
 
@@ -64,7 +64,7 @@
   font-family: var(--font-family-sans);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-regular);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-700);
   background: transparent;
 }
@@ -80,14 +80,14 @@
   width: 18px;
   height: 18px;
   font-family: var(--font-family-sans);
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-medium);
   color: var(--color-neutral-400);
   background: #ffffff;
   border: 1px solid #d3d3e7;
   border-radius: 4px;
   flex-shrink: 0;
-  line-height: 1;
+  line-height: var(--line-height-none);
 }
 
 /* ── Action buttons ──────────────────────────────────────────────────────── */
@@ -97,4 +97,3 @@
   align-items: center;
   gap: var(--spacing-1);
 }
-

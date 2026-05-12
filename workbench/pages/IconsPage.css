@@ -46,11 +46,11 @@
 
 .wb-icons__toggle-label {
   padding: 0 var(--spacing-2) 0 var(--spacing-1);
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   color: var(--wb-subtle);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: var(--letter-spacing-caps);
   user-select: none;
 }
 
@@ -138,7 +138,7 @@
   min-width: 18px;
   height: 16px;
   padding: 0 5px;
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-semibold);
   color: var(--wb-subtle);
   background: var(--color-neutral-100);
@@ -170,11 +170,11 @@
   font-weight: var(--font-weight-semibold);
   color: var(--wb-text);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: var(--letter-spacing-wide);
 }
 
 .wb-icons__group-count {
-  font-size: 11px;
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   color: var(--wb-subtle);
   font-variant-numeric: tabular-nums;
@@ -257,8 +257,8 @@
 
 .wb-icon-tile__name {
   font-family: var(--font-family-mono);
-  font-size: 10px;
-  letter-spacing: 0;
+  font-size: var(--font-size-2xs);
+  letter-spacing: var(--letter-spacing-normal);
   color: var(--wb-subtle);
   white-space: nowrap;
   overflow: hidden;
@@ -281,7 +281,7 @@
   margin: 0 auto;
   width: fit-content;
   padding: 2px 8px;
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-semibold);
   color: var(--wb-active-fg);
   background: var(--wb-active-bg);

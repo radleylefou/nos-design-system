@@ -38,7 +38,7 @@
 .nos-mg__label {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-500);
   white-space: nowrap;
 }
@@ -50,9 +50,9 @@
 }
 
 .nos-mg__value {
-  font-size: 32px;
+  font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-medium);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-700);
   white-space: nowrap;
 }
@@ -68,7 +68,7 @@
 .nos-mg__badge--delta {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   padding-bottom: 6px;
 }
 
@@ -79,12 +79,12 @@
   gap: 4px;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
 }
 
 .nos-mg__badge-dot {
-  font-size: 16px;
-  line-height: 0;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-none);
   position: relative;
   top: 1px;
 }

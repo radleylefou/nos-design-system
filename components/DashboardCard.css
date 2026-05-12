@@ -32,7 +32,7 @@
   margin: 0;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-700);
 }
 

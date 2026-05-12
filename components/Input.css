@@ -11,14 +11,14 @@
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   color: var(--color-neutral-700);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
 }
 
 .nos-input__hint {
   margin: 0;
   font-size: var(--font-size-xs);
   color: var(--color-neutral-500);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
 }
 
 .nos-input__hint--error {
@@ -100,7 +100,7 @@
   font-family: inherit;
   font-size: var(--font-size-sm);
   color: var(--color-neutral-900);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
 }
 
 .nos-field--sm .nos-field__control {

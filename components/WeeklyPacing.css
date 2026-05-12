@@ -18,16 +18,16 @@
 }
 
 .nos-wp__value {
-  font-size: 32px;
+  font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-medium);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-700);
 }
 
 .nos-wp__target {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-500);
 }
 
@@ -70,7 +70,7 @@
   margin-bottom: var(--spacing-3);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-500);
   white-space: nowrap;
 }
@@ -107,7 +107,7 @@
 .nos-wp__insight-text {
   margin: 0;
   font-size: var(--font-size-xs);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   white-space: nowrap;
 }
 
@@ -120,4 +120,3 @@
   color: var(--color-neutral-700);
   font-weight: var(--font-weight-medium);
 }
-

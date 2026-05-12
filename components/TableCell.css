@@ -14,7 +14,7 @@
 .nos-tc--text {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-700);
   white-space: nowrap;
 }
@@ -30,7 +30,7 @@
 .nos-tc__primary {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-700);
   white-space: nowrap;
 }
@@ -38,7 +38,7 @@
 .nos-tc__secondary {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-regular);
-  line-height: 1.4;
+  line-height: var(--line-height-snug);
   color: var(--color-neutral-500);
   white-space: nowrap;
 }
@@ -91,4 +91,3 @@
   gap: var(--spacing-2);
   flex-shrink: 0;
 }
-

@@ -15,9 +15,9 @@
   border-radius: var(--radius-full);
   padding: 2px var(--spacing-2);
   font-family: inherit;
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--letter-spacing-caps);
   text-transform: uppercase;
   color: var(--wb-subtle);
   cursor: pointer;
@@ -89,15 +89,15 @@
 }
 
 .wb-swatch__step {
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-semibold);
   color: var(--wb-text);
-  letter-spacing: 0.02em;
+  letter-spacing: var(--letter-spacing-normal);
 }
 
 .wb-swatch__hex {
   font-family: var(--font-family-mono);
-  font-size: 9px;
+  font-size: var(--font-size-2xs);
   color: var(--wb-muted);
   text-transform: uppercase;
 }
@@ -388,8 +388,8 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   font-family: var(--font-family-mono);
-  font-size: 10px;
-  line-height: 1.4;
+  font-size: var(--font-size-2xs);
+  line-height: var(--line-height-snug);
   color: var(--wb-subtle);
   word-break: break-all;
 }
@@ -444,7 +444,7 @@
 
 .wb-border-card__name {
   font-family: var(--font-family-mono);
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   color: var(--wb-muted);
   white-space: nowrap;
   overflow: hidden;
@@ -457,7 +457,7 @@
 
 .wb-border-card__value {
   font-family: var(--font-family-mono);
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   color: var(--wb-subtle);
   white-space: nowrap;
   overflow: hidden;
