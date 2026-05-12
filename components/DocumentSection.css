@@ -1,0 +1,32 @@
+.nos-document-section {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
+}
+
+.nos-document-section__header {
+  padding: var(--spacing-5) var(--spacing-6);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nos-document-section__body {
+  padding: var(--spacing-6);
+}
+
+.nos-document-section__divider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 0 var(--spacing-6);
+}
+
+.nos-document-section__footer {
+  padding: var(--spacing-4) var(--spacing-6);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}

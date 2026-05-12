@@ -93,6 +93,15 @@ function ColorView() {
       <SwatchGroup title="Warning" swatches={tokens.color.semantic.warning} prefix="color-semantic-warning" />
       <SwatchGroup title="Error"   swatches={tokens.color.semantic.error}   prefix="color-semantic-error" />
       <SwatchGroup title="Info"    swatches={tokens.color.semantic.info}    prefix="color-semantic-info" />
+      <SwatchGroup title="Dataviz — Green"  swatches={tokens.color.dataviz.green}  prefix="color-dataviz-green" />
+      <SwatchGroup title="Dataviz — Lime"   swatches={tokens.color.dataviz.lime}   prefix="color-dataviz-lime" />
+      <SwatchGroup title="Dataviz — Blue"   swatches={tokens.color.dataviz.blue}   prefix="color-dataviz-blue" />
+      <SwatchGroup title="Dataviz — Cyan"   swatches={tokens.color.dataviz.cyan}   prefix="color-dataviz-cyan" />
+      <SwatchGroup title="Dataviz — Teal"   swatches={tokens.color.dataviz.teal}   prefix="color-dataviz-teal" />
+      <SwatchGroup title="Dataviz — Orange" swatches={tokens.color.dataviz.orange} prefix="color-dataviz-orange" />
+      <SwatchGroup title="Dataviz — Amber"  swatches={tokens.color.dataviz.amber}  prefix="color-dataviz-amber" />
+      <SwatchGroup title="Dataviz — Pink"   swatches={tokens.color.dataviz.pink}   prefix="color-dataviz-pink" />
+      <SwatchGroup title="White Alpha" swatches={tokens.color['white-alpha']} prefix="color-white-alpha" />
     </>
   );
 }

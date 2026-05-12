@@ -16,11 +16,16 @@
 
 import { useState } from 'react';
 import { Button } from '../../components/Button.jsx';
+import { Overlay } from '../../components/Overlay.jsx';
+import { Modal, ModalShell } from '../../components/Modal.jsx';
 import { Input } from '../../components/Input.jsx';
 import { Textarea } from '../../components/Textarea.jsx';
 import { Select } from '../../components/Select.jsx';
 import { Checkbox } from '../../components/Checkbox.jsx';
 import { SegmentedControl } from '../../components/SegmentedControl.jsx';
+import { Field, FieldRow } from '../../components/Field.jsx';
+import { ChoiceGroup } from '../../components/ChoiceGroup.jsx';
+import { Callout } from '../../components/Callout.jsx';
 import { DashboardCard } from '../../components/DashboardCard.jsx';
 import { NeedsAttention } from '../../components/NeedsAttention.jsx';
 import { WeeklyPacing } from '../../components/WeeklyPacing.jsx';
@@ -30,7 +35,15 @@ import { TableCellText, TableCellSubtext, TableCellIcon, TableCellLink, TableCel
 import { RecentTimeEntries } from '../../components/RecentTimeEntries.jsx';
 import { PipelineTable } from '../../components/PipelineTable.jsx';
 import { PIPELINE_COLUMNS } from '../../components/pipelineColumns.js';
+import { StatusPill } from '../../components/StatusPill.jsx';
+import { PageHeader } from '../../components/PageHeader.jsx';
+import { PageTabs } from '../../components/PageTabs.jsx';
+import { DescriptionList } from '../../components/DescriptionList.jsx';
+import { SectionHeader } from '../../components/SectionHeader.jsx';
+import { DocumentSection } from '../../components/DocumentSection.jsx';
+import { AssistBar } from '../../components/AssistBar.jsx';
 import { DemoStage } from './DemoStage.jsx';
+import './ModalFormDemos.css';
 
 // ── NeedsAttention sample data ─────────────────────────────────────────────
 
@@ -174,6 +187,15 @@ function TaskIcon() {
   );
 }
 
+function CalendarIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <rect x="3" y="4" width="12" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M6 2.5V5.5M12 2.5V5.5M3 7.5H15" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 // ── CellRow — mock table row context for cell demos ───────────────────────
 
 function CellRow({ children }) {
@@ -195,6 +217,52 @@ function CellRow({ children }) {
 
 // ── Stateful wrappers for controlled demos ─────────────────────────────────
 
+function PageTabsDemo() {
+  const [active, setActive] = useState('overview');
+  return (
+    <PageTabs
+      tabs={[
+        { id: 'overview', label: 'Overview' },
+        { id: 'pain-points', label: 'Pain Points' },
+        { id: 'wish-list', label: 'Solution Wish List' },
+        { id: 'user-groups', label: 'User Groups' },
+        { id: 'tech-needs', label: 'Technology Needs' },
+      ]}
+      activeTab={active}
+      onTabChange={setActive}
+    />
+  );
+}
+
+function DocumentSectionDemo() {
+  return (
+    <DocumentSection
+      header={
+        <SectionHeader
+          icon={<ClipboardIcon />}
+          title="Introduction"
+          status="draft"
+          onEdit={() => {}}
+        />
+      }
+      footer={
+        <>
+          <Button variant="secondary" size="sm">Mark as Reviewed</Button>
+          <Button variant="secondary" size="sm">Approve</Button>
+        </>
+      }
+    >
+      <DescriptionList
+        items={[
+          { label: 'Client Profile', value: 'Acme Health Systems is a regional healthcare network operating 23 outpatient clinics across the Pacific Northwest, serving approximately 180,000 patients annually.' },
+          { label: 'Organizational Context', value: 'Acme Health is in the midst of a digital transformation initiative focused on operational efficiency and patient experience.' },
+          { label: 'Engagement Origin', value: 'This engagement originated from a discovery workshop identifying referral intake as the highest-impact bottleneck in patient access.' },
+        ]}
+      />
+    </DocumentSection>
+  );
+}
+
 function CheckboxDemo() {
   const [checked, setChecked] = useState(false);
   return <Checkbox label="Include archived records" checked={checked} onChange={(e) => setChecked(e.target.checked)} />;
@@ -212,6 +280,152 @@ function SegmentedDemo() {
       value={val}
       onChange={setVal}
     />
+  );
+}
+
+function ChoiceGroupDemo() {
+  const [value, setValue] = useState('billable');
+  return (
+    <ChoiceGroup
+      ariaLabel="Entry type"
+      value={value}
+      onChange={setValue}
+      options={[
+        { label: 'Billable', value: 'billable' },
+        { label: 'Non-Billable', value: 'non-billable' },
+        { label: 'Internal', value: 'internal' },
+        { label: 'Other', value: 'other' },
+      ]}
+    />
+  );
+}
+
+function InteractiveOverlayDemo() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button variant="secondary" onClick={() => setOpen(true)}>Show Overlay</Button>
+      <Overlay open={open} onClick={() => setOpen(false)}>
+        <div className="demo-overlay-panel">
+          <h3>Overlay content</h3>
+          <p>Click the scrim to close this centered surface.</p>
+          <Button size="sm" onClick={() => setOpen(false)}>Close</Button>
+        </div>
+      </Overlay>
+    </>
+  );
+}
+
+function InteractiveModalDemo() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open Modal</Button>
+      <Modal
+        open={open}
+        onOpenChange={setOpen}
+        title="Time Entry"
+        description="Track time by selecting a task or project. Hours sync to the related SOW."
+        footer={(
+          <>
+            <Button variant="secondary" onClick={() => setOpen(false)}>Cancel</Button>
+            <Button onClick={() => setOpen(false)}>Submit Entry</Button>
+          </>
+        )}
+      >
+        <TimeEntryModalContent />
+      </Modal>
+    </>
+  );
+}
+
+function DateFieldButton() {
+  return (
+    <button className="demo-date-field" type="button">
+      <span className="demo-date-field__primary">Today</span>
+      <span className="demo-date-field__dot" aria-hidden="true" />
+      <span>Tuesday, Apr 28</span>
+      <CalendarIcon />
+    </button>
+  );
+}
+
+function HoursPresetGroup() {
+  const [value, setValue] = useState('1:00');
+  const options = ['0:15', '0:30', '1:00', '2:00', '00:00'];
+  return (
+    <div className="demo-hours-group" role="group" aria-label="Hours presets">
+      {options.map((option) => (
+        <button
+          className={`demo-hours-group__item${value === option ? ' demo-hours-group__item--active' : ''}`}
+          key={option}
+          type="button"
+          onClick={() => setValue(option)}
+        >
+          {option}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function TimeEntryModalContent() {
+  const [mode, setMode] = useState('task');
+  const [entryType, setEntryType] = useState('billable');
+
+  return (
+    <div className="demo-time-entry">
+      <SegmentedControl
+        ariaLabel="Entry kind"
+        options={[
+          { label: 'Task', value: 'task', icon: <TaskIcon /> },
+          { label: 'Project', value: 'project', icon: <FolderIcon /> },
+        ]}
+        value={mode}
+        onChange={setMode}
+      />
+
+      <div className="demo-time-entry__divider" />
+
+      <Select
+        label="Search Task"
+        defaultValue="branding"
+        options={[
+          { label: 'Branding & Design', value: 'branding' },
+          { label: 'Sales Design Work', value: 'sales' },
+          { label: 'UXUI Design & Branding', value: 'uxui' },
+        ]}
+      />
+
+      <Callout tone="success">
+        Your hours will be logged to <strong>RIA Branding & Website</strong> → SOW#4 → Radiology Imaging Associates
+      </Callout>
+
+      <Field label="Entry Type">
+        <ChoiceGroup
+          ariaLabel="Entry type"
+          value={entryType}
+          onChange={setEntryType}
+          options={[
+            { label: 'Billable', value: 'billable' },
+            { label: 'Non-Billable', value: 'non-billable' },
+            { label: 'Internal', value: 'internal' },
+            { label: 'Other', value: 'other' },
+          ]}
+        />
+      </Field>
+
+      <FieldRow columns={2}>
+        <Field label="Hours">
+          <HoursPresetGroup />
+        </Field>
+        <Field label="Date">
+          <DateFieldButton />
+        </Field>
+      </FieldRow>
+
+      <Textarea label="Description" placeholder="What did you work on?" rows={4} resize="none" />
+    </div>
   );
 }
 
@@ -268,6 +482,57 @@ export const DEMOS = {
     ),
   },
 
+  // ── Overlays ─────────────────────────────────────────────────────────────
+
+  Overlay: {
+    description: 'Full-viewport scrim that centers modal or popup content.',
+    preview: () => <Button variant="secondary" size="sm">Show Overlay</Button>,
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Interactive overlay" render={() => <InteractiveOverlayDemo />} />
+        <DemoStage label="Scrim token reference">
+          <div className="demo-overlay-reference">
+            <span>--overlay-scrim</span>
+          </div>
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  Modal: {
+    description: 'Centered dialog shell with overlay, header, body, close action, and footer slot.',
+    preview: () => (
+      <div className="demo-modal-preview">
+        <ModalShell
+          title="Time Entry"
+          description="Track time by selecting a task or project."
+          footer={<Button size="sm">Submit</Button>}
+        >
+          <Callout tone="success">Hours sync to the related SOW.</Callout>
+        </ModalShell>
+      </div>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Static ModalShell — Figma size and chrome" fullWidth>
+          <ModalShell
+            title="Time Entry"
+            description="Track time by selecting a task or project. Hours sync to the related SOW."
+            footer={(
+              <>
+                <Button variant="secondary">Cancel</Button>
+                <Button>Submit Entry</Button>
+              </>
+            )}
+          >
+            <TimeEntryModalContent />
+          </ModalShell>
+        </DemoStage>
+        <DemoStage label="Interactive Modal" render={() => <InteractiveModalDemo />} />
+      </div>
+    ),
+  },
+
   // ── Form Controls ─────────────────────────────────────────────────────────
 
   Input: {
@@ -316,7 +581,7 @@ export const DEMOS = {
   },
 
   Textarea: {
-    description: 'Multi-line text field, shares chrome with Input.',
+    description: 'Multi-line text field using the shared form field chrome.',
     preview: () => (
       <div style={{ width: 220 }}>
         <Textarea placeholder="What did you work on?" rows={2} />
@@ -496,6 +761,130 @@ export const DEMOS = {
             ]}
             value="task"
           />
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  Field: {
+    description: 'Shared label, control, helper, and error wrapper for composed form controls.',
+    preview: () => (
+      <div style={{ width: 360 }}>
+        <Field label="Entry Type">
+          <ChoiceGroupDemo />
+        </Field>
+      </div>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="With select control">
+          <div style={{ width: 360 }}>
+            <Select
+              label="Search Task"
+              helperText="Hours sync to the related SOW."
+              defaultValue="branding"
+              options={[
+                { label: 'Branding & Design', value: 'branding' },
+                { label: 'Sales Design Work', value: 'sales' },
+              ]}
+            />
+          </div>
+        </DemoStage>
+        <DemoStage label="With custom choice control">
+          <Field label="Entry Type">
+            <ChoiceGroupDemo />
+          </Field>
+        </DemoStage>
+        <DemoStage label="Error state">
+          <div style={{ width: 360 }}>
+            <Select label="Project" error="Choose a project before submitting." placeholder="Choose project" options={[{ label: 'RIA Branding', value: 'ria' }]} />
+          </div>
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  FieldRow: {
+    description: 'Responsive field grouping for two- and three-column modal form layouts.',
+    preview: () => (
+      <FieldRow columns={2}>
+        <Input label="Hours" size="sm" defaultValue="1:00" />
+        <Input label="Date" size="sm" defaultValue="Today" />
+      </FieldRow>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Two-column modal row" fullWidth>
+          <FieldRow columns={2}>
+            <Field label="Hours"><HoursPresetGroup /></Field>
+            <Field label="Date"><DateFieldButton /></Field>
+          </FieldRow>
+        </DemoStage>
+        <DemoStage label="Three-column row" fullWidth>
+          <FieldRow columns={3}>
+            <Input label="Client" defaultValue="RIA" />
+            <Input label="Project" defaultValue="SOW#4" />
+            <Input label="Hours" defaultValue="7.00h" />
+          </FieldRow>
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  ChoiceGroup: {
+    description: 'Single-select outlined pill group for entry types and compact form choices.',
+    preview: () => <ChoiceGroupDemo />,
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Entry Type — Time Entry modal" render={() => <ChoiceGroupDemo />} />
+        <DemoStage label="With icons">
+          <ChoiceGroup
+            ariaLabel="Object type"
+            value="task"
+            onChange={() => {}}
+            options={[
+              { label: 'Task', value: 'task', icon: <TaskIcon /> },
+              { label: 'Project', value: 'project', icon: <FolderIcon /> },
+            ]}
+          />
+        </DemoStage>
+        <DemoStage label="Disabled option">
+          <ChoiceGroup
+            ariaLabel="Entry type disabled"
+            value="billable"
+            onChange={() => {}}
+            options={[
+              { label: 'Billable', value: 'billable' },
+              { label: 'Non-Billable', value: 'non-billable' },
+              { label: 'Internal', value: 'internal', disabled: true },
+            ]}
+          />
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  // ── Feedback ─────────────────────────────────────────────────────────────
+
+  Callout: {
+    description: 'Compact inline guidance box for success, info, warning, danger, and brand messages.',
+    preview: () => (
+      <Callout tone="success">Hours will be logged to <strong>RIA Branding</strong>.</Callout>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Success — Figma green box" fullWidth>
+          <Callout tone="success">
+            Your hours will be logged to <strong>RIA Branding & Website</strong> → SOW#4 → Radiology Imaging Associates
+          </Callout>
+        </DemoStage>
+        <DemoStage label="Tones">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-3)', width: '100%' }}>
+            <Callout tone="info">This entry is linked to the active project.</Callout>
+            <Callout tone="warning">Hours exceed the remaining weekly target.</Callout>
+            <Callout tone="danger">This project is not available for time entry.</Callout>
+            <Callout tone="brand">Use project mode to log non-task work.</Callout>
+          </div>
         </DemoStage>
       </div>
     ),
@@ -780,6 +1169,261 @@ export const DEMOS = {
         <DemoStage label="TableCellActions — +Note and external link" render={() => (
           <CellRow><TableCellActions onNote={() => {}} onOpenLink={() => {}} /></CellRow>
         )} />
+      </div>
+    ),
+  },
+
+  // ── Document View ─────────────────────────────────────────────────────────
+
+  StatusPill: {
+    description: 'Compact lifecycle state badge with semantic color variants.',
+    preview: () => (
+      <div style={{ display: 'flex', gap: 'var(--spacing-2)', flexWrap: 'wrap', alignItems: 'center' }}>
+        <StatusPill variant="draft" />
+        <StatusPill variant="in-progress" />
+        <StatusPill variant="reviewed" />
+        <StatusPill variant="approved" />
+        <StatusPill variant="pending" />
+      </div>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="All variants">
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
+            <StatusPill variant="draft" />
+            <StatusPill variant="in-progress" />
+            <StatusPill variant="reviewed" />
+            <StatusPill variant="approved" />
+            <StatusPill variant="pending" />
+          </div>
+        </DemoStage>
+        <DemoStage label="Custom label override">
+          <div style={{ display: 'flex', gap: 'var(--spacing-3)', flexWrap: 'wrap', alignItems: 'center' }}>
+            <StatusPill variant="reviewed" label="Under Review" />
+            <StatusPill variant="in-progress" label="Active" />
+            <StatusPill variant="approved" label="Signed Off" />
+          </div>
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  PageHeader: {
+    description: 'Page-level title shell with optional subtitle, status pill, and meta text.',
+    preview: () => (
+      <PageHeader
+        title="Solution Definition"
+        status="in-progress"
+        subtitle="Comprehensive problem framing, scope, and solution design."
+      />
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Title only" fullWidth>
+          <PageHeader title="Solution Definition" />
+        </DemoStage>
+        <DemoStage label="With status" fullWidth>
+          <PageHeader title="Solution Definition" status="in-progress" />
+        </DemoStage>
+        <DemoStage label="Full — title, subtitle, status, meta" fullWidth>
+          <PageHeader
+            title="Solution Definition"
+            status="in-progress"
+            subtitle="Comprehensive problem framing, scope, and solution design for the engagement."
+            meta="Last edited by Alex Rivera · 2h ago"
+          />
+        </DemoStage>
+        <DemoStage label="Approved state" fullWidth>
+          <PageHeader
+            title="Discovery Report"
+            status="approved"
+            subtitle="Stakeholder interviews and technical assessment findings."
+            meta="Last edited by George S. · 1d ago"
+          />
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  PageTabs: {
+    description: 'Underline-style horizontal tab bar for document section navigation (3–7 tabs).',
+    preview: () => (
+      <PageTabs
+        tabs={[
+          { id: 'overview', label: 'Overview' },
+          { id: 'pain-points', label: 'Pain Points' },
+          { id: 'wish-list', label: 'Solution Wish List' },
+        ]}
+        activeTab="overview"
+        onTabChange={() => {}}
+      />
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Interactive — 5 tabs" fullWidth render={() => <PageTabsDemo />} />
+        <DemoStage label="3 tabs" fullWidth>
+          <PageTabs
+            tabs={[
+              { id: 'overview', label: 'Overview' },
+              { id: 'details', label: 'Details' },
+              { id: 'history', label: 'History' },
+            ]}
+            activeTab="overview"
+            onTabChange={() => {}}
+          />
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  DescriptionList: {
+    description: 'Read-only labeled content display — uppercase labels above paragraph values.',
+    preview: () => (
+      <DescriptionList
+        items={[
+          { label: 'Client', value: 'Acme Health Systems' },
+          { label: 'Engagement', value: 'Referral Intake Automation' },
+        ]}
+      />
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Two items" fullWidth>
+          <DescriptionList
+            items={[
+              { label: 'Client Profile', value: 'Acme Health Systems is a regional healthcare network operating 23 outpatient clinics across the Pacific Northwest, serving approximately 180,000 patients annually.' },
+              { label: 'Engagement Origin', value: 'This engagement originated from a discovery workshop identifying referral intake as the highest-impact bottleneck in patient access.' },
+            ]}
+          />
+        </DemoStage>
+        <DemoStage label="Three items" fullWidth>
+          <DescriptionList
+            items={[
+              { label: 'Client', value: 'Acme Health Systems' },
+              { label: 'Industry', value: 'Healthcare / Regional Network' },
+              { label: 'Scope', value: '23 outpatient clinics, ~180,000 patients annually' },
+            ]}
+          />
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  SectionHeader: {
+    description: 'Header row for document sections — icon, title, optional status pill, and edit action.',
+    preview: () => (
+      <SectionHeader
+        icon={<ClipboardIcon />}
+        title="Introduction"
+        status="draft"
+        onEdit={() => {}}
+      />
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Title only" fullWidth>
+          <SectionHeader title="Problem Statement" />
+        </DemoStage>
+        <DemoStage label="With icon and status" fullWidth>
+          <SectionHeader icon={<ClipboardIcon />} title="Introduction" status="draft" />
+        </DemoStage>
+        <DemoStage label="Full — icon, title, status, edit" fullWidth>
+          <SectionHeader icon={<ClipboardIcon />} title="Introduction" status="draft" onEdit={() => {}} />
+        </DemoStage>
+        <DemoStage label="Reviewed state" fullWidth>
+          <SectionHeader icon={<TaskIcon />} title="Problem Statement" status="reviewed" onEdit={() => {}} />
+        </DemoStage>
+        <DemoStage label="Approved state" fullWidth>
+          <SectionHeader title="Executive Summary" status="approved" />
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  DocumentSection: {
+    description: 'Card shell for document content — header, body, and divider-separated footer slots.',
+    preview: () => (
+      <DocumentSection
+        header={<SectionHeader title="Introduction" status="draft" />}
+      >
+        <DescriptionList
+          items={[{ label: 'Client Profile', value: 'Acme Health Systems is a regional healthcare network.' }]}
+        />
+      </DocumentSection>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Header + body + footer" fullWidth render={() => <DocumentSectionDemo />} />
+        <DemoStage label="With AI actions footer" fullWidth>
+          <DocumentSection
+            header={<SectionHeader icon={<TaskIcon />} title="Problem Statement" status="reviewed" onEdit={() => {}} />}
+            footer={
+              <AssistBar
+                label="AI Actions:"
+                actions={[
+                  { label: 'Regenerate', onClick: () => {} },
+                  { label: 'Expand with metrics', onClick: () => {} },
+                ]}
+              />
+            }
+          >
+            <DescriptionList
+              items={[
+                { label: 'Problem', value: "Acme Health's intake teams spend an average of 14 minutes per patient manually transcribing referral documents, creating bottlenecks that delay care across 23 clinics." },
+              ]}
+            />
+          </DocumentSection>
+        </DemoStage>
+        <DemoStage label="Body only — no header or footer" fullWidth>
+          <DocumentSection>
+            <DescriptionList
+              items={[
+                { label: 'Notes', value: 'No stakeholders assigned yet.' },
+              ]}
+            />
+          </DocumentSection>
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  AssistBar: {
+    description: 'Muted secondary action row with an optional label prefix — for AI-adjacent or meta actions.',
+    preview: () => (
+      <AssistBar
+        label="AI Actions:"
+        actions={[
+          { label: 'Regenerate', onClick: () => {} },
+          { label: 'Expand with metrics', onClick: () => {} },
+        ]}
+      />
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="With label prefix">
+          <AssistBar
+            label="AI Actions:"
+            actions={[
+              { label: 'Regenerate', onClick: () => {} },
+              { label: 'Expand with metrics', onClick: () => {} },
+            ]}
+          />
+        </DemoStage>
+        <DemoStage label="Without label">
+          <AssistBar
+            actions={[
+              { label: 'Copy link', onClick: () => {} },
+              { label: 'Export as PDF', onClick: () => {} },
+              { label: 'Archive', onClick: () => {} },
+            ]}
+          />
+        </DemoStage>
+        <DemoStage label="Single action">
+          <AssistBar
+            label="Quick action:"
+            actions={[{ label: 'Mark as reviewed', onClick: () => {} }]}
+          />
+        </DemoStage>
       </div>
     ),
   },

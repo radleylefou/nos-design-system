@@ -1,0 +1,44 @@
+.nos-status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-full);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* draft — neutral, no semantic color */
+.nos-status-pill--draft {
+  background: var(--color-neutral-75);
+  color: var(--color-neutral-600);
+}
+
+/* in-progress — warning tone */
+.nos-status-pill--in-progress {
+  background: var(--color-semantic-warning-100);
+  color: var(--color-semantic-warning-700);
+}
+
+/* reviewed — info tone */
+.nos-status-pill--reviewed {
+  background: var(--color-semantic-info-100);
+  color: var(--color-semantic-info-700);
+}
+
+/* approved — success tone */
+.nos-status-pill--approved {
+  background: var(--color-semantic-success-100);
+  color: var(--color-semantic-success-700);
+}
+
+/* pending — neutral muted */
+.nos-status-pill--pending {
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-500);
+}

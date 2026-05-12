@@ -59,6 +59,23 @@ Shadows should read as depth, not as decoration. If you can see a shadow at a gl
 - Active/pressed: go one more step darker than hover.
 - Disabled: reduce opacity to `0.55`, set `cursor: not-allowed`. Do not change the component's color entirely.
 
+## Layout patterns
+
+NOS screens fall into four modes. Match the shell components to the mode — don't mix them.
+
+| Mode | When to use | Shell components |
+|------|-------------|-----------------|
+| **Dashboard** | KPIs, summaries, metric cards | `DashboardCard`, `WeeklyPacing`, `MonthlyGlance` |
+| **Data table** | Rows of records, sortable/filterable lists | `PipelineTable`, `TableCell`, `TableHeader` |
+| **Document** | Structured content with lifecycle status (proposals, definitions, specs) | `DocumentSection`, `PageHeader`, `PageTabs` |
+| **Form / Modal** | Edit mode, input-heavy, transactional | `Field`, `Modal`, `ChoiceGroup` |
+
+Rules:
+- Don't use `DashboardCard` for document content. It's metric-chrome, not a content container.
+- `SegmentedControl` is for compact toggles inside modals and forms (2–4 options). Use `PageTabs` for document-level navigation (3–7 tabs, underline style).
+- `StatusPill` applies to any object with a lifecycle state. Use consistent variant names across all screens: `draft`, `in-progress`, `reviewed`, `approved`, `pending`.
+- Document sections use a divider before their footer action row. The footer is freeform children — compose with `Button` (secondary/ghost variants) or `AssistBar` for AI-adjacent actions.
+
 ## Composition checklist
 
 Before shipping a new component or pattern:

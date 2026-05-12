@@ -9,9 +9,24 @@ export const COMPONENT_CATEGORIES = [
     components: ['Button'],
   },
   {
+    label: 'Overlays',
+    description: 'Modal and popup surfaces that sit above the page.',
+    components: ['Overlay', 'Modal'],
+  },
+  {
     label: 'Form Controls',
-    description: 'Inputs, selects, and other form primitives.',
-    components: ['Input', 'Textarea', 'Select', 'Checkbox', 'SegmentedControl'],
+    description: 'Inputs, selects, field layouts, and choice primitives.',
+    components: ['Input', 'Textarea', 'Select', 'Checkbox', 'SegmentedControl', 'Field', 'FieldRow', 'ChoiceGroup'],
+  },
+  {
+    label: 'Feedback',
+    description: 'Inline system messages, callouts, and status guidance.',
+    components: ['Callout', 'StatusPill'],
+  },
+  {
+    label: 'Document',
+    description: 'Page shells, section cards, and display primitives for document and detail views.',
+    components: ['PageHeader', 'PageTabs', 'DescriptionList', 'SectionHeader', 'DocumentSection', 'AssistBar'],
   },
   {
     label: 'Metrics',
