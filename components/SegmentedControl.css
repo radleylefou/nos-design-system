@@ -2,8 +2,11 @@
 
 .nos-seg {
   display: inline-flex;
+  align-self: flex-start;
   align-items: center;
   gap: var(--spacing-1);
+  width: fit-content;
+  max-width: 100%;
   padding: var(--spacing-1);
   background: var(--color-brand-50);
   border-radius: var(--radius-lg);

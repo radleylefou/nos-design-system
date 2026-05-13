@@ -25,6 +25,7 @@
   --color-brand-800: #4835D5;
   --color-brand-900: #4130C0;
   --color-brand-950: #0E0A29;
+  --color-semantic-success-25: #F5FFEE;
   --color-semantic-success-50: #F0FDF4;
   --color-semantic-success-100: #DCFCE7;
   --color-semantic-success-500: #22C55E;
@@ -124,6 +125,7 @@
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
+  --radius-2xl: 20px;
   --radius-full: 9999px;
   --shadow-2xs: 0 1px 1px 0 rgba(17, 24, 39, 0.04);
   --shadow-xs: 0 1px 2px 0 rgba(17, 24, 39, 0.05);
@@ -136,6 +138,7 @@
   --shadow-dropdown: 0 8px 16px -4px rgba(17, 24, 39, 0.10), 0 4px 6px -4px rgba(17, 24, 39, 0.05);
   --shadow-popover: 0 12px 24px -6px rgba(17, 24, 39, 0.12), 0 4px 8px -4px rgba(17, 24, 39, 0.06);
   --shadow-modal: 0 24px 48px -12px rgba(17, 24, 39, 0.25), 0 8px 16px -8px rgba(17, 24, 39, 0.10);
+  --shadow-modal-soft: 0 44px 44px 0 rgba(0, 0, 0, 0.10);
   --shadow-toast: 0 12px 32px -8px rgba(17, 24, 39, 0.18), 0 4px 8px -4px rgba(17, 24, 39, 0.08);
   --shadow-focus: 0 0 0 2px #ffffff, 0 0 0 4px #736AE3;
   --shadow-focus-error: 0 0 0 2px #ffffff, 0 0 0 4px #DC2626;
@@ -158,6 +161,8 @@
   --border-strong: var(--border-alpha-20);
   --border-inverse: var(--border-on-dark-15);
   --border-focus: var(--color-brand-500);
+  --overlay-scrim: rgba(84, 84, 100, 0.50);
+  --callout-success-bg: var(--color-semantic-success-25);
   --action-primary-bg: var(--color-brand-500);
   --action-primary-bg-hover: var(--color-brand-600);
   --action-primary-bg-active: var(--color-brand-700);

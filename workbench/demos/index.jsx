@@ -709,7 +709,7 @@ export const DEMOS = {
   },
 
   SegmentedControl: {
-    description: 'Pill group for mutually exclusive options. Brand-tinted container, icon per option, check icon when active.',
+    description: 'Pill group for mutually exclusive options. Brand-tinted container with optional icons per option.',
     preview: () => (
       <SegmentedControl
         ariaLabel="Entry kind"
