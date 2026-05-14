@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Sidebar } from './Sidebar.jsx';
 import { HomePage } from './pages/HomePage.jsx';
+import { InstructionsPage } from './pages/InstructionsPage.jsx';
 import { ComponentsPage } from './pages/ComponentsPage.jsx';
 import { TokensPage } from './pages/TokensPage.jsx';
 import { PlaygroundPage } from './pages/PlaygroundPage.jsx';
@@ -23,6 +24,7 @@ export function App() {
       <main className="wb-main">
         <WorkbenchTransition transitionKey={viewKey}>
           {view.section === 'home'         && <HomePage onNavigate={setView} />}
+          {view.section === 'instructions' && <InstructionsPage onNavigate={setView} />}
           {view.section === 'component'    && (
             <ComponentsPage
               categoryId={view.categoryId}

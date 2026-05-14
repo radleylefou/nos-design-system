@@ -28,8 +28,8 @@
   color: var(--color-neutral-400);
   cursor: pointer;
   transition:
-    color var(--duration-fast) ease,
-    border-color var(--duration-fast) ease;
+    border-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard);
   white-space: nowrap;
 }
 

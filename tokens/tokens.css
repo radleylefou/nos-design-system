@@ -200,6 +200,13 @@
   --easing-standard: cubic-bezier(0.2, 0, 0, 1);
   --easing-accelerate: cubic-bezier(0.3, 0, 1, 1);
   --easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --motion-duration-feedback: 120ms;
+  --motion-duration-state: 180ms;
+  --motion-duration-entry: 220ms;
+  --motion-duration-exit: 160ms;
+  --motion-easing-standard: cubic-bezier(0.25, 1, 0.5, 1);
+  --motion-easing-enter: cubic-bezier(0.16, 1, 0.3, 1);
+  --motion-easing-exit: cubic-bezier(0.3, 0, 1, 1);
   --z-base: 0;
   --z-dropdown: 1000;
   --z-sticky: 1100;

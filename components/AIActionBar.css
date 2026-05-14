@@ -48,10 +48,17 @@
   line-height: var(--line-height-snug);
   cursor: pointer;
   white-space: nowrap;
+  transition:
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
 }
 
 .nos-ai-action-bar__action:hover:not(:disabled) {
   color: var(--color-brand-800);
+}
+
+.nos-ai-action-bar__action:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .nos-ai-action-bar__action:focus-visible {

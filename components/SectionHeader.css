@@ -56,13 +56,18 @@
   color: var(--color-neutral-400);
   cursor: pointer;
   transition:
-    background-color var(--duration-fast) ease,
-    color var(--duration-fast) ease;
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
 }
 
 .nos-section-header__edit:hover {
   background: var(--color-neutral-75);
   color: var(--color-neutral-700);
+}
+
+.nos-section-header__edit:active {
+  transform: translateY(1px);
 }
 
 .nos-section-header__edit:focus-visible {

@@ -12,6 +12,19 @@
   box-shadow: var(--shadow-modal-soft);
   font-family: var(--font-family-sans);
   color: var(--fg-default);
+  animation: nos-modal-enter var(--motion-duration-entry) var(--motion-easing-enter) both;
+}
+
+@keyframes nos-modal-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.995);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .nos-modal--sm {
@@ -69,10 +82,17 @@
   background: transparent;
   color: var(--color-neutral-500);
   cursor: pointer;
+  transition:
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
 }
 
 .nos-modal__close:hover {
   color: var(--color-neutral-700);
+}
+
+.nos-modal__close:active {
+  transform: translateY(1px);
 }
 
 .nos-modal__close:focus-visible {

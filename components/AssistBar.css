@@ -31,12 +31,18 @@
   font-weight: var(--font-weight-medium);
   color: var(--color-brand-500);
   cursor: pointer;
-  transition: color var(--duration-fast) ease;
   border-radius: var(--radius-sm);
+  transition:
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
 }
 
 .nos-assist-bar__action:hover {
   color: var(--color-brand-700);
+}
+
+.nos-assist-bar__action:active {
+  transform: translateY(1px);
 }
 
 .nos-assist-bar__action:focus-visible {

@@ -2,6 +2,7 @@ import './Sidebar.css';
 
 const PRIMARY_SECTIONS = [
   { id: 'home', label: 'Home' },
+  { id: 'instructions', label: 'Instructions' },
   { id: 'component', label: 'Components' },
   { id: 'tokens', label: 'Tokens' },
   { id: 'icons', label: 'Icons' },
@@ -57,6 +58,7 @@ export function Sidebar({ view, onNavigate }) {
 
 function getSectionView(sectionId, currentView) {
   if (sectionId === 'home') return { section: 'home' };
+  if (sectionId === 'instructions') return { section: 'instructions' };
   if (sectionId === 'component') return { section: 'component' };
   if (sectionId === 'tokens') return { section: 'tokens', category: 'Color' };
   if (sectionId === 'icons') return { section: 'icons' };

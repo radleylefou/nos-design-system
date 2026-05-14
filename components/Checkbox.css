@@ -42,12 +42,18 @@
   color: var(--fg-inverse);
   flex-shrink: 0;
   transition:
-    background-color var(--duration-fast) var(--easing-standard),
-    border-color var(--duration-fast) var(--easing-standard);
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    border-color var(--motion-duration-state) var(--motion-easing-standard),
+    box-shadow var(--motion-duration-state) var(--motion-easing-standard);
 }
 
 .nos-checkbox__check {
   opacity: 0;
+  transform: scale(0.85);
+  transform-origin: center;
+  transition:
+    opacity var(--motion-duration-feedback) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
 }
 
 .nos-checkbox__row:hover .nos-checkbox__input:not(:disabled):not(:checked) ~ .nos-checkbox__box {
@@ -61,6 +67,7 @@
 
 .nos-checkbox__input:checked ~ .nos-checkbox__box .nos-checkbox__check {
   opacity: 1;
+  transform: scale(1);
 }
 
 .nos-checkbox__input:focus-visible ~ .nos-checkbox__box {

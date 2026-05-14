@@ -24,9 +24,10 @@
   line-height: var(--line-height-snug);
   cursor: pointer;
   transition:
-    background-color var(--duration-fast) var(--easing-standard),
-    color var(--duration-fast) var(--easing-standard),
-    opacity var(--duration-fast) var(--easing-standard);
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    opacity var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
 }
 
 .nos-side-nav-search:hover:not(:disabled) {
@@ -37,6 +38,10 @@
 .nos-side-nav-search:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus);
+}
+
+.nos-side-nav-search:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 .nos-side-nav-search:disabled {

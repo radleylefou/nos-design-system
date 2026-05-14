@@ -14,9 +14,10 @@
   color: var(--side-nav-fg-muted);
   cursor: pointer;
   transition:
-    background-color var(--duration-fast) var(--easing-standard),
-    color var(--duration-fast) var(--easing-standard),
-    opacity var(--duration-fast) var(--easing-standard);
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    opacity var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
 }
 
 .nos-side-nav-notification:hover:not(:disabled) {
@@ -27,6 +28,10 @@
 .nos-side-nav-notification:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus);
+}
+
+.nos-side-nav-notification:active:not(:disabled) {
+  transform: translateY(1px) scale(0.995);
 }
 
 .nos-side-nav-notification:disabled {

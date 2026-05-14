@@ -48,7 +48,7 @@
   border-radius: var(--radius-sm);
   color: var(--color-neutral-700);
   cursor: pointer;
-  transition: opacity var(--duration-fast) var(--easing-standard);
+  transition: opacity var(--motion-duration-state) var(--motion-easing-standard);
 }
 
 .nos-dc__chevron:hover {
@@ -79,7 +79,7 @@
   border-radius: var(--radius-sm);
   color: inherit;
   cursor: pointer;
-  transition: opacity var(--duration-fast) var(--easing-standard);
+  transition: opacity var(--motion-duration-state) var(--motion-easing-standard);
 }
 
 .nos-dc__icon-btn:hover {

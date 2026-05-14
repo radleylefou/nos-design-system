@@ -45,8 +45,10 @@
   border: 1px solid var(--border-default);
   border-radius: var(--radius-sm);
   transition:
-    border-color var(--duration-fast) var(--easing-standard),
-    box-shadow var(--duration-fast) var(--easing-standard);
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    border-color var(--motion-duration-state) var(--motion-easing-standard),
+    box-shadow var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard);
 }
 
 .nos-field--sm {

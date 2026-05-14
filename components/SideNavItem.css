@@ -19,9 +19,10 @@
   text-decoration: none;
   cursor: pointer;
   transition:
-    background-color var(--duration-fast) var(--easing-standard),
-    color var(--duration-fast) var(--easing-standard),
-    opacity var(--duration-fast) var(--easing-standard);
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    opacity var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
 }
 
 .nos-side-nav-item:hover:not(.nos-side-nav-item--disabled) {
@@ -31,6 +32,10 @@
 .nos-side-nav-item:focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus);
+}
+
+.nos-side-nav-item:active:not(.nos-side-nav-item--disabled):not(:disabled) {
+  transform: translateY(1px);
 }
 
 .nos-side-nav-item--active {
