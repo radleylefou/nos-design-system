@@ -1,6 +1,15 @@
 import { StatusPill } from './StatusPill.jsx';
 import './SectionHeader.css';
 
+function EditIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M11.25 2.75L13.25 4.75L6 12H4V10L11.25 2.75Z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9.75 4.25L11.75 6.25" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 /**
  * SectionHeader — header row for document content sections.
  *
@@ -12,7 +21,10 @@ import './SectionHeader.css';
  *   level     — heading element level: 2 | 3 (default: 2)
  *   icon      — optional JSX node rendered before the title
  *   status    — optional StatusPill variant
+ *   statusLabel — optional StatusPill label override
+ *   statusSurface — StatusPill surface, defaults to 'white' for grey section headers
  *   onEdit    — optional callback; renders an "Edit" button when provided
+ *   editLabel — accessible label for the edit button
  *   className — optional class appended to the root
  *   ...rest   — forwarded to the root <div>
  */
@@ -21,7 +33,10 @@ export function SectionHeader({
   level = 2,
   icon,
   status,
+  statusLabel,
+  statusSurface = 'white',
   onEdit,
+  editLabel = 'Edit section',
   className = '',
   ...rest
 }) {
@@ -36,14 +51,16 @@ export function SectionHeader({
       </div>
       {(status || onEdit) && (
         <div className="nos-section-header__right">
-          {status && <StatusPill variant={status} />}
+          {status && <StatusPill variant={status} label={statusLabel} surface={statusSurface} />}
           {onEdit && (
             <button
               type="button"
               className="nos-section-header__edit"
               onClick={onEdit}
+              aria-label={editLabel}
+              title={editLabel}
             >
-              Edit
+              <EditIcon />
             </button>
           )}
         </div>

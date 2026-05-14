@@ -37,13 +37,25 @@ import { PipelineTable } from '../../components/PipelineTable.jsx';
 import { PIPELINE_COLUMNS } from '../../components/pipelineColumns.js';
 import { StatusPill } from '../../components/StatusPill.jsx';
 import { PageHeader } from '../../components/PageHeader.jsx';
+import { DocumentBreadcrumbs } from '../../components/DocumentBreadcrumbs.jsx';
 import { PageTabs } from '../../components/PageTabs.jsx';
 import { DescriptionList } from '../../components/DescriptionList.jsx';
 import { SectionHeader } from '../../components/SectionHeader.jsx';
 import { DocumentSection } from '../../components/DocumentSection.jsx';
 import { AssistBar } from '../../components/AssistBar.jsx';
+import { DocumentOutcomeList } from '../../components/DocumentOutcomeList.jsx';
+import { DocumentMetricCard } from '../../components/DocumentMetricCard.jsx';
+import { AIActionBar } from '../../components/AIActionBar.jsx';
+import { SideNavigation } from '../../components/SideNavigation.jsx';
+import { SideNavSection } from '../../components/SideNavSection.jsx';
+import { SideNavItem } from '../../components/SideNavItem.jsx';
+import { SideNavSearch } from '../../components/SideNavSearch.jsx';
+import { SideNavNotificationButton } from '../../components/SideNavNotificationButton.jsx';
+import { SideNavAccount } from '../../components/SideNavAccount.jsx';
 import { DemoStage } from './DemoStage.jsx';
 import './ModalFormDemos.css';
+import './DocumentWorkspaceDemos.css';
+import './SideNavDemos.css';
 
 // ── NeedsAttention sample data ─────────────────────────────────────────────
 
@@ -124,6 +136,26 @@ function ClipboardIcon() {
   );
 }
 
+function UserCircleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <circle cx="9" cy="9" r="6.5" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="9" cy="7" r="2" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M5.75 13.25C6.3 11.85 7.4 11.1 9 11.1C10.6 11.1 11.7 11.85 12.25 13.25" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function OpportunityIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <circle cx="9" cy="9" r="6.5" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M5.75 6.75L12.25 11.25M12.25 6.75L5.75 11.25" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <circle cx="9" cy="9" r="2.25" stroke="currentColor" strokeWidth="1.4" />
+    </svg>
+  );
+}
+
 function FilterIcon() {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -166,6 +198,103 @@ function SearchIcon() {
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
       <circle cx="6" cy="6" r="4" stroke="currentColor" strokeWidth="1.25" />
       <path d="M9.5 9.5L12 12" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function BrandMarkIcon() {
+  return (
+    <svg width="40" height="34" viewBox="0 0 40 34" fill="none" aria-hidden="true">
+      <path d="M20 32L3 2.5L37 2.5L20 32Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+      <path d="M20 32L20 12L3 2.5M20 12L37 2.5" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function BellIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M5 6.5C5 4.6 6.25 3.25 8 3.25C9.75 3.25 11 4.6 11 6.5V9.25L12.25 11H3.75L5 9.25V6.5Z" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
+      <path d="M6.75 12.25C7 12.75 7.4 13 8 13C8.6 13 9 12.75 9.25 12.25" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function HomeIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M2.5 7.25L8 2.75L13.5 7.25V13.25H10V9.5H6V13.25H2.5V7.25Z" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function ClockIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.25" />
+      <path d="M8 4.75V8L10.25 9.25" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function SunIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <circle cx="8" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.25" />
+      <path d="M8 1.75V3.25M8 12.75V14.25M1.75 8H3.25M12.75 8H14.25M3.6 3.6L4.65 4.65M11.35 11.35L12.4 12.4M12.4 3.6L11.35 4.65M4.65 11.35L3.6 12.4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function CreditCardIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <rect x="2.5" y="4" width="11" height="8" rx="1.25" stroke="currentColor" strokeWidth="1.25" />
+      <path d="M2.5 6.5H13.5M4.5 10H7" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M5 3L6.75 5.4L5.75 6.55C6.45 8 8 9.55 9.45 10.25L10.6 9.25L13 11C12.8 12.2 11.75 13 10.5 13C6.35 13 3 9.65 3 5.5C3 4.25 3.8 3.2 5 3Z" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function UsersIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M6.75 7.5C8.13 7.5 9.25 6.38 9.25 5C9.25 3.62 8.13 2.5 6.75 2.5C5.37 2.5 4.25 3.62 4.25 5C4.25 6.38 5.37 7.5 6.75 7.5Z" stroke="currentColor" strokeWidth="1.25" />
+      <path d="M2.5 13C2.85 10.8 4.4 9.5 6.75 9.5C9.1 9.5 10.65 10.8 11 13M10.25 7.5C11.4 7.5 12.25 6.6 12.25 5.5C12.25 4.4 11.4 3.5 10.25 3.5M12.25 13C12.1 11.65 11.45 10.75 10.35 10.25" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function AnalyticsIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M3.5 12.5V8.5M6.5 12.5V5.5M9.5 12.5V7M12.5 12.5V3.5" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function StructureIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M8 3.5V6.5M8 9.5V12.5M5 6.5H11M4 12.5H12" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+      <rect x="6.25" y="2" width="3.5" height="3" rx="0.75" stroke="currentColor" strokeWidth="1.25" />
+      <rect x="2.25" y="11" width="3.5" height="3" rx="0.75" stroke="currentColor" strokeWidth="1.25" />
+      <rect x="10.25" y="11" width="3.5" height="3" rx="0.75" stroke="currentColor" strokeWidth="1.25" />
+    </svg>
+  );
+}
+
+function ChevronsIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+      <path d="M6.25 7.25L9 4.5L11.75 7.25M6.25 10.75L9 13.5L11.75 10.75" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -239,7 +368,7 @@ function DocumentSectionDemo() {
     <DocumentSection
       header={
         <SectionHeader
-          icon={<ClipboardIcon />}
+          icon={<UserCircleIcon />}
           title="Introduction"
           status="draft"
           onEdit={() => {}}
@@ -248,7 +377,7 @@ function DocumentSectionDemo() {
       footer={
         <>
           <Button variant="secondary" size="sm">Mark as Reviewed</Button>
-          <Button variant="secondary" size="sm">Approve</Button>
+          <Button size="sm">Approve</Button>
         </>
       }
     >
@@ -260,6 +389,116 @@ function DocumentSectionDemo() {
         ]}
       />
     </DocumentSection>
+  );
+}
+
+const documentTabs = [
+  { id: 'overview', label: 'Overview' },
+  { id: 'pain-points', label: 'Pain Points' },
+  { id: 'wish-list', label: 'Solution Wish List' },
+  { id: 'user-groups', label: 'User Groups' },
+  { id: 'tech-needs', label: 'Technology Needs' },
+];
+
+const outcomeItems = [
+  'Reduce average intake time from 14 minutes to under 6 minutes per referral',
+  'Eliminate demographic data entry errors through automated EHR reconciliation',
+  'Surface incomplete referrals before scheduling, reducing patient friction',
+  'Establish HIPAA-compliant audit trail for all intake decisions',
+];
+
+function DocumentMetricGrid() {
+  return (
+    <div className="demo-document-metric-grid">
+      <DocumentMetricCard
+        label="Annual Cost Savings"
+        value="$840K"
+        delta="+4% vs Mar"
+        supportingText="Reduced intake FTE"
+      />
+      <DocumentMetricCard
+        label="Error Reduction"
+        value="88%"
+        supportingText="Fewer data entry errors"
+      />
+      <DocumentMetricCard
+        label="Patient Satisfaction"
+        value="+1.3 pts"
+        delta="+0.3%"
+        supportingText="CSAT improvement"
+      />
+    </div>
+  );
+}
+
+function DocumentWorkspaceDemo() {
+  const [activeTab, setActiveTab] = useState('overview');
+
+  return (
+    <div className="demo-document-workspace">
+      <DocumentBreadcrumbs
+        onBack={() => {}}
+        items={[
+          { label: 'Engagements', onClick: () => {} },
+          { label: 'Acme Health Systems', onClick: () => {} },
+          { label: 'Clinical Intake Automation Platform', current: true },
+        ]}
+      />
+
+      <div className="demo-document-workspace__header">
+        <PageHeader
+          title="Solution Definition"
+          subtitle="Comprehensive problem framing, scope, and solution design for the engagement."
+          metaItems={['Last edited by Alex Rivera', '2d ago']}
+          status="in-progress"
+        />
+        <PageTabs tabs={documentTabs} activeTab={activeTab} onTabChange={setActiveTab} />
+      </div>
+
+      <DocumentSection
+        header={<SectionHeader icon={<UserCircleIcon />} title="Introduction" status="draft" onEdit={() => {}} />}
+        footer={(
+          <>
+            <Button variant="secondary" size="sm">Mark As Reviewed</Button>
+            <Button size="sm">Approve</Button>
+          </>
+        )}
+      >
+        <DescriptionList
+          items={[
+            { label: 'Client Profile', value: 'Acme Health Systems is a regional healthcare network operating 23 outpatient clinics across the Pacific Northwest, serving approximately 180,000 patients annually. The organization employs 450 clinical staff and 120 administrative personnel.' },
+            { label: 'Organizational Context', value: 'Acme Health is in the midst of a digital transformation initiative focused on operational efficiency and patient experience. The organization recently completed an Epic EHR implementation and is now addressing downstream workflow inefficiencies.' },
+            { label: 'Engagement Origin', value: 'This engagement originated from a discovery workshop identifying referral intake as the highest-impact bottleneck in patient access. The VP of Operations championed this initiative following a 6-month pilot study quantifying the operational cost.' },
+          ]}
+        />
+      </DocumentSection>
+
+      <DocumentSection
+        header={<SectionHeader icon={<OpportunityIcon />} title="Opportunity Statement" status="draft" onEdit={() => {}} />}
+        footer={(
+          <AIActionBar
+            actions={[
+              { label: 'Calculate ROI', onClick: () => {} },
+              { label: 'Add Benefits', onClick: () => {} },
+            ]}
+          />
+        )}
+      >
+        <DescriptionList
+          items={[
+            { label: 'Strategic Value', value: "Automating referral intake enables Acme Health to scale patient access without proportional headcount growth, directly supporting the organization's 3-year growth plan to expand from 23 to 35 clinics." },
+          ]}
+        />
+        <div className="demo-document-content-group">
+          <p className="demo-document-content-label">Expected Outcomes</p>
+          <DocumentOutcomeList items={outcomeItems} />
+        </div>
+        <div className="demo-document-content-group">
+          <p className="demo-document-content-label">Quantified Benefits</p>
+          <DocumentMetricGrid />
+        </div>
+      </DocumentSection>
+    </div>
   );
 }
 
@@ -429,6 +668,60 @@ function TimeEntryModalContent() {
   );
 }
 
+const mainSideNavItems = [
+  { label: 'Home', icon: <HomeIcon />, active: true },
+  { label: 'Guidance', icon: <CalendarIcon /> },
+  { label: 'Time Entry', icon: <ClockIcon /> },
+  { label: 'PTO', icon: <SunIcon /> },
+  { label: 'Expenses', icon: <CreditCardIcon /> },
+  { label: 'Meetings', icon: <PhoneIcon /> },
+];
+
+const platformSideNavItems = [
+  { label: 'CRM', icon: <UsersIcon /> },
+  { label: 'Demand Planning', icon: <AnalyticsIcon /> },
+  { label: 'Project Management', icon: <StructureIcon /> },
+];
+
+function DemoAccountAvatar() {
+  return <span className="demo-side-nav-avatar">MO</span>;
+}
+
+function SideNavigationDemo({ compact = false }) {
+  return (
+    <SideNavigation
+      className={compact ? 'demo-side-nav-preview' : ''}
+      logo={<BrandMarkIcon />}
+      notification={<SideNavNotificationButton icon={<BellIcon />} unread />}
+      account={(
+        <SideNavAccount
+          avatar={<DemoAccountAvatar />}
+          name="Maya Ortiz"
+          supportingText="maya.ortiz@nymbl.app"
+          menuIcon={<ChevronsIcon />}
+        />
+      )}
+    >
+      <SideNavSearch icon={<SearchIcon />} shortcut="⌘ K" />
+      <SideNavSection title="Main">
+        {mainSideNavItems.map((item) => (
+          <SideNavItem
+            key={item.label}
+            icon={item.icon}
+            label={item.label}
+            active={item.active}
+          />
+        ))}
+      </SideNavSection>
+      <SideNavSection title="Platform">
+        {platformSideNavItems.map((item) => (
+          <SideNavItem key={item.label} icon={item.icon} label={item.label} />
+        ))}
+      </SideNavSection>
+    </SideNavigation>
+  );
+}
+
 export const DEMOS = {
   // ── Actions ───────────────────────────────────────────────────────────────
 
@@ -546,12 +839,12 @@ export const DEMOS = {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
         <DemoStage label="Default">
           <div style={{ width: 320 }}>
-            <Input label="Full name" placeholder="Carol Chen" />
+            <Input label="Full name" placeholder="Maya Ortiz" />
           </div>
         </DemoStage>
         <DemoStage label="With helper text">
           <div style={{ width: 320 }}>
-            <Input label="Email" type="email" placeholder="carol@nymbl.app" helperText="We'll only use this for account notifications." />
+            <Input label="Email" type="email" placeholder="maya.ortiz@nymbl.app" helperText="We'll only use this for account notifications." />
           </div>
         </DemoStage>
         <DemoStage label="Error state">
@@ -1175,8 +1468,35 @@ export const DEMOS = {
 
   // ── Document View ─────────────────────────────────────────────────────────
 
+  DocumentBreadcrumbs: {
+    description: 'Back action plus breadcrumb trail for document workspaces.',
+    preview: () => (
+      <DocumentBreadcrumbs
+        onBack={() => {}}
+        items={['Engagements', 'Acme Health Systems', 'Solution Definition']}
+      />
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Back action + breadcrumbs" fullWidth>
+          <DocumentBreadcrumbs
+            onBack={() => {}}
+            items={[
+              { label: 'Engagements', onClick: () => {} },
+              { label: 'Acme Health Systems', onClick: () => {} },
+              { label: 'Clinical Intake Automation Platform', current: true },
+            ]}
+          />
+        </DemoStage>
+        <DemoStage label="Breadcrumbs only" fullWidth>
+          <DocumentBreadcrumbs items={['Documents', 'Solution Definition', 'Overview']} />
+        </DemoStage>
+      </div>
+    ),
+  },
+
   StatusPill: {
-    description: 'Compact lifecycle state badge with semantic color variants.',
+    description: 'Mixed-case lifecycle state badge with outlined semantic tone variants.',
     preview: () => (
       <div style={{ display: 'flex', gap: 'var(--spacing-2)', flexWrap: 'wrap', alignItems: 'center' }}>
         <StatusPill variant="draft" />
@@ -1209,7 +1529,7 @@ export const DEMOS = {
   },
 
   PageHeader: {
-    description: 'Page-level title shell with optional subtitle, status pill, and meta text.',
+    description: 'Page-level title shell with subtitle, metadata, status, and action slot.',
     preview: () => (
       <PageHeader
         title="Solution Definition"
@@ -1230,15 +1550,16 @@ export const DEMOS = {
             title="Solution Definition"
             status="in-progress"
             subtitle="Comprehensive problem framing, scope, and solution design for the engagement."
-            meta="Last edited by Alex Rivera · 2h ago"
+            meta="Last edited by Alex Rivera · 2d ago"
           />
         </DemoStage>
-        <DemoStage label="Approved state" fullWidth>
+        <DemoStage label="With action slot" fullWidth>
           <PageHeader
             title="Discovery Report"
             status="approved"
             subtitle="Stakeholder interviews and technical assessment findings."
-            meta="Last edited by George S. · 1d ago"
+            metaItems={['Last edited by Jordan Lee', '1d ago']}
+            actions={<Button variant="secondary" size="sm">Export</Button>}
           />
         </DemoStage>
       </div>
@@ -1341,7 +1662,7 @@ export const DEMOS = {
   },
 
   DocumentSection: {
-    description: 'Card shell for document content — header, body, and divider-separated footer slots.',
+    description: 'Tinted document shell with header, inset body surface, and optional actions.',
     preview: () => (
       <DocumentSection
         header={<SectionHeader title="Introduction" status="draft" />}
@@ -1354,15 +1675,14 @@ export const DEMOS = {
     detail: () => (
       <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
         <DemoStage label="Header + body + footer" fullWidth render={() => <DocumentSectionDemo />} />
-        <DemoStage label="With AI actions footer" fullWidth>
+        <DemoStage label="With AI action bar" fullWidth>
           <DocumentSection
             header={<SectionHeader icon={<TaskIcon />} title="Problem Statement" status="reviewed" onEdit={() => {}} />}
             footer={
-              <AssistBar
-                label="AI Actions:"
+              <AIActionBar
                 actions={[
                   { label: 'Regenerate', onClick: () => {} },
-                  { label: 'Expand with metrics', onClick: () => {} },
+                  { label: 'Expand Metrics', onClick: () => {} },
                 ]}
               />
             }
@@ -1382,6 +1702,42 @@ export const DEMOS = {
               ]}
             />
           </DocumentSection>
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  DocumentOutcomeList: {
+    description: 'Divider-separated document outcome rows with status icon and body copy.',
+    preview: () => <DocumentOutcomeList items={outcomeItems.slice(0, 2)} />,
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Expected outcomes" fullWidth>
+          <DocumentOutcomeList items={outcomeItems} />
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  DocumentMetricCard: {
+    description: 'Quantified benefit card for document body metrics and deltas.',
+    preview: () => (
+      <DocumentMetricCard
+        label="Annual Cost Savings"
+        value="$840K"
+        delta="+4% vs Mar"
+        supportingText="Reduced intake FTE"
+      />
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Three-card benefit row" fullWidth>
+          <DocumentMetricGrid />
+        </DemoStage>
+        <DemoStage label="Without delta" fullWidth>
+          <div style={{ maxWidth: 320 }}>
+            <DocumentMetricCard label="Error Reduction" value="88%" supportingText="Fewer data entry errors" />
+          </div>
         </DemoStage>
       </div>
     ),
@@ -1423,6 +1779,202 @@ export const DEMOS = {
             label="Quick action:"
             actions={[{ label: 'Mark as reviewed', onClick: () => {} }]}
           />
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  AIActionBar: {
+    description: 'Success-tinted document action row for AI-assisted content actions.',
+    preview: () => (
+      <AIActionBar
+        actions={[
+          { label: 'Calculate ROI', onClick: () => {} },
+          { label: 'Add Benefits', onClick: () => {} },
+        ]}
+      />
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="AI Actions row" fullWidth>
+          <AIActionBar
+            actions={[
+              { label: 'Calculate ROI', onClick: () => {} },
+              { label: 'Add Benefits', onClick: () => {} },
+            ]}
+          />
+        </DemoStage>
+        <DemoStage label="Full document workspace" fullWidth render={() => <DocumentWorkspaceDemo />} />
+      </div>
+    ),
+  },
+
+  // ── Navigation ───────────────────────────────────────────────────────────
+
+  SideNavigation: {
+    description: 'Dark NOS app sidebar shell with header, grouped nav content, and account footer slots.',
+    preview: () => (
+      <div className="demo-side-nav-card-scale">
+        <SideNavigationDemo compact />
+      </div>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Figma sidebar composition">
+          <SideNavigationDemo />
+        </DemoStage>
+        <DemoStage label="Shell with custom slots">
+          <SideNavigation
+            className="demo-side-nav-mid"
+            logo={<BrandMarkIcon />}
+            notification={<SideNavNotificationButton icon={<BellIcon />} />}
+            account={<SideNavAccount avatar={<DemoAccountAvatar />} name="Lena Park" supportingText="Operations Lead" menuIcon={<ChevronsIcon />} />}
+          >
+            <SideNavSearch icon={<SearchIcon />} shortcut="/" label="Find page" />
+            <SideNavSection title="Workspace">
+              <SideNavItem icon={<HomeIcon />} label="Overview" active />
+              <SideNavItem icon={<AnalyticsIcon />} label="Reports" />
+              <SideNavItem icon={<UsersIcon />} label="Team" />
+            </SideNavSection>
+          </SideNavigation>
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  SideNavSection: {
+    description: 'Labeled sidebar group for related navigation items.',
+    preview: () => (
+      <div className="demo-side-nav-surface">
+        <SideNavSection title="Main">
+          <SideNavItem icon={<HomeIcon />} label="Home" active />
+          <SideNavItem icon={<CalendarIcon />} label="Guidance" />
+        </SideNavSection>
+      </div>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="With title">
+          <div className="demo-side-nav-surface">
+            <SideNavSection title="Main">
+              <SideNavItem icon={<HomeIcon />} label="Home" active />
+              <SideNavItem icon={<CalendarIcon />} label="Guidance" />
+              <SideNavItem icon={<ClockIcon />} label="Time Entry" />
+            </SideNavSection>
+          </div>
+        </DemoStage>
+        <DemoStage label="Without title">
+          <div className="demo-side-nav-surface">
+            <SideNavSection>
+              <SideNavItem icon={<UsersIcon />} label="CRM" />
+              <SideNavItem icon={<AnalyticsIcon />} label="Demand Planning" />
+            </SideNavSection>
+          </div>
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  SideNavItem: {
+    description: 'Single sidebar navigation row with icon, active, hover, focus, link, and disabled states.',
+    preview: () => (
+      <div className="demo-side-nav-surface">
+        <SideNavItem icon={<HomeIcon />} label="Home" active />
+      </div>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="States">
+          <div className="demo-side-nav-surface">
+            <SideNavItem icon={<HomeIcon />} label="Active item" active />
+            <SideNavItem icon={<CalendarIcon />} label="Default item" />
+            <SideNavItem icon={<ClockIcon />} label="Disabled item" disabled />
+          </div>
+        </DemoStage>
+        <DemoStage label="Link semantics">
+          <div className="demo-side-nav-surface">
+            <SideNavItem href="#side-nav-link" icon={<StructureIcon />} label="Project Management" />
+          </div>
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  SideNavSearch: {
+    description: 'Sidebar search and command trigger with optional shortcut badge.',
+    preview: () => (
+      <div className="demo-side-nav-surface">
+        <SideNavSearch icon={<SearchIcon />} shortcut="⌘ K" />
+      </div>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Default">
+          <div className="demo-side-nav-surface">
+            <SideNavSearch icon={<SearchIcon />} shortcut="⌘ K" />
+          </div>
+        </DemoStage>
+        <DemoStage label="Without shortcut">
+          <div className="demo-side-nav-surface">
+            <SideNavSearch icon={<SearchIcon />} label="Search projects" />
+          </div>
+        </DemoStage>
+        <DemoStage label="Disabled">
+          <div className="demo-side-nav-surface">
+            <SideNavSearch icon={<SearchIcon />} shortcut="/" disabled />
+          </div>
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  SideNavNotificationButton: {
+    description: 'Icon-only sidebar notification trigger with optional unread dot.',
+    preview: () => (
+      <div className="demo-side-nav-surface demo-side-nav-surface--inline">
+        <SideNavNotificationButton icon={<BellIcon />} unread />
+      </div>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Unread">
+          <div className="demo-side-nav-surface demo-side-nav-surface--inline">
+            <SideNavNotificationButton icon={<BellIcon />} unread />
+          </div>
+        </DemoStage>
+        <DemoStage label="Default and disabled">
+          <div className="demo-side-nav-surface demo-side-nav-surface--inline">
+            <SideNavNotificationButton icon={<BellIcon />} />
+            <SideNavNotificationButton icon={<BellIcon />} disabled />
+          </div>
+        </DemoStage>
+      </div>
+    ),
+  },
+
+  SideNavAccount: {
+    description: 'Sidebar account footer trigger with avatar, primary text, supporting text, and menu affordance.',
+    preview: () => (
+      <div className="demo-side-nav-surface">
+        <SideNavAccount avatar={<DemoAccountAvatar />} name="Maya Ortiz" supportingText="maya.ortiz@nymbl.app" menuIcon={<ChevronsIcon />} />
+      </div>
+    ),
+    detail: () => (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+        <DemoStage label="Full account row">
+          <div className="demo-side-nav-surface">
+            <SideNavAccount avatar={<DemoAccountAvatar />} name="Maya Ortiz" supportingText="maya.ortiz@nymbl.app" menuIcon={<ChevronsIcon />} />
+          </div>
+        </DemoStage>
+        <DemoStage label="Name only">
+          <div className="demo-side-nav-surface">
+            <SideNavAccount avatar={<span className="demo-side-nav-avatar">RS</span>} name="Riley Stone" menuIcon={<ChevronsIcon />} />
+          </div>
+        </DemoStage>
+        <DemoStage label="Disabled">
+          <div className="demo-side-nav-surface">
+            <SideNavAccount avatar={<span className="demo-side-nav-avatar">AK</span>} name="Avery Kim" supportingText="Strategy Team" disabled menuIcon={<ChevronsIcon />} />
+          </div>
         </DemoStage>
       </div>
     ),

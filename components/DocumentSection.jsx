@@ -9,7 +9,7 @@ import './DocumentSection.css';
  *
  * Props:
  *   header    — optional ReactNode rendered in the header zone (typically SectionHeader)
- *   footer    — optional ReactNode rendered below a divider (typically Button row or AssistBar)
+ *   footer    — optional ReactNode rendered after body children inside the white body surface
  *   children  — body content
  *   className — optional class appended to the root
  *   ...rest   — forwarded to the root <section>
@@ -24,18 +24,15 @@ export function DocumentSection({ header, footer, children, className = '', ...r
           {header}
         </div>
       )}
-      {children && (
+      {(children || footer) && (
         <div className="nos-document-section__body">
           {children}
+          {footer && (
+            <div className="nos-document-section__footer">
+              {footer}
+            </div>
+          )}
         </div>
-      )}
-      {footer && (
-        <>
-          <div className="nos-document-section__divider" aria-hidden="true" />
-          <div className="nos-document-section__footer">
-            {footer}
-          </div>
-        </>
       )}
     </section>
   );

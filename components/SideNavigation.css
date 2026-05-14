@@ -1,0 +1,57 @@
+/* SideNavigation — NOS app sidebar shell. */
+
+.nos-side-nav {
+  display: flex;
+  flex-direction: column;
+  width: var(--side-nav-width);
+  min-width: var(--side-nav-width);
+  height: 100%;
+  min-height: 100vh;
+  background: var(--side-nav-bg);
+  color: var(--side-nav-fg);
+  font-family: var(--font-family-sans);
+}
+
+.nos-side-nav__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--side-nav-header-height);
+  padding: var(--spacing-6) var(--spacing-5);
+  gap: var(--spacing-3);
+  flex: 0 0 auto;
+}
+
+.nos-side-nav__logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  color: var(--color-brand-500);
+}
+
+.nos-side-nav__logo svg {
+  display: block;
+}
+
+.nos-side-nav__notification {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nos-side-nav__content {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.nos-side-nav__footer {
+  display: flex;
+  align-items: center;
+  min-height: var(--side-nav-footer-height);
+  padding: var(--spacing-4);
+  flex: 0 0 auto;
+}

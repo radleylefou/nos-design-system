@@ -29,11 +29,23 @@ export { MonthlyGlance } from './MonthlyGlance.jsx';
 
 // ── Document View ─────────────────────────────────────────────────────────
 export { PageHeader } from './PageHeader.jsx';
+export { DocumentBreadcrumbs } from './DocumentBreadcrumbs.jsx';
 export { PageTabs } from './PageTabs.jsx';
 export { DescriptionList } from './DescriptionList.jsx';
 export { SectionHeader } from './SectionHeader.jsx';
 export { DocumentSection } from './DocumentSection.jsx';
 export { AssistBar } from './AssistBar.jsx';
+export { DocumentOutcomeList, DocumentOutcomeRow } from './DocumentOutcomeList.jsx';
+export { DocumentMetricCard } from './DocumentMetricCard.jsx';
+export { AIActionBar } from './AIActionBar.jsx';
+
+// ── Navigation ────────────────────────────────────────────────────────────
+export { SideNavigation } from './SideNavigation.jsx';
+export { SideNavSection } from './SideNavSection.jsx';
+export { SideNavItem } from './SideNavItem.jsx';
+export { SideNavSearch } from './SideNavSearch.jsx';
+export { SideNavNotificationButton } from './SideNavNotificationButton.jsx';
+export { SideNavAccount } from './SideNavAccount.jsx';
 
 // ── Tables ────────────────────────────────────────────────────────────────
 export { TableHeader } from './TableHeader.jsx';

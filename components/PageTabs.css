@@ -1,17 +1,22 @@
 .nos-page-tabs {
-  border-bottom: 1px solid var(--border-subtle);
+  width: 100%;
+  border-bottom: 1px solid var(--color-neutral-75);
 }
 
 .nos-page-tabs__list {
   display: flex;
-  gap: 0;
+  gap: var(--spacing-6);
   margin: 0;
   padding: 0;
+  overflow-x: auto;
 }
 
 .nos-page-tabs__tab {
   position: relative;
-  padding: var(--spacing-3) var(--spacing-4);
+  display: inline-flex;
+  align-items: center;
+  height: var(--spacing-10);
+  padding: 0;
   background: transparent;
   border: none;
   border-bottom: 2px solid transparent;
@@ -20,7 +25,7 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-tight);
-  color: var(--color-neutral-500);
+  color: var(--color-neutral-400);
   cursor: pointer;
   transition:
     color var(--duration-fast) ease,
@@ -29,7 +34,7 @@
 }
 
 .nos-page-tabs__tab:hover {
-  color: var(--color-neutral-700);
+  color: var(--color-neutral-500);
 }
 
 .nos-page-tabs__tab:focus-visible {
@@ -39,11 +44,11 @@
 }
 
 .nos-page-tabs__tab--active {
-  color: var(--color-brand-600);
+  color: var(--color-neutral-600);
   border-bottom-color: var(--color-brand-600);
   font-weight: var(--font-weight-semibold);
 }
 
 .nos-page-tabs__tab--active:hover {
-  color: var(--color-brand-600);
+  color: var(--color-neutral-600);
 }

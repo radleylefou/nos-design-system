@@ -26,7 +26,12 @@ export const COMPONENT_CATEGORIES = [
   {
     label: 'Document',
     description: 'Page shells, section cards, and display primitives for document and detail views.',
-    components: ['PageHeader', 'PageTabs', 'DescriptionList', 'SectionHeader', 'DocumentSection', 'AssistBar'],
+    components: ['DocumentBreadcrumbs', 'PageHeader', 'PageTabs', 'DescriptionList', 'SectionHeader', 'DocumentSection', 'DocumentOutcomeList', 'DocumentMetricCard', 'AssistBar', 'AIActionBar'],
+  },
+  {
+    label: 'Navigation',
+    description: 'Application navigation shells, sidebar items, and account/search triggers.',
+    components: ['SideNavigation', 'SideNavSection', 'SideNavItem', 'SideNavSearch', 'SideNavNotificationButton', 'SideNavAccount'],
   },
   {
     label: 'Metrics',

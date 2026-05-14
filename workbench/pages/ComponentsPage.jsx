@@ -41,6 +41,14 @@ export function ComponentsPage({ categoryId, componentId, onNavigate }) {
 
 // ── Secondary nav sidebar ──────────────────────────────────────────────────
 
+function ArrowLeftIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M11 7H3M6 4L3 7L6 10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 function ComponentNavSidebar({ categoryId, componentId, onNavigate }) {
   return (
     <nav className="comp-nav" aria-label="Component categories">
@@ -51,51 +59,61 @@ function ComponentNavSidebar({ categoryId, componentId, onNavigate }) {
         {COMPONENT_CATEGORIES.length === 0 ? (
           <p className="comp-nav__empty">No components yet.</p>
         ) : (
-          COMPONENT_CATEGORIES.map((category) => {
-            const isExpanded = categoryId === category.label;
-            return (
-              <div key={category.label} className="comp-nav__category">
-                <button
-                  type="button"
-                  className={`comp-nav__cat-header${isExpanded ? ' comp-nav__cat-header--expanded' : ''}`}
-                  onClick={() =>
-                    onNavigate(
-                      isExpanded
-                        ? { section: 'component' }
-                        : { section: 'component', categoryId: category.label }
-                    )
-                  }
-                >
-                  <span className="comp-nav__cat-label">{category.label}</span>
-                  <span className="comp-nav__cat-arrow" aria-hidden="true" />
-                </button>
-                {isExpanded && (
-                  <div className="comp-nav__items">
-                    {category.components.map((name) => {
-                      const isActive = componentId === name;
-                      return (
-                        <button
-                          key={name}
-                          type="button"
-                          className={`comp-nav__item${isActive ? ' comp-nav__item--active' : ''}`}
-                          aria-current={isActive ? 'page' : undefined}
-                          onClick={() =>
-                            onNavigate({
-                              section: 'component',
-                              categoryId: category.label,
-                              componentId: name,
-                            })
-                          }
-                        >
-                          {name}
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            );
-          })
+          <>
+            <button
+              type="button"
+              className="comp-nav__all"
+              onClick={() => onNavigate({ section: 'component' })}
+            >
+              <span className="comp-nav__all-arrow" aria-hidden="true"><ArrowLeftIcon /></span>
+              <span>All components</span>
+            </button>
+            {COMPONENT_CATEGORIES.map((category) => {
+              const isExpanded = categoryId === category.label;
+              return (
+                <div key={category.label} className="comp-nav__category">
+                  <button
+                    type="button"
+                    className={`comp-nav__cat-header${isExpanded ? ' comp-nav__cat-header--expanded' : ''}`}
+                    onClick={() =>
+                      onNavigate(
+                        isExpanded
+                          ? { section: 'component' }
+                          : { section: 'component', categoryId: category.label }
+                      )
+                    }
+                  >
+                    <span className="comp-nav__cat-label">{category.label}</span>
+                    <span className="comp-nav__cat-arrow" aria-hidden="true" />
+                  </button>
+                  {isExpanded && (
+                    <div className="comp-nav__items">
+                      {category.components.map((name) => {
+                        const isActive = componentId === name;
+                        return (
+                          <button
+                            key={name}
+                            type="button"
+                            className={`comp-nav__item${isActive ? ' comp-nav__item--active' : ''}`}
+                            aria-current={isActive ? 'page' : undefined}
+                            onClick={() =>
+                              onNavigate({
+                                section: 'component',
+                                categoryId: category.label,
+                                componentId: name,
+                              })
+                            }
+                          >
+                            {name}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </>
         )}
       </div>
     </nav>
