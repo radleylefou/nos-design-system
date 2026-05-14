@@ -18,6 +18,8 @@ Composition and design guidance for anyone building inside or on top of the NOS 
 | Neutrals | Surfaces, text, borders, hover fills. The default palette for most UI. |
 | Success / Warning / Error / Info | Only for their intended semantic meaning — never as decoration. |
 
+This rule applies to the NOS DS and its shared components. Individual NOS apps may define additional app-specific semantic color aliases using NOS token values — provided the aliases are documented with their domain intent in a local `tokens-app.css` file and do not silently repurpose base semantic tokens inside shared components.
+
 If more than ~10% of a screen is saturated with brand color, it's wrong.
 
 ## Density and spacing
@@ -75,6 +77,24 @@ Rules:
 - `SegmentedControl` is for compact toggles inside modals and forms (2–4 options). Use `PageTabs` for document-level navigation (3–7 tabs, underline style).
 - `StatusPill` applies to any object with a lifecycle state. Use consistent variant names across all screens: `draft`, `in-progress`, `reviewed`, `approved`, `pending`.
 - Document sections use a divider before their footer action row. The footer is freeform children — compose with `Button` (secondary/ghost variants) or `AssistBar` for AI-adjacent actions.
+
+## Hierarchy and Data-Dense View Composition
+
+When displaying hierarchical data with 4+ levels (e.g., L1 > L2 > L3 > AC), maintain the 3-size-maximum rule by using **weight and indentation as the primary hierarchy signal**, not additional font sizes.
+
+**Recommended pattern:**
+
+| Level | Size | Weight | Indent |
+|---|---|---|---|
+| L1 (section header) | 14px | semibold | 0 |
+| L2 (sub-header) | 14px | medium | 16px |
+| L3 (row) | 14px | regular | 32px |
+| L4 / metadata | 12px | regular | 48px |
+
+This keeps the view to 2 font sizes (14px, 12px) while communicating 4 hierarchy levels. Use `var(--font-family-mono)` for numerical columns (estimates, hours, IDs). Use `var(--color-neutral-400)` for L4/metadata text to further differentiate without a size change.
+
+**For Kanban and phase board views:**
+Cards should display a maximum of 4 data points without expansion. Use progressive disclosure (expand on click/hover) for secondary metadata. Never stack more than 3 visual weight levels in a single card without a separator.
 
 ## Composition checklist
 
