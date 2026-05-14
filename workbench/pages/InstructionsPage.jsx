@@ -215,10 +215,12 @@ function createStarterPrompt(workbenchUrl) {
     '1. Read DESIGN.md for the NOS design direction.',
     '2. Browse the workbench Components area and reuse existing NOS components first.',
     '3. Browse Tokens before choosing colors, spacing, radii, shadows, typography, or motion.',
-    '4. Import components from components/index.js and import tokens/base.css or tokens/tokens.css.',
+    '4. Import components from components/index.js and import tokens/tokens.css globally.',
     '5. Follow rules/rules.md, AGENTS.md, and CLAUDE.md for composition and repo constraints.',
-    '6. Do not hardcode visual values or introduce unrelated component libraries.',
+    '6. Do not hardcode visual values. Do not add UI component libraries that duplicate NOS components. Headless capability libraries such as dnd-kit, @xyflow/react, and @tiptap/react are permitted for behavior that cannot be hand-built.',
     '7. Verify the UI against workbench demos and page examples before inventing new patterns.',
+    '8. If a needed component is not in components/index.js, build it as a NOS-compliant component: create ComponentName.jsx and ComponentName.css in components/, export it from index.js, and add a workbench demo.',
+    '9. App-specific semantic tokens go in a local tokens-app.css file. Values must reference NOS token variables, never raw hex, and each override needs a comment explaining its semantic intent.',
   ].join('\n');
 }
 

@@ -71,10 +71,12 @@ When building with NOS:
 1. Read this brief first to understand the system character.
 2. Browse the hosted workbench to identify existing components and examples.
 3. Inspect `components/index.js` for available exports.
-4. Inspect `tokens/tokens.json` and `tokens/base.css` before adding visual values.
+4. Inspect `tokens/tokens.json` and import `tokens/tokens.css` globally before adding visual values.
 5. Follow `rules/rules.md` for composition guidance.
 6. Follow `AGENTS.md` and `CLAUDE.md` for repo and implementation constraints.
 7. Verify UI against the workbench before inventing new patterns.
+8. If a needed component is not in `components/index.js`, build it as a NOS-compliant component in `components/`, export it, and add a workbench demo.
+9. Put app-specific semantic tokens in a local `tokens-app.css` file. Values must reference NOS token variables, never raw hex, and each override needs a comment explaining its semantic intent.
 
 ## Avoid
 
