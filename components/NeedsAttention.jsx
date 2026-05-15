@@ -43,7 +43,7 @@ export function NeedsAttention({
 function NeedsAttentionItem({ tone, title, subtitle, action }) {
   return (
     <li className={`nos-na__item nos-na__item--${tone}`}>
-      <span className="nos-na__bar" aria-hidden="true" />
+
       <div className="nos-na__content">
         <p className="nos-na__item-title">{title}</p>
         {subtitle && (

@@ -1,21 +1,21 @@
 .wb-app {
   /* Workbench chrome uses frozen neutral values — intentionally decoupled from
      design system tokens so palette changes don't affect the tool itself.
-     All --color-neutral-* stops are also frozen here so direct references in
+     All --wb-neutral-* stops are also frozen here so direct references in
      workbench CSS files stay stable regardless of token updates. */
-  --color-neutral-25: #FCFCFD;
-  --color-neutral-50: #F9FAFB;
-  --color-neutral-75: #F6F7F8;
-  --color-neutral-100: #F3F4F6;
-  --color-neutral-200: #E5E7EB;
-  --color-neutral-300: #D1D5DB;
-  --color-neutral-400: #9CA3AF;
-  --color-neutral-500: #6B7280;
-  --color-neutral-600: #4B5563;
-  --color-neutral-700: #374151;
-  --color-neutral-800: #1F2937;
-  --color-neutral-900: #111827;
-  --color-neutral-950: #030712;
+  --wb-neutral-25: #FCFCFD;
+  --wb-neutral-50: #F9FAFB;
+  --wb-neutral-75: #F6F7F8;
+  --wb-neutral-100: #F3F4F6;
+  --wb-neutral-200: #E5E7EB;
+  --wb-neutral-300: #D1D5DB;
+  --wb-neutral-400: #9CA3AF;
+  --wb-neutral-500: #6B7280;
+  --wb-neutral-600: #4B5563;
+  --wb-neutral-700: #374151;
+  --wb-neutral-800: #1F2937;
+  --wb-neutral-900: #111827;
+  --wb-neutral-950: #030712;
   --wb-bg: #F6F7F8;
   --wb-bg-soft: #F9FAFB;
   --wb-surface: #ffffff;

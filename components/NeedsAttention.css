@@ -16,16 +16,9 @@
 .nos-na__item {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: var(--spacing-2);
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
   border-radius: var(--radius-md);
-}
-
-.nos-na__bar {
-  flex: 0 0 auto;
-  width: 6px;
-  align-self: stretch;
-  border-radius: 2px;
 }
 
 .nos-na__content {
@@ -53,13 +46,8 @@
   color: var(--color-neutral-500);
 }
 
-/* ── Tones ─────────────────────────────────────────────────────────────── */
+/* ── Tones — differentiated by background tint only ───────────────────── */
 
-.nos-na__item--danger { background: var(--color-semantic-error-50); }
-.nos-na__item--danger .nos-na__bar { background: var(--color-semantic-error-500); }
-
+.nos-na__item--danger  { background: var(--color-semantic-error-50); }
 .nos-na__item--warning { background: var(--color-semantic-warning-50); }
-.nos-na__item--warning .nos-na__bar { background: var(--color-semantic-warning-500); }
-
-.nos-na__item--brand { background: var(--color-brand-50); }
-.nos-na__item--brand .nos-na__bar { background: var(--color-brand-400); }
+.nos-na__item--brand   { background: var(--color-brand-50); }

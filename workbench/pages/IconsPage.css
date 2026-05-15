@@ -40,7 +40,7 @@
   padding: 3px;
   border: 1px solid var(--wb-border);
   border-radius: var(--radius-full);
-  background: var(--color-neutral-100);
+  background: var(--wb-neutral-100);
   gap: 2px;
 }
 
@@ -141,7 +141,7 @@
   font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-semibold);
   color: var(--wb-subtle);
-  background: var(--color-neutral-100);
+  background: var(--wb-neutral-100);
   border-radius: var(--radius-sm);
   font-variant-numeric: tabular-nums;
 }
@@ -234,11 +234,11 @@
 .wb-icon-tile:focus-visible {
   outline: none;
   z-index: 1;
-  box-shadow: inset 0 0 0 2px var(--color-neutral-900);
+  box-shadow: inset 0 0 0 2px var(--wb-neutral-900);
 }
 
 .wb-icon-tile.is-copied {
-  background: var(--color-neutral-100);
+  background: var(--wb-neutral-100);
   color: var(--wb-text);
 }
 

@@ -28,7 +28,7 @@
   line-height: var(--line-height-snug);
   letter-spacing: var(--letter-spacing-caps);
   text-transform: uppercase;
-  color: var(--color-neutral-400);
+  color: var(--wb-neutral-400);
 }
 
 .demo-document-metric-grid {

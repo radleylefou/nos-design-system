@@ -92,9 +92,9 @@ export const TAG_COLORS = {
   Metrics:     { bg: 'var(--color-brand-50)',           text: 'var(--color-brand-700)' },
   SideNav:     { bg: 'var(--color-brand-50)',           text: 'var(--color-brand-700)' },
   Icons:       { bg: 'var(--color-brand-50)',           text: 'var(--color-brand-700)' },
-  Tokens:      { bg: 'var(--color-neutral-100)',        text: 'var(--color-neutral-700)' },
-  Playground:  { bg: 'var(--color-neutral-100)',        text: 'var(--color-neutral-700)' },
-  Workbench:   { bg: 'var(--color-neutral-100)',        text: 'var(--color-neutral-700)' },
+  Tokens:      { bg: 'var(--wb-neutral-100)',        text: 'var(--wb-neutral-700)' },
+  Playground:  { bg: 'var(--wb-neutral-100)',        text: 'var(--wb-neutral-700)' },
+  Workbench:   { bg: 'var(--wb-neutral-100)',        text: 'var(--wb-neutral-700)' },
 };
 
 export const ENTRY_TYPE_META = {

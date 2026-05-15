@@ -1189,7 +1189,7 @@ export const DEMOS = {
     description: 'Thin chrome shell providing card header and inner slot for dashboard components.',
     preview: () => (
       <DashboardCard title="Weekly Pacing">
-        <div style={{ padding: 'var(--spacing-4)', color: 'var(--color-neutral-500)', fontSize: 'var(--font-size-sm)' }}>
+        <div style={{ padding: 'var(--spacing-4)', color: 'var(--wb-neutral-500)', fontSize: 'var(--font-size-sm)' }}>
           Card content goes here
         </div>
       </DashboardCard>
@@ -1200,7 +1200,7 @@ export const DEMOS = {
           label="Title only"
           render={() => (
             <DashboardCard title="Weekly Pacing">
-              <div style={{ padding: 'var(--spacing-4)', color: 'var(--color-neutral-500)', fontSize: 'var(--font-size-sm)' }}>
+              <div style={{ padding: 'var(--spacing-4)', color: 'var(--wb-neutral-500)', fontSize: 'var(--font-size-sm)' }}>
                 Card body content
               </div>
             </DashboardCard>
@@ -1210,7 +1210,7 @@ export const DEMOS = {
           label="With chevron (title click)"
           render={() => (
             <DashboardCard title="This Week" onTitleClick={() => {}}>
-              <div style={{ padding: 'var(--spacing-4)', color: 'var(--color-neutral-500)', fontSize: 'var(--font-size-sm)' }}>
+              <div style={{ padding: 'var(--spacing-4)', color: 'var(--wb-neutral-500)', fontSize: 'var(--font-size-sm)' }}>
                 Card body content
               </div>
             </DashboardCard>
@@ -1225,7 +1225,7 @@ export const DEMOS = {
               onExpand={() => {}}
               onMore={() => {}}
             >
-              <div style={{ padding: 'var(--spacing-4)', color: 'var(--color-neutral-500)', fontSize: 'var(--font-size-sm)' }}>
+              <div style={{ padding: 'var(--spacing-4)', color: 'var(--wb-neutral-500)', fontSize: 'var(--font-size-sm)' }}>
                 Card body content
               </div>
             </DashboardCard>

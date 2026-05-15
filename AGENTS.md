@@ -120,14 +120,14 @@ Start from these constraints and the component will be correct by construction:
 - **Visual baseline:** calm, neutral surface (`var(--bg-surface)`), border `var(--border-default)`, radius matching context (8px for panels/cards, 6px for interactive elements)
 - **Typography:** 14px regular for data rows; 14px semibold for section headers; 12px for metadata. Never exceed 3 type sizes in one view.
 - **Color:** neutrals dominate; brand accent only for selected/active states; no decorative color
-- **Spacing:** 4px grid — use `var(--space-2)` (8px) for row padding, `var(--space-4)` (16px) for section padding, `var(--space-6)` (24px) between major sections
+- **Spacing:** 4px grid — use `var(--spacing-2)` (8px) for row padding, `var(--spacing-4)` (16px) for section padding, `var(--spacing-6)` (24px) between major sections
 - **State coverage:** default, hover, selected/active, disabled, focus — all required
 - **Props API:** variant, size, disabled, loading as needed; callbacks via onX props; `...rest` spread
 
 **Reference patterns for common missing components:**
 
 *KanbanBoard / KanbanColumn / KanbanCard:*
-- Column: `Card` with `var(--bg-subtle)` background, `var(--radius-md)` radius, `var(--space-4)` padding
+- Column: `Card` with `var(--bg-subtle)` background, `var(--radius-md)` radius, `var(--spacing-4)` padding
 - Card: `Card` component with drag handle, status badge, label text
 - Use `dnd-kit` for drag behavior; KanbanCard is purely presentational
 
