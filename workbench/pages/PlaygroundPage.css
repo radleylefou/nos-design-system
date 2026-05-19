@@ -205,7 +205,7 @@
   height: var(--spacing-5);
   border: none;
   border-radius: var(--radius-full);
-  background: var(--color-neutral-300);
+  background: var(--wb-neutral-300);
   cursor: pointer;
   flex-shrink: 0;
   transition: background-color var(--duration-slow) var(--wb-motion);
@@ -341,7 +341,7 @@
   justify-content: space-between;
   gap: var(--spacing-3);
   padding: var(--spacing-2) var(--spacing-4);
-  background: var(--color-neutral-900);
+  background: var(--wb-neutral-900);
   border-bottom: 1px solid var(--border-on-dark-15);
 }
 
@@ -351,13 +351,13 @@
   line-height: var(--line-height-tight);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
-  color: var(--color-neutral-500);
+  color: var(--wb-neutral-500);
 }
 
 .wb-code-panel__pre {
   margin: 0;
   padding: var(--spacing-5) var(--spacing-6);
-  background: var(--color-neutral-950);
+  background: var(--wb-neutral-950);
   overflow-x: auto;
 }
 
@@ -365,18 +365,18 @@
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
   line-height: var(--line-height-relaxed);
-  color: var(--color-neutral-300);
+  color: var(--wb-neutral-300);
   white-space: pre;
 }
 
 .wb-code-panel .wb-copy-btn {
   border-color: var(--border-on-dark-20);
-  color: var(--color-neutral-500);
+  color: var(--wb-neutral-500);
 }
 
 .wb-code-panel .wb-copy-btn:hover {
-  background: var(--color-neutral-800);
-  color: var(--color-neutral-300);
+  background: var(--wb-neutral-800);
+  color: var(--wb-neutral-300);
 }
 
 @media (max-width: 960px) {

@@ -1,97 +1,78 @@
 import { useId } from 'react';
+import { Field } from './Field.jsx';
 import './Select.css';
 
 /**
- * Select — native single-select dropdown with NOS field chrome.
+ * Select — native single-select dropdown wrapped in the shared .nos-field chrome.
  *
  * Props:
- *   label:      string | node
- *   helperText: string | node
- *   error:      string | boolean — when truthy the field renders in the error state.
- *                                  If a string is given it replaces helperText.
- *   size:       "sm" | "md" | "lg"    (default: "md")
- *   options:    array of { label, value, disabled }
- *   placeholder: optional disabled first option
- *   disabled:   boolean
- *   children:   custom <option> nodes; used instead of options when provided
- *   All other props pass through to the underlying <select>.
- *
- * Usage:
- *   <Select label="Region" placeholder="Choose region" options={regions} />
- *   <Select label="Status" error="Select a status" />
+ *   label       — text label rendered above the field
+ *   helperText  — neutral hint rendered below the field
+ *   error       — string; when present, switches to the error state and replaces helperText
+ *   options     — array of { value, label } items
+ *   placeholder — optional placeholder rendered as a disabled first option
+ *   size        — 'sm' | 'md'
+ *   disabled    — disables the field
+ *   id          — explicit id; otherwise auto-generated for label association
+ *   ...rest     — forwarded to <select> (value, defaultValue, onChange, name, etc.)
  */
 export function Select({
   label,
   helperText,
-  error = false,
-  size = 'md',
+  error,
   options = [],
   placeholder,
+  size = 'md',
   disabled = false,
   id,
   className = '',
-  children,
   ...rest
 }) {
-  const generatedId = useId();
-  const selectId = id || generatedId;
-  const describedById = `${selectId}-desc`;
-
-  const errorText = typeof error === 'string' ? error : null;
+  const autoId = useId();
+  const selectId = id || autoId;
   const hasError = Boolean(error);
-  const message = errorText || helperText;
+  const feedbackId = error || helperText ? `${selectId}-feedback` : undefined;
 
-  const wrapperClasses = [
-    'nos-select',
-    `nos-select--${size}`,
-    hasError ? 'nos-select--error' : '',
-    disabled ? 'nos-select--disabled' : '',
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const fieldCls = [
+    'nos-field',
+    'nos-field--select',
+    `nos-field--${size}`,
+    hasError ? 'nos-field--error' : '',
+    disabled ? 'nos-field--disabled' : '',
+  ].filter(Boolean).join(' ');
 
   return (
-    <div className="nos-field">
-      {label && (
-        <label htmlFor={selectId} className="nos-field__label">
-          {label}
-        </label>
-      )}
-      <div className={wrapperClasses}>
+    <Field
+      className={className}
+      label={label}
+      htmlFor={selectId}
+      helperText={helperText}
+      error={error}
+      feedbackId={feedbackId}
+    >
+      <div className={fieldCls}>
         <select
           id={selectId}
-          className="nos-select__control"
           disabled={disabled}
           aria-invalid={hasError || undefined}
-          aria-describedby={message ? describedById : undefined}
+          aria-describedby={feedbackId}
+          className="nos-field__control nos-field__control--select"
+          defaultValue={rest.value === undefined && rest.defaultValue === undefined && placeholder ? '' : undefined}
           {...rest}
         >
           {placeholder && (
-            <option value="" disabled>
-              {placeholder}
-            </option>
+            <option value="" disabled hidden>{placeholder}</option>
           )}
-          {children || options.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-              disabled={option.disabled}
-            >
-              {option.label}
-            </option>
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>{opt.label}</option>
           ))}
         </select>
-        <span className="nos-select__indicator" aria-hidden="true" />
+        <span className="nos-field__icon nos-field__icon--trailing" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M3.5 5.25L7 8.75L10.5 5.25" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
       </div>
-      {message && (
-        <div
-          id={describedById}
-          className={`nos-field__message ${hasError ? 'nos-field__message--error' : ''}`}
-        >
-          {message}
-        </div>
-      )}
-    </div>
+    </Field>
   );
 }

@@ -79,7 +79,7 @@
   align-self: flex-start;
   margin-top: var(--spacing-2);
   padding: var(--spacing-2) var(--spacing-3);
-  background: var(--color-neutral-100);
+  background: var(--wb-neutral-100);
   border: 1px solid var(--wb-border-soft);
   border-radius: var(--radius-full);
   font-size: var(--font-size-sm);
@@ -179,7 +179,7 @@
   align-self: flex-end;
   width: var(--spacing-8);
   height: var(--spacing-8);
-  background: var(--color-neutral-100);
+  background: var(--wb-neutral-100);
   border: 1px solid var(--wb-border-soft);
   border-radius: var(--radius-full);
   font-size: var(--font-size-sm);

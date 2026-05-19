@@ -1,0 +1,72 @@
+/* ChoiceGroup — independent radio-style choice pills. */
+
+.nos-choice-group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+  font-family: var(--font-family-sans);
+}
+
+.nos-choice-group__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  height: 30px;
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  color: var(--color-neutral-700);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-none);
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    border-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
+}
+
+.nos-choice-group--sm .nos-choice-group__item {
+  height: 28px;
+  padding: 0 var(--spacing-2);
+  font-size: var(--font-size-xs);
+}
+
+.nos-choice-group__item:hover:not(:disabled) {
+  border-color: var(--color-brand-300);
+  background: var(--color-brand-50);
+}
+
+.nos-choice-group__item:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.nos-choice-group__item:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.nos-choice-group__item:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.nos-choice-group__item--active {
+  border-color: var(--color-brand-500);
+  background: var(--color-brand-50);
+  color: var(--color-brand-500);
+}
+
+.nos-choice-group__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  transition: opacity var(--motion-duration-state) var(--motion-easing-standard);
+}

@@ -1,0 +1,30 @@
+.demo-stage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.demo-stage__label {
+  margin: 0;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--fg-default);
+}
+
+.demo-stage__surface {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: var(--spacing-8);
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px var(--border-alpha-10);
+  overflow: hidden;
+}
+
+.demo-stage__surface--full-width {
+  display: block;
+  padding: var(--spacing-4);
+  overflow-x: auto;
+}

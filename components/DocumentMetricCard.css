@@ -1,0 +1,74 @@
+.nos-document-metric-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+  min-height: calc(var(--spacing-10) * 3);
+  padding: var(--spacing-4);
+  border: 1px solid var(--color-neutral-75);
+  border-radius: var(--radius-lg);
+  background: var(--bg-surface);
+  font-family: var(--font-family-sans);
+}
+
+.nos-document-metric-card__label,
+.nos-document-metric-card__value,
+.nos-document-metric-card__delta,
+.nos-document-metric-card__supporting {
+  margin: 0;
+}
+
+.nos-document-metric-card__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  color: var(--color-neutral-400);
+}
+
+.nos-document-metric-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.nos-document-metric-card__value-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-3);
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.nos-document-metric-card__value {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  color: var(--color-neutral-600);
+  font-variant-numeric: tabular-nums;
+}
+
+.nos-document-metric-card__delta {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  font-variant-numeric: tabular-nums;
+}
+
+.nos-document-metric-card__delta--positive {
+  color: var(--color-dataviz-green-700);
+}
+
+.nos-document-metric-card__delta--negative {
+  color: var(--color-semantic-error-600);
+}
+
+.nos-document-metric-card__delta--neutral {
+  color: var(--color-neutral-400);
+}
+
+.nos-document-metric-card__supporting {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  color: var(--color-neutral-400);
+}

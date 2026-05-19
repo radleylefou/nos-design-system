@@ -1,67 +1,14 @@
-.nos-textarea {
+/* Textarea — multi-line variant of the shared .nos-field chrome. */
+
+.nos-field--textarea {
+  align-items: stretch;
+  padding: var(--spacing-2) var(--spacing-3);
+  min-height: auto;
+}
+
+.nos-field__control--textarea {
   width: 100%;
-  min-width: 0;
-  border: 1px solid var(--border-default);
-  border-radius: var(--radius-md);
-  background: var(--bg-surface);
-  color: var(--fg-default);
   font-family: inherit;
-  line-height: var(--line-height-normal);
-  outline: none;
-  transition: border-color var(--duration-fast) var(--easing-standard),
-    box-shadow var(--duration-fast) var(--easing-standard);
-}
-
-.nos-textarea:hover:not(:disabled):not(.nos-textarea--error) {
-  border-color: var(--border-strong);
-}
-
-.nos-textarea:focus {
-  border-color: var(--border-focus);
-  box-shadow: var(--shadow-focus);
-}
-
-.nos-textarea--error {
-  border-color: var(--color-semantic-error-600);
-}
-
-.nos-textarea--error:focus {
-  box-shadow: var(--shadow-focus-error);
-}
-
-.nos-textarea:disabled,
-.nos-textarea--disabled {
-  background: var(--bg-subtle);
-  color: var(--fg-disabled);
-  cursor: not-allowed;
-}
-
-.nos-textarea::placeholder {
-  color: var(--fg-subtle);
-}
-
-.nos-textarea--sm {
-  min-height: var(--spacing-16);
-  padding: var(--spacing-2);
-  font-size: var(--font-size-xs);
-}
-
-.nos-textarea--md {
-  min-height: calc(var(--spacing-20) + var(--spacing-4));
-  padding: var(--spacing-3);
   font-size: var(--font-size-sm);
-}
-
-.nos-textarea--lg {
-  min-height: calc(var(--spacing-24) + var(--spacing-6));
-  padding: var(--spacing-4);
-  font-size: var(--font-size-base);
-}
-
-.nos-textarea--resize-none {
-  resize: none;
-}
-
-.nos-textarea--resize-vertical {
-  resize: vertical;
+  line-height: var(--line-height-normal);
 }

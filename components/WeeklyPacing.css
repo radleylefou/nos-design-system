@@ -1,0 +1,122 @@
+/* WeeklyPacing — inner content layout (chrome from DashboardCard). */
+
+.nos-wp {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-3);
+  font-family: var(--font-family-sans);
+}
+
+/* ── Hero row ────────────────────────────────────────────────────────────── */
+
+.nos-wp__hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-1);
+  white-space: nowrap;
+}
+
+.nos-wp__value {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  color: var(--color-neutral-700);
+}
+
+.nos-wp__target {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  color: var(--color-neutral-500);
+}
+
+/* ── Pacing bar ──────────────────────────────────────────────────────────── */
+
+.nos-wp__bar-track {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  height: 34px;
+  margin-bottom: var(--spacing-2);
+}
+
+.nos-wp__bar-segment {
+  border-radius: 4px;
+  display: block;
+}
+
+.nos-wp__bar-segment--logged {
+  flex: 1 0 0;
+  min-width: 3px;
+  background: var(--color-brand-500);
+}
+
+.nos-wp__bar-segment--today {
+  flex: 0 0 28px;
+  background: #57c99d;
+}
+
+.nos-wp__bar-segment--remaining {
+  flex: 2 0 0;
+  background: var(--color-neutral-200);
+}
+
+/* ── Meta row ────────────────────────────────────────────────────────────── */
+
+.nos-wp__meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  color: var(--color-neutral-500);
+  white-space: nowrap;
+}
+
+/* ── Divider ─────────────────────────────────────────────────────────────── */
+
+.nos-wp__divider {
+  border: 0;
+  border-top: 1px solid var(--color-brand-100);
+  margin-bottom: var(--spacing-3);
+}
+
+/* ── Insight row ─────────────────────────────────────────────────────────── */
+
+.nos-wp__insight {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+}
+
+.nos-wp__insight-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-width: 0;
+}
+
+.nos-wp__sparkle {
+  flex: 0 0 auto;
+  color: var(--color-brand-400);
+}
+
+.nos-wp__insight-text {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-snug);
+  white-space: nowrap;
+}
+
+.nos-wp__insight-regular {
+  color: var(--color-neutral-500);
+  font-weight: var(--font-weight-regular);
+}
+
+.nos-wp__insight-emphasis {
+  color: var(--color-neutral-700);
+  font-weight: var(--font-weight-medium);
+}

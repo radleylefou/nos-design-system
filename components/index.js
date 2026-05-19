@@ -1,47 +1,58 @@
-// Component registry.
-// Every component in `components/` must be exported from here so downstream
-// NOS apps and the workbench can import from a single entry point.
+// NOS Design System — Component Registry
+// Export every component from this file so NOS apps have a single import path.
 
+// ── Actions ───────────────────────────────────────────────────────────────
 export { Button } from './Button.jsx';
+
+// ── Overlays ──────────────────────────────────────────────────────────────
+export { Overlay } from './Overlay.jsx';
+export { Modal, ModalShell } from './Modal.jsx';
+
+// ── Form Controls ─────────────────────────────────────────────────────────
 export { Input } from './Input.jsx';
-export { Select } from './Select.jsx';
 export { Textarea } from './Textarea.jsx';
+export { Select } from './Select.jsx';
 export { Checkbox } from './Checkbox.jsx';
-export { RadioGroup } from './RadioGroup.jsx';
-export { Switch } from './Switch.jsx';
-export { Tabs } from './Tabs.jsx';
-export { Card } from './Card.jsx';
-export { Badge } from './Badge.jsx';
-export { LoadingGrid } from './LoadingGrid.jsx';
-export { Metrics } from './Metrics.jsx';
-export { SideNav } from './SideNav.jsx';
+export { SegmentedControl } from './SegmentedControl.jsx';
+export { Field, FieldRow } from './Field.jsx';
+export { ChoiceGroup } from './ChoiceGroup.jsx';
 
-// Data Display
-export { Table } from './Table.jsx';
-export { Avatar } from './Avatar.jsx';
-export { ProgressBar, ProgressRing } from './Progress.jsx';
-export { StatBlock } from './StatBlock.jsx';
-export { Divider } from './Divider.jsx';
+// ── Feedback ──────────────────────────────────────────────────────────────
+export { Callout } from './Callout.jsx';
+export { StatusPill } from './StatusPill.jsx';
 
-// Forms (extended)
-export { DatePicker, DateRangePicker } from './DatePicker.jsx';
-export { Combobox } from './Combobox.jsx';
-export { TagInput } from './TagInput.jsx';
-export { NumberInput } from './NumberInput.jsx';
-export { FileUpload } from './FileUpload.jsx';
-export { FieldGroup } from './FieldGroup.jsx';
+// ── Metrics ───────────────────────────────────────────────────────────────
+export { DashboardCard } from './DashboardCard.jsx';
+export { NeedsAttention } from './NeedsAttention.jsx';
+export { WeeklyPacing } from './WeeklyPacing.jsx';
+export { MonthlyGlance } from './MonthlyGlance.jsx';
 
-// NOS domain primitives — Batch 5
-export { StatusPill, STATUS_OPTIONS } from './StatusPill.jsx';
-export { HierarchyTree } from './HierarchyTree.jsx';
-export { RequirementList } from './RequirementList.jsx';
-export { Timeline } from './Timeline.jsx';
-export { CommentThread } from './CommentThread.jsx';
-export { Stepper } from './Stepper.jsx';
+// ── Document View ─────────────────────────────────────────────────────────
+export { PageHeader } from './PageHeader.jsx';
+export { DocumentBreadcrumbs } from './DocumentBreadcrumbs.jsx';
+export { PageTabs } from './PageTabs.jsx';
+export { DescriptionList } from './DescriptionList.jsx';
+export { SectionHeader } from './SectionHeader.jsx';
+export { DocumentSection } from './DocumentSection.jsx';
+export { AssistBar } from './AssistBar.jsx';
+export { DocumentOutcomeList, DocumentOutcomeRow } from './DocumentOutcomeList.jsx';
+export { DocumentMetricCard } from './DocumentMetricCard.jsx';
+export { AIActionBar } from './AIActionBar.jsx';
 
-// Polish & secondary — Batch 6
-export { Popover } from './Popover.jsx';
-export { Menu } from './Menu.jsx';
-export { Accordion } from './Accordion.jsx';
-export { Alert, Banner } from './Alert.jsx';
-export { Kbd } from './Kbd.jsx';
+// ── Navigation ────────────────────────────────────────────────────────────
+export { SideNavigation } from './SideNavigation.jsx';
+export { SideNavSection } from './SideNavSection.jsx';
+export { SideNavItem } from './SideNavItem.jsx';
+export { SideNavSearch } from './SideNavSearch.jsx';
+export { SideNavNotificationButton } from './SideNavNotificationButton.jsx';
+export { SideNavAccount } from './SideNavAccount.jsx';
+
+// ── Tables ────────────────────────────────────────────────────────────────
+export { TableHeader } from './TableHeader.jsx';
+export { TableCellText, TableCellSubtext, TableCellIcon, TableCellLink, TableCellActions } from './TableCell.jsx';
+export { RecentTimeEntries } from './RecentTimeEntries.jsx';
+export { PipelineTable } from './PipelineTable.jsx';
+export { PIPELINE_COLUMNS } from './pipelineColumns.js';
+
+// ── Kanban ────────────────────────────────────────────────────────────────
+export { KanbanBoard, KanbanColumn, KanbanCard } from './KanbanBoard.jsx';

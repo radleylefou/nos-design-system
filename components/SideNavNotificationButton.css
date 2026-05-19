@@ -1,0 +1,62 @@
+/* SideNavNotificationButton — sidebar header notification trigger. */
+
+.nos-side-nav-notification {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-7);
+  height: var(--spacing-7);
+  padding: var(--spacing-0);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--side-nav-fg-muted);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    opacity var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
+}
+
+.nos-side-nav-notification:hover:not(:disabled) {
+  background: var(--side-nav-surface);
+  color: var(--side-nav-fg);
+}
+
+.nos-side-nav-notification:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.nos-side-nav-notification:active:not(:disabled) {
+  transform: translateY(1px) scale(0.995);
+}
+
+.nos-side-nav-notification:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.nos-side-nav-notification__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nos-side-nav-notification__icon svg {
+  display: block;
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+}
+
+.nos-side-nav-notification__dot {
+  position: absolute;
+  top: calc(var(--spacing-1) / 2);
+  right: calc(var(--spacing-1) / 2);
+  width: var(--side-nav-notification-dot-size);
+  height: var(--side-nav-notification-dot-size);
+  border-radius: var(--radius-full);
+  background: var(--side-nav-unread-bg);
+}

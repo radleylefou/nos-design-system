@@ -1,0 +1,65 @@
+/* Callout — compact inline feedback box. */
+
+.nos-callout {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-height: 38px;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+}
+
+.nos-callout--success {
+  background: var(--callout-success-bg);
+  color: var(--color-neutral-600);
+}
+
+.nos-callout--info,
+.nos-callout--brand {
+  background: var(--color-brand-50);
+  color: var(--color-neutral-600);
+}
+
+.nos-callout--warning {
+  background: var(--color-semantic-warning-50);
+  color: var(--color-semantic-warning-700);
+}
+
+.nos-callout--danger {
+  background: var(--color-semantic-error-50);
+  color: var(--color-semantic-error-700);
+}
+
+.nos-callout__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: var(--color-semantic-success-600);
+}
+
+.nos-callout--info .nos-callout__icon,
+.nos-callout--brand .nos-callout__icon {
+  color: var(--color-brand-500);
+}
+
+.nos-callout--warning .nos-callout__icon {
+  color: var(--color-semantic-warning-600);
+}
+
+.nos-callout--danger .nos-callout__icon {
+  color: var(--color-semantic-error-600);
+}
+
+.nos-callout__content {
+  min-width: 0;
+}
+
+.nos-callout strong {
+  color: var(--color-neutral-700);
+  font-weight: var(--font-weight-medium);
+}

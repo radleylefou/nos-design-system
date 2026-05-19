@@ -1,0 +1,24 @@
+/* SideNavSection — labeled groups inside SideNavigation. */
+
+.nos-side-nav-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.nos-side-nav-section__label {
+  display: flex;
+  align-items: center;
+  min-height: calc(var(--spacing-5) + var(--spacing-8));
+  padding: var(--spacing-4) var(--spacing-5);
+  color: var(--side-nav-fg-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+}
+
+.nos-side-nav-section__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-0) var(--spacing-2) var(--spacing-0) var(--spacing-2);
+}

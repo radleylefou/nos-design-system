@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import tokens from '../../tokens/tokens.json';
 import { TOKEN_CATEGORIES } from '../nav.js';
+import { WorkbenchTransition } from '../WorkbenchTransition.jsx';
 import './TokensPage.css';
 
 // Extract $value from a DTCG token object, or return the value as-is.
@@ -46,14 +47,14 @@ export function TokensPage({ category = 'Color' }) {
         ))}
       </div>
 
-      <div key={active} className="wb-motion-enter wb-motion-enter--tab">
+      <WorkbenchTransition transitionKey={active} variant="tab" className="wb-token-panel">
         {active === 'Color'      && <ColorView />}
         {active === 'Typography' && <TypographyView />}
         {active === 'Spacing'    && <SpacingView />}
         {active === 'Radius'     && <RadiusView />}
         {active === 'Shadow'     && <ShadowView />}
         {active === 'Border'     && <BorderView />}
-      </div>
+      </WorkbenchTransition>
     </div>
   );
 }
@@ -92,6 +93,15 @@ function ColorView() {
       <SwatchGroup title="Warning" swatches={tokens.color.semantic.warning} prefix="color-semantic-warning" />
       <SwatchGroup title="Error"   swatches={tokens.color.semantic.error}   prefix="color-semantic-error" />
       <SwatchGroup title="Info"    swatches={tokens.color.semantic.info}    prefix="color-semantic-info" />
+      <SwatchGroup title="Dataviz — Green"  swatches={tokens.color.dataviz.green}  prefix="color-dataviz-green" />
+      <SwatchGroup title="Dataviz — Lime"   swatches={tokens.color.dataviz.lime}   prefix="color-dataviz-lime" />
+      <SwatchGroup title="Dataviz — Blue"   swatches={tokens.color.dataviz.blue}   prefix="color-dataviz-blue" />
+      <SwatchGroup title="Dataviz — Cyan"   swatches={tokens.color.dataviz.cyan}   prefix="color-dataviz-cyan" />
+      <SwatchGroup title="Dataviz — Teal"   swatches={tokens.color.dataviz.teal}   prefix="color-dataviz-teal" />
+      <SwatchGroup title="Dataviz — Orange" swatches={tokens.color.dataviz.orange} prefix="color-dataviz-orange" />
+      <SwatchGroup title="Dataviz — Amber"  swatches={tokens.color.dataviz.amber}  prefix="color-dataviz-amber" />
+      <SwatchGroup title="Dataviz — Pink"   swatches={tokens.color.dataviz.pink}   prefix="color-dataviz-pink" />
+      <SwatchGroup title="White Alpha" swatches={tokens.color['white-alpha']} prefix="color-white-alpha" />
     </>
   );
 }
@@ -139,13 +149,6 @@ const TYPOGRAPHY_FONT_ROLES = [
     usage: 'Use for code, tokens, keyboard shortcuts, IDs, and fixed-width technical values.',
     sample: 'scope_id: NOS-4821',
   },
-  {
-    key: 'display',
-    label: 'Display',
-    role: 'Dashboard display font',
-    usage: 'Use sparingly for metric labels, dashboard eyebrows, and high-emphasis operational moments.',
-    sample: 'UTILIZATION',
-  },
 ];
 
 const TYPOGRAPHY_STYLES = [
@@ -153,11 +156,21 @@ const TYPOGRAPHY_STYLES = [
     name: 'Page title',
     description: 'Top-level workbench and app page headings.',
     fontFamily: 'sans',
-    fontSize: '3xl',
-    fontWeight: 'semibold',
-    lineHeight: 'tight',
+    fontSize: '4xl',
+    fontWeight: 'bold',
+    lineHeight: 'display',
     letterSpacing: 'normal',
     sample: 'Components',
+  },
+  {
+    name: 'Page description',
+    description: 'Introductory copy below top-level headings.',
+    fontFamily: 'sans',
+    fontSize: 'sm',
+    fontWeight: 'regular',
+    lineHeight: 'relaxed',
+    letterSpacing: 'normal',
+    sample: 'Browse the primitives that shape NOS product screens.',
   },
   {
     name: 'Section title',
@@ -171,24 +184,86 @@ const TYPOGRAPHY_STYLES = [
     sample: 'Design Tokens',
   },
   {
-    name: 'Body',
-    description: 'Default readable product copy and descriptions.',
-    fontFamily: 'sans',
-    fontSize: 'base',
-    fontWeight: 'regular',
-    lineHeight: 'normal',
-    letterSpacing: 'normal',
-    sample: 'Use restrained typography to keep dense NOS workflows readable.',
-  },
-  {
-    name: 'Caption',
-    description: 'Secondary metadata, helper copy, timestamps, and quiet row details.',
+    name: 'Control label',
+    description: 'Labels above inputs, selects, checkboxes, and playground controls.',
     fontFamily: 'sans',
     fontSize: 'xs',
     fontWeight: 'medium',
-    lineHeight: 'normal',
+    lineHeight: 'snug',
+    letterSpacing: 'normal',
+    sample: 'Client name',
+  },
+  {
+    name: 'Control text',
+    description: 'Text inside buttons, inputs, selects, segmented controls, and compact UI.',
+    fontFamily: 'sans',
+    fontSize: 'sm',
+    fontWeight: 'medium',
+    lineHeight: 'none',
+    letterSpacing: 'normal',
+    sample: 'Save changes',
+  },
+  {
+    name: 'Helper text',
+    description: 'Secondary form guidance, validation copy, timestamps, and muted details.',
+    fontFamily: 'sans',
+    fontSize: 'xs',
+    fontWeight: 'regular',
+    lineHeight: 'snug',
     letterSpacing: 'normal',
     sample: 'Updated 2 hours ago',
+  },
+  {
+    name: 'Table header',
+    description: 'Column headers, table-stage labels, and dense table chrome.',
+    fontFamily: 'sans',
+    fontSize: '2xs',
+    fontWeight: 'medium',
+    lineHeight: 'none',
+    letterSpacing: 'caps',
+    transform: 'uppercase',
+    sample: 'STAGE',
+  },
+  {
+    name: 'Table cell',
+    description: 'Primary row text in tables and list-like data surfaces.',
+    fontFamily: 'sans',
+    fontSize: 'sm',
+    fontWeight: 'medium',
+    lineHeight: 'snug',
+    letterSpacing: 'normal',
+    sample: 'Radiology Imaging Associates',
+  },
+  {
+    name: 'Table meta',
+    description: 'Secondary table row text and quiet metadata below primary values.',
+    fontFamily: 'sans',
+    fontSize: 'xs',
+    fontWeight: 'regular',
+    lineHeight: 'snug',
+    letterSpacing: 'normal',
+    sample: 'SOW#4 - Website Project',
+  },
+  {
+    name: 'Metric value',
+    description: 'Large numerical readouts in metrics, stat blocks, and dashboard cards.',
+    fontFamily: 'sans',
+    fontSize: '3xl',
+    fontWeight: 'medium',
+    lineHeight: 'tight',
+    letterSpacing: 'normal',
+    numeric: true,
+    sample: '115.00 hrs',
+  },
+  {
+    name: 'Metric label',
+    description: 'Compact labels below or beside numerical dashboard readouts.',
+    fontFamily: 'sans',
+    fontSize: 'xs',
+    fontWeight: 'regular',
+    lineHeight: 'snug',
+    letterSpacing: 'normal',
+    sample: 'Target 40 hrs',
   },
   {
     name: 'Code',
@@ -199,28 +274,6 @@ const TYPOGRAPHY_STYLES = [
     lineHeight: 'relaxed',
     letterSpacing: 'normal',
     sample: '--font-size-sm',
-  },
-  {
-    name: 'Metric label',
-    description: 'Compact dashboard labels that benefit from a more technical display face.',
-    fontFamily: 'display',
-    fontSize: 'sm',
-    fontWeight: 'semibold',
-    lineHeight: 'tight',
-    letterSpacing: 'wide',
-    transform: 'uppercase',
-    sample: 'TRUE CAPACITY',
-  },
-  {
-    name: 'Metric value',
-    description: 'Large numerical readouts in metrics, stat blocks, and dashboards.',
-    fontFamily: 'sans',
-    fontSize: '4xl',
-    fontWeight: 'bold',
-    lineHeight: 'tight',
-    letterSpacing: 'normal',
-    numeric: true,
-    sample: '115.00 hrs',
   },
 ];
 
@@ -235,7 +288,7 @@ function TypographyView() {
         <header className="wb-section__head">
           <h2 className="wb-section__title">Fonts used</h2>
           <p className="wb-section__desc">
-            NOS uses Geist for most interface typography, a system monospace stack for technical content, and Bitcount Single as a restrained display face for dashboard moments.
+            NOS uses Geist for interface typography and a system monospace stack for technical content. Large dashboard values stay in the sans family for a calmer enterprise rhythm.
           </p>
         </header>
         <div className="wb-font-grid">

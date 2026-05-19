@@ -1,0 +1,93 @@
+/* SegmentedControl — brand-tinted container with active/inactive pill states. */
+
+.nos-seg {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: var(--spacing-1);
+  width: fit-content;
+  max-width: 100%;
+  padding: var(--spacing-1);
+  background: var(--color-brand-50);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-family-sans);
+}
+
+.nos-seg--disabled {
+  opacity: 0.5;
+}
+
+.nos-seg__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-neutral-900);
+  font-family: inherit;
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-none);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    border-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
+}
+
+.nos-seg--sm .nos-seg__pill {
+  height: 28px;
+  padding: 0 var(--spacing-3);
+  font-size: var(--font-size-xs);
+}
+
+.nos-seg--md .nos-seg__pill {
+  height: 32px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--font-size-sm);
+}
+
+.nos-seg__pill:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.nos-seg__pill:disabled {
+  cursor: not-allowed;
+}
+
+.nos-seg__pill:hover:not(.nos-seg__pill--active):not(:disabled) {
+  background: var(--color-brand-100);
+}
+
+.nos-seg__pill:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.nos-seg__pill--active {
+  background: #ffffff;
+  border-color: var(--color-brand-300);
+  color: var(--color-brand-500);
+}
+
+.nos-seg__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity var(--motion-duration-state) var(--motion-easing-standard);
+}
+
+.nos-seg__icon:empty {
+  display: none;
+}
+
+.nos-seg__icon svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}

@@ -1,76 +1,64 @@
 import { useId } from 'react';
+import { Field } from './Field.jsx';
 import './Textarea.css';
 
 /**
- * Textarea — multi-line text field matching the NOS Input field pattern.
+ * Textarea — multi-line text field using the shared Field label and control chrome.
  *
  * Props:
- *   label:      string | node
- *   helperText: string | node
- *   error:      string | boolean — when truthy the field renders in the error state.
- *                                  If a string is given it replaces helperText.
- *   size:       "sm" | "md" | "lg"      (default: "md")
- *   resize:     "none" | "vertical"     (default: "vertical")
- *   disabled:   boolean
- *   All other props pass through to the underlying <textarea>.
- *
- * Usage:
- *   <Textarea label="Notes" placeholder="Add context..." />
- *   <Textarea label="Reason" error="Reason is required" />
+ *   label       — text label rendered above the field
+ *   helperText  — neutral hint rendered below the field
+ *   error       — string; when present, switches to the error state and replaces helperText
+ *   resize      — 'vertical' (default) | 'none' — controls textarea resize behavior
+ *   rows        — number of visible rows (default 3)
+ *   disabled    — disables the field
+ *   id          — explicit id; otherwise auto-generated for label association
+ *   ...rest     — forwarded to <textarea>
  */
 export function Textarea({
   label,
   helperText,
-  error = false,
-  size = 'md',
+  error,
   resize = 'vertical',
+  rows = 3,
   disabled = false,
   id,
   className = '',
   ...rest
 }) {
-  const generatedId = useId();
-  const textareaId = id || generatedId;
-  const describedById = `${textareaId}-desc`;
-
-  const errorText = typeof error === 'string' ? error : null;
+  const autoId = useId();
+  const ta = id || autoId;
   const hasError = Boolean(error);
-  const message = errorText || helperText;
+  const feedbackId = error || helperText ? `${ta}-feedback` : undefined;
 
-  const controlClasses = [
-    'nos-textarea',
-    `nos-textarea--${size}`,
-    `nos-textarea--resize-${resize}`,
-    hasError ? 'nos-textarea--error' : '',
-    disabled ? 'nos-textarea--disabled' : '',
-    className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  const fieldCls = [
+    'nos-field',
+    'nos-field--textarea',
+    hasError ? 'nos-field--error' : '',
+    disabled ? 'nos-field--disabled' : '',
+  ].filter(Boolean).join(' ');
 
   return (
-    <div className="nos-field">
-      {label && (
-        <label htmlFor={textareaId} className="nos-field__label">
-          {label}
-        </label>
-      )}
-      <textarea
-        id={textareaId}
-        className={controlClasses}
-        disabled={disabled}
-        aria-invalid={hasError || undefined}
-        aria-describedby={message ? describedById : undefined}
-        {...rest}
-      />
-      {message && (
-        <div
-          id={describedById}
-          className={`nos-field__message ${hasError ? 'nos-field__message--error' : ''}`}
-        >
-          {message}
-        </div>
-      )}
-    </div>
+    <Field
+      className={className}
+      label={label}
+      htmlFor={ta}
+      helperText={helperText}
+      error={error}
+      feedbackId={feedbackId}
+    >
+      <div className={fieldCls}>
+        <textarea
+          id={ta}
+          rows={rows}
+          disabled={disabled}
+          aria-invalid={hasError || undefined}
+          aria-describedby={feedbackId}
+          className="nos-field__control nos-field__control--textarea"
+          style={{ resize }}
+          {...rest}
+        />
+      </div>
+    </Field>
   );
 }

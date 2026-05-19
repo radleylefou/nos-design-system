@@ -1,0 +1,90 @@
+/* SideNavSearch — sidebar command/search trigger. */
+
+.nos-side-nav-search-wrap {
+  display: flex;
+  width: 100%;
+  padding: var(--spacing-0) calc(var(--spacing-2) + var(--spacing-1));
+}
+
+.nos-side-nav-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--side-nav-item-height);
+  gap: var(--spacing-3);
+  padding: var(--spacing-0) var(--spacing-2) var(--spacing-0) calc(var(--spacing-2) + var(--spacing-1));
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--side-nav-surface);
+  color: var(--side-nav-fg-muted);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    opacity var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
+}
+
+.nos-side-nav-search:hover:not(:disabled) {
+  background: var(--side-nav-surface-hover);
+  color: var(--side-nav-fg);
+}
+
+.nos-side-nav-search:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.nos-side-nav-search:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.nos-side-nav-search:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.nos-side-nav-search__body {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  gap: calc(var(--spacing-1) + var(--spacing-2) / 2);
+}
+
+.nos-side-nav-search__icon,
+.nos-side-nav-search__shortcut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.nos-side-nav-search__icon svg {
+  display: block;
+  width: var(--spacing-4);
+  height: var(--spacing-4);
+}
+
+.nos-side-nav-search__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nos-side-nav-search__shortcut {
+  min-height: calc(var(--spacing-4) + var(--spacing-1) / 2);
+  padding: calc(var(--spacing-1) / 2) var(--spacing-1);
+  gap: var(--spacing-1);
+  border: 1px solid var(--side-nav-shortcut-border);
+  border-radius: calc(var(--radius-sm) - var(--spacing-1) / 2);
+  background: var(--side-nav-surface);
+  color: var(--side-nav-fg-muted);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+}

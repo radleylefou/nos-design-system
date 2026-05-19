@@ -1,37 +1,67 @@
-import { Badge } from './Badge.jsx';
+import './StatusPill.css';
 
 /**
- * StatusPill — Badge preset for the canonical NOS scope statuses.
- *
- * Enforces consistent labeling and color mapping so individual screens
- * cannot drift. Add new statuses here, not at the call site.
+ * StatusPill — compact badge indicating an object's lifecycle state.
  *
  * Props:
- *   status:  "draft" | "in-review" | "approved" | "archived" | "rejected"
- *   size:    "sm" | "md"   (default: "md")
- *   dot:     boolean       (default: true)
- *
- * Usage:
- *   <StatusPill status="approved" />
- *   <StatusPill status="in-review" size="sm" />
+ *   variant  — lifecycle/status key; sets default label and tone
+ *   tone     — optional color tone override: 'neutral' | 'brand' | 'info' | 'success' | 'warning' | 'danger' | 'orange' | 'amber'
+ *   surface  — 'tint' | 'white'; tint uses a light colored fill, white is for grey headers
+ *   label    — optional override text; defaults to a capitalized form of the variant
+ *   ...rest  — forwarded to the root <span>
  */
+export function StatusPill({
+  variant = 'draft',
+  tone,
+  surface = 'tint',
+  label,
+  className = '',
+  ...rest
+}) {
+  const defaultLabels = {
+    'draft': 'Draft',
+    'in-progress': 'In Progress',
+    'reviewed': 'Reviewed',
+    'approved': 'Approved',
+    'pending': 'Pending',
+    'neutral': 'Neutral',
+    'brand': 'Brand',
+    'info': 'Info',
+    'success': 'Success',
+    'warning': 'Warning',
+    'danger': 'Danger',
+    'orange': 'Orange',
+    'amber': 'Amber',
+  };
+  const defaultTones = {
+    'draft': 'orange',
+    'in-progress': 'amber',
+    'reviewed': 'info',
+    'approved': 'success',
+    'pending': 'neutral',
+    'neutral': 'neutral',
+    'brand': 'brand',
+    'info': 'info',
+    'success': 'success',
+    'warning': 'warning',
+    'danger': 'danger',
+    'orange': 'orange',
+    'amber': 'amber',
+  };
 
-const STATUS_MAP = {
-  draft:       { variant: 'neutral', label: 'Draft' },
-  'in-review': { variant: 'info',    label: 'In Review' },
-  approved:    { variant: 'success', label: 'Approved' },
-  archived:    { variant: 'neutral', label: 'Archived' },
-  rejected:    { variant: 'error',   label: 'Rejected' },
-};
-
-export function StatusPill({ status, size = 'md', dot = true, ...rest }) {
-  const config = STATUS_MAP[status] || { variant: 'neutral', label: status };
+  const displayLabel = label ?? defaultLabels[variant] ?? variant;
+  const visualTone = tone ?? defaultTones[variant] ?? 'neutral';
+  const cls = [
+    'nos-status-pill',
+    `nos-status-pill--${visualTone}`,
+    `nos-status-pill--surface-${surface}`,
+    `nos-status-pill--variant-${variant}`,
+    className,
+  ].filter(Boolean).join(' ');
 
   return (
-    <Badge variant={config.variant} size={size} dot={dot} {...rest}>
-      {config.label}
-    </Badge>
+    <span className={cls} {...rest}>
+      {displayLabel}
+    </span>
   );
 }
-
-export const STATUS_OPTIONS = Object.keys(STATUS_MAP);

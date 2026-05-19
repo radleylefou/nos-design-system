@@ -1,56 +1,59 @@
 import './Button.css';
 
 /**
- * Button — primary interactive control.
+ * Button — primary action control for NOS surfaces.
+ *
+ * Variants are derived from the Figma frames:
+ *   primary   — solid brand fill, used for the main page CTA (e.g. "+ Time Entry")
+ *   secondary — white surface with brand-tinted border, paired with primary
+ *   ghost     — transparent, neutral text, used for tertiary / cancel actions
+ *   soft      — brand-50 fill with brand text, used inline / in tables (e.g. "+ Note")
+ *   link      — text-only, brand color, used for "View All →" patterns
+ *
+ * Sizes:
+ *   sm — table-inline footprint
+ *   md — default
  *
  * Props:
- *   variant:  "primary" | "secondary" | "ghost" | "danger" | "super"
- *             (default: "primary"). "super" is an elevated primary with a
- *             brand glow — reserve it for a single headline action per view.
- *   size:     "sm" | "md" | "lg"                             (default: "md")
- *   disabled: boolean
- *   loading:  boolean   — shows a spinner and blocks clicks
- *   leadingIcon, trailingIcon: ReactNode
- *   children: label content
- *
- * Usage:
- *   <Button variant="primary" onClick={save}>Save changes</Button>
- *   <Button variant="ghost" size="sm" leadingIcon={<PlusIcon />}>Add</Button>
+ *   variant       — 'primary' | 'secondary' | 'ghost' | 'soft' | 'link'
+ *   size          — 'sm' | 'md'
+ *   leadingIcon   — JSX node rendered before the label
+ *   trailingIcon  — JSX node rendered after the label
+ *   disabled      — disables the button
+ *   ...rest       — forwarded to <button>
  */
 export function Button({
   variant = 'primary',
   size = 'md',
-  disabled = false,
-  loading = false,
   leadingIcon,
   trailingIcon,
-  children,
-  className = '',
+  disabled = false,
   type = 'button',
+  className = '',
+  children,
   ...rest
 }) {
-  const classes = [
-    'nos-button',
-    `nos-button--${variant}`,
-    `nos-button--${size}`,
-    loading ? 'nos-button--loading' : '',
+  const cls = [
+    'nos-btn',
+    `nos-btn--${variant}`,
+    `nos-btn--${size}`,
+    !children && (leadingIcon || trailingIcon) ? 'nos-btn--icon-only' : '',
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  ].filter(Boolean).join(' ');
 
   return (
-    <button
-      type={type}
-      className={classes}
-      disabled={disabled || loading}
-      aria-busy={loading || undefined}
-      {...rest}
-    >
-      {loading && <span className="nos-button__spinner" aria-hidden="true" />}
-      {!loading && leadingIcon && <span className="nos-button__icon">{leadingIcon}</span>}
-      <span className="nos-button__label">{children}</span>
-      {!loading && trailingIcon && <span className="nos-button__icon">{trailingIcon}</span>}
+    <button type={type} disabled={disabled} className={cls} {...rest}>
+      {leadingIcon && (
+        <span className="nos-btn__icon nos-btn__icon--leading" aria-hidden="true">
+          {leadingIcon}
+        </span>
+      )}
+      {children && <span className="nos-btn__label">{children}</span>}
+      {trailingIcon && (
+        <span className="nos-btn__icon nos-btn__icon--trailing" aria-hidden="true">
+          {trailingIcon}
+        </span>
+      )}
     </button>
   );
 }

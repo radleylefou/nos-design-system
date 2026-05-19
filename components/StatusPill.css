@@ -1,0 +1,74 @@
+.nos-status-pill {
+  --status-pill-bg-tint: var(--color-neutral-25);
+  --status-pill-border: var(--color-neutral-100);
+  --status-pill-text: var(--color-neutral-500);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--spacing-6);
+  padding: 0 var(--spacing-3);
+  border: 1px solid var(--status-pill-border);
+  border-radius: var(--radius-full);
+  background: var(--status-pill-bg-tint);
+  color: var(--status-pill-text);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-none);
+  letter-spacing: var(--letter-spacing-normal);
+  text-transform: none;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.nos-status-pill--surface-white {
+  background: var(--bg-surface);
+}
+
+.nos-status-pill--surface-tint {
+  background: var(--status-pill-bg-tint);
+}
+
+.nos-status-pill--neutral {
+  --status-pill-bg-tint: var(--color-neutral-25);
+  --status-pill-border: var(--color-neutral-100);
+  --status-pill-text: var(--color-neutral-500);
+}
+
+.nos-status-pill--brand {
+  --status-pill-bg-tint: var(--color-brand-50);
+  --status-pill-border: var(--color-brand-500);
+  --status-pill-text: var(--color-brand-700);
+}
+
+.nos-status-pill--info {
+  --status-pill-bg-tint: var(--color-semantic-info-50);
+  --status-pill-border: var(--color-semantic-info-500);
+  --status-pill-text: var(--color-semantic-info-700);
+}
+
+.nos-status-pill--success {
+  --status-pill-bg-tint: var(--color-semantic-success-50);
+  --status-pill-border: var(--color-semantic-success-500);
+  --status-pill-text: var(--color-semantic-success-700);
+}
+
+.nos-status-pill--warning,
+.nos-status-pill--amber {
+  --status-pill-bg-tint: var(--color-dataviz-amber-50);
+  --status-pill-border: var(--color-dataviz-amber-400);
+  --status-pill-text: var(--color-dataviz-amber-800);
+}
+
+.nos-status-pill--danger {
+  --status-pill-bg-tint: var(--color-semantic-error-50);
+  --status-pill-border: var(--color-semantic-error-500);
+  --status-pill-text: var(--color-semantic-error-700);
+}
+
+.nos-status-pill--orange {
+  --status-pill-bg-tint: var(--bg-surface);
+  --status-pill-border: var(--color-dataviz-orange-400);
+  --status-pill-text: var(--color-dataviz-orange-400);
+}

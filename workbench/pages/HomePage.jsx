@@ -4,8 +4,8 @@ import './HomePage.css';
  * HomePage — workbench landing view.
  *
  * Shows a "Recently Added" callout row above a grid of section navigation
- * tiles that link to the rest of the workbench (Components, Tokens, Icons,
- * Playground, Page Examples, Changelog).
+ * tiles that link to the rest of the workbench (Instructions, Components,
+ * Tokens, Icons, Playground, Page Examples, Changelog).
  *
  * Props:
  *   onNavigate: callback(view) — navigates the workbench to the given view
@@ -40,6 +40,11 @@ const RECENT = [
 ];
 
 const SECTIONS = [
+  {
+    label: 'Instructions',
+    description: 'Copy an AppGen starter prompt and find source references.',
+    view: { section: 'instructions' },
+  },
   {
     label: 'Components',
     description: 'Browse the full component library by category.',

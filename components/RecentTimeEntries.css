@@ -1,0 +1,54 @@
+/* RecentTimeEntries — card-framed compact time-entry table. */
+
+.nos-rte {
+  background: #ffffff;
+  border: 1px solid var(--color-brand-50);
+  border-radius: 14px;
+  overflow: hidden;
+  font-family: var(--font-family-sans);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Table ───────────────────────────────────────────────────────────────── */
+
+.nos-rte__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ── Column header bar ───────────────────────────────────────────────────── */
+
+.nos-rte__col-header-row {
+  background: var(--color-brand-50);
+}
+
+.nos-rte__col-header {
+  padding: 0 var(--spacing-4);
+  height: 30px;
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-none);
+  letter-spacing: var(--letter-spacing-caps);
+  text-transform: uppercase;
+  color: var(--color-neutral-500);
+  white-space: nowrap;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* ── Data rows ───────────────────────────────────────────────────────────── */
+
+.nos-rte__row {
+  border-bottom: 1px solid var(--color-brand-50);
+}
+
+.nos-rte__row--last {
+  border-bottom: none;
+}
+
+.nos-rte__cell {
+  padding: var(--spacing-3) var(--spacing-4);
+  vertical-align: middle;
+  height: 61px;
+}

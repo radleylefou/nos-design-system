@@ -80,5 +80,104 @@ NOS targets a **modern enterprise SaaS** aesthetic — calm, confident, data-fri
 - Duplicating components into the workbench folder
 - Using CSS-in-JS libraries (styled-components, emotion) — plain CSS only
 - Adding router libraries (react-router, etc.) — the workbench uses plain React state for navigation
-- Adding component libraries as dependencies (Chakra, MUI, shadcn, Radix) — this repo *is* the component library
+- Adding UI component libraries (Chakra, MUI, shadcn, Radix, Ant Design) — this repo *is* the component library. Headless capability libraries are NOT covered by this prohibition; see below.
 - Adding animation libraries before the system has motion tokens defined
+
+## Capability Libraries (Permitted Exceptions)
+
+Some app features require behavioral infrastructure that cannot be hand-built in reasonable time and has no equivalent in the NOS DS component registry. Headless capability libraries — those that provide behavior and event wiring with zero visual opinions — are permitted for these cases.
+
+**Approved headless capability libraries:**
+
+| Category | Library | Rationale |
+|---|---|---|
+| Drag-and-drop | `dnd-kit` | Zero styles, full token control, accessible |
+| Diagramming canvas | `@xyflow/react` (React Flow) | Headless nodes/edges; NOS styles apply |
+| Rich text editing | `@tiptap/react` | Headless, no default styles, fully token-styleable |
+| Gantt / timeline | SVG/CSS first | Build from NOS tokens. Reach for a library only after 3+ days of complexity |
+
+**Rules for using capability libraries:**
+1. The library must not ship or require its own CSS stylesheet for functional output.
+2. All visual output must use NOS token CSS custom properties exclusively.
+3. Wrapper components that integrate the library (e.g., `DiagramCanvas.jsx`) must be registered in `components/index.js` and demonstrated in the workbench like any other component.
+4. One library per category maximum — do not add a second drag-and-drop or diagramming library.
+
+**What is still prohibited:** Any library that duplicates NOS DS components (buttons, inputs, dropdowns, modals, tables, selects, etc.) — e.g., Radix Primitives, HeadlessUI, shadcn/ui. These wrap what NOS already provides and will fragment the design system.
+
+## Building Custom Components Not in the Registry
+
+When a needed UI component doesn't exist in `components/index.js`, build it as a NOS component. Do not inline it inside a page or feature file.
+
+**Step-by-step:**
+1. Create `components/ComponentName.jsx` and `components/ComponentName.css`
+2. Export it from `components/index.js`
+3. Add a workbench demo page in `workbench/pages/`
+
+**LLM pattern for inferring a new NOS component:**
+
+Start from these constraints and the component will be correct by construction:
+
+- **Visual baseline:** calm, neutral surface (`var(--bg-surface)`), border `var(--border-default)`, radius matching context (8px for panels/cards, 6px for interactive elements)
+- **Typography:** 14px regular for data rows; 14px semibold for section headers; 12px for metadata. Never exceed 3 type sizes in one view.
+- **Color:** neutrals dominate; brand accent only for selected/active states; no decorative color
+- **Spacing:** 4px grid — use `var(--spacing-2)` (8px) for row padding, `var(--spacing-4)` (16px) for section padding, `var(--spacing-6)` (24px) between major sections
+- **State coverage:** default, hover, selected/active, disabled, focus — all required
+- **Props API:** variant, size, disabled, loading as needed; callbacks via onX props; `...rest` spread
+
+**Reference patterns for common missing components:**
+
+*KanbanBoard / KanbanColumn / KanbanCard:*
+- Column: `Card` with `var(--bg-subtle)` background, `var(--radius-md)` radius, `var(--spacing-4)` padding
+- Card: `Card` component with drag handle, status badge, label text
+- Use `dnd-kit` for drag behavior; KanbanCard is purely presentational
+
+*CommandPalette:*
+- Modal overlay (`var(--z-modal)`), `var(--shadow-modal)` shadow, `var(--radius-lg)` radius
+- Input at top using NOS `Input` component; results list using standard row pattern
+- Keyboard navigation state via React, not a library
+
+*GanttChart:*
+- SVG-based; rows use `var(--color-neutral-800)` text, bars use `var(--color-brand-400)` fill
+- Grid lines use `var(--border-subtle)`; today marker uses `var(--color-semantic-info-500)`
+- No library unless SVG complexity exceeds 3 days
+
+*PhaseBoard:*
+- Grid of `Card` components, one per phase column
+- Phase header: uppercase label token, `var(--color-neutral-500)`
+- Epics inside columns: draggable via dnd-kit
+
+## App-Level Token Overrides
+
+The NOS DS token set is intentionally minimal and semantic-neutral. Individual NOS apps may need additional semantic tokens for domain-specific contexts (entity types, workflow states, custom status systems) that don't exist in the base token set.
+
+**Pattern: local token override file**
+
+Each NOS app may define a `tokens-app.css` at its root that extends (not replaces) `tokens.css`. Import order: `tokens.css` first, then `tokens-app.css`.
+
+**Rules:**
+1. App token values must reference NOS token variables — never raw hex values.
+   - ✓ `--color-type-experience: var(--color-brand-400);`
+   - ✗ `--color-type-experience: #6869DD;`
+2. Each override must have a comment documenting its semantic intent.
+3. App tokens must not shadow or override any existing NOS base token name.
+4. App tokens use a namespaced prefix: `--color-type-*`, `--status-*`, `--entity-*`, etc.
+
+**Base semantic color rule relaxation for apps:**
+The base rule "semantic colors serve only their intended purpose" applies to the NOS DS and its shared components. An app may intentionally map a base semantic color to a domain-specific state — but it must be documented explicitly in `tokens-app.css` with a rationale comment, not silently repurposed.
+
+Example `tokens-app.css`:
+```css
+/* tokens-app.css — app-level token overrides. Import after tokens.css. */
+
+/* L1 component type colors — domain entity classification, not semantic status */
+--color-type-experience:   var(--color-brand-400);            /* Experience = Nymbl brand */
+--color-type-workflow:     var(--color-semantic-info-500);    /* Workflow = active process */
+--color-type-integration:  var(--color-semantic-warning-500); /* Integration = bridging */
+--color-type-foundation:   var(--color-neutral-500);          /* Foundation = structural */
+
+/* Engagement status — info-blue intentionally repurposed as progress-ready indicator */
+--status-draft:    var(--color-neutral-400);
+--status-ready:    var(--color-semantic-info-500);
+--status-approved: var(--color-semantic-success-600);
+--status-blocked:  var(--color-semantic-error-600);
+```

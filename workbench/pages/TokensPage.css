@@ -1,7 +1,7 @@
 .wb-inline-code {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
-  background: var(--color-neutral-100);
+  background: var(--wb-neutral-100);
   border: 1px solid var(--wb-border);
   padding: 1px var(--spacing-2);
   border-radius: var(--radius-sm);
@@ -15,9 +15,9 @@
   border-radius: var(--radius-full);
   padding: 2px var(--spacing-2);
   font-family: inherit;
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--letter-spacing-caps);
   text-transform: uppercase;
   color: var(--wb-subtle);
   cursor: pointer;
@@ -40,6 +40,12 @@
 }
 
 /* ── Color swatches ───────────────────────────────────────────────── */
+
+.wb-token-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-10);
+}
 
 /* Horizontal strip layout: one swatch per step across the full width */
 .wb-swatches {
@@ -83,15 +89,15 @@
 }
 
 .wb-swatch__step {
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-semibold);
   color: var(--wb-text);
-  letter-spacing: 0.02em;
+  letter-spacing: var(--letter-spacing-normal);
 }
 
 .wb-swatch__hex {
   font-family: var(--font-family-mono);
-  font-size: 9px;
+  font-size: var(--font-size-2xs);
   color: var(--wb-muted);
   text-transform: uppercase;
 }
@@ -271,7 +277,7 @@
 .wb-type-style__tokens code {
   padding: 2px var(--spacing-2);
   color: var(--wb-muted);
-  background: var(--color-neutral-100);
+  background: var(--wb-neutral-100);
   border: 1px solid var(--wb-border);
   border-radius: var(--radius-sm);
   font-family: var(--font-family-mono);
@@ -282,7 +288,7 @@
 /* Spacing bars */
 .wb-spacing-bar {
   height: 6px;
-  background: var(--color-neutral-900);
+  background: var(--wb-neutral-900);
   border-radius: 1px;
   min-width: 2px;
   opacity: 0.78;
@@ -309,7 +315,7 @@
 .wb-radius-preview {
   width: 48px;
   height: 48px;
-  background: var(--color-neutral-100);
+  background: var(--wb-neutral-100);
   border: 1.5px solid var(--wb-border-strong);
 }
 
@@ -382,8 +388,8 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   font-family: var(--font-family-mono);
-  font-size: 10px;
-  line-height: 1.4;
+  font-size: var(--font-size-2xs);
+  line-height: var(--line-height-snug);
   color: var(--wb-subtle);
   word-break: break-all;
 }
@@ -438,7 +444,7 @@
 
 .wb-border-card__name {
   font-family: var(--font-family-mono);
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   color: var(--wb-muted);
   white-space: nowrap;
   overflow: hidden;
@@ -451,7 +457,7 @@
 
 .wb-border-card__value {
   font-family: var(--font-family-mono);
-  font-size: 10px;
+  font-size: var(--font-size-2xs);
   color: var(--wb-subtle);
   white-space: nowrap;
   overflow: hidden;

@@ -1,0 +1,91 @@
+.nos-document-breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-family: var(--font-family-sans);
+}
+
+.nos-document-breadcrumbs__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-8);
+  height: var(--spacing-8);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: var(--color-neutral-75);
+  color: var(--color-neutral-800);
+  cursor: pointer;
+  transition:
+    background-color var(--motion-duration-state) var(--motion-easing-standard),
+    color var(--motion-duration-state) var(--motion-easing-standard),
+    transform var(--motion-duration-feedback) var(--motion-easing-standard);
+}
+
+.nos-document-breadcrumbs__back:hover {
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+}
+
+.nos-document-breadcrumbs__back:active {
+  transform: translateY(1px);
+}
+
+.nos-document-breadcrumbs__back:focus-visible,
+.nos-document-breadcrumbs__button:focus-visible,
+.nos-document-breadcrumbs__link:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.nos-document-breadcrumbs__list {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.nos-document-breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  min-width: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  color: var(--color-neutral-400);
+}
+
+.nos-document-breadcrumbs__item--current {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-800);
+}
+
+.nos-document-breadcrumbs__separator {
+  color: var(--color-neutral-400);
+}
+
+.nos-document-breadcrumbs__button,
+.nos-document-breadcrumbs__link {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nos-document-breadcrumbs__button:hover,
+.nos-document-breadcrumbs__link:hover {
+  color: var(--color-neutral-800);
+}
